@@ -1,0 +1,43 @@
+ --- Istruzioni condizionali
+ 
+ --- IF ---
+ 
+ // condizione primaria
+if (condizione1) {
+  ...
+  ...
+}
+// condizione secondaria:
+// questa condizione viene verificata solo se la prima non è risultata vera
+else if (condizione2) {
+  ...
+  ...
+}
+// condizione residuale:
+// consiste nel comportamento da seguire se nessuna delle precedenti condizioni risulta vera
+else {
+  ...
+  ...
+}
+
+
+
+--- SWITCH ---
+
+class ProvaSwitch{
+  public static void main(String args[]){
+    int k = 10;
+    switch(k){
+      case 5: System.out.println("case k = 5");
+      break;
+      
+      case 10: System.out.println("case k = 10");
+      break;
+      
+      case 15: System.out.println("case k = 15");
+      break;
+      
+      default: System.out.println("case default");
+    }
+  }
+}
