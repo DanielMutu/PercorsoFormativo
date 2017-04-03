@@ -1,4 +1,5 @@
                Caratteristiche Della Programmazione Ad Oggetti
+Composta da:
 
 - Classe: una classe è un'astrazione che rappresenta un insieme di oggetti che condividono le stesse caratteristiche e le stesse funzionalità. Un programma Java risiede interamente in classi (e in interfacce, come vedremo più avanti). Generalmente, una classe è usata per definire un tipo di oggetti.
 
