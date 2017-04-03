@@ -15,3 +15,25 @@ oggetto di una qualunque delle classi figlie.
      ---- Polimorfismo ----
      
 Un metodo si dice polimorfo quando è in grado di adattare il suo comportamento allo specifico oggetto su cui deve operare. 
+
+Esempio di codice polimorfo:
+
+class Albero
+{
+    protected void cresce()
+    {
+        System.out.println("Metodo cresce della classe Albero");
+    }
+    public static void main(String args[])
+    {
+        Albero al = new Abete();
+        al.cresce();
+    }
+}
+class Abete extends Albero
+{
+    public void cresce()
+    {
+        System.out.println("Metodo cresce della classe Abete");
+    }
+}
