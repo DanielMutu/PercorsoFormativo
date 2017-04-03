@@ -1,0 +1,7 @@
+
+---- Modificatori di accesso ----
+
+public : Visibile  in qualsiasi parte del programma.
+private : visibile solo dall'interno della classe stessa.
+protected: visibile solo dalle classi dello stesso package e dalle sottoclassi
+default: Default	visibile dallo stesso package e dalle sottoclassi se sono nello stesso package. È la visibilità assegnata di default se non viene specificato nulla.
