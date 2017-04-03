@@ -1,0 +1,61 @@
+Per instanziare un oggetto si fa uso dell'istruzione new, cosicché la sintassi di dichiarazione e inizializzazione di una variabile oggetto è la seguente:
+
+Esempio codice:
+
+//*******************************************
+
+TipoOggetto nomeVariabile = new TipoOggetto (par1, par2, ..., parN);
+
+//*******************************************
+
+... oppure ...
+
+//*******************************************
+
+TipoOggetto nomeVariabile;
+nomeVariabile = new TipoOggetto (par1, par2, ..., parN);
+
+//*******************************************
+
+Instanziamento -->  new TipoOggetto (par1, par2, ..., parN);
+
+//******************  Esempio codice intero *********************
+public class TestImpiegato
+{
+public static void main(String[] args)
+
+
+{
+Impiegato rossi = new Impiegato ("Mario" , "Rossi" , 1974, "Capo reparto");
+
+
+System.out.println("Dati relativi 
+all'impiegato Rossi.");
+System.out.print ("Nome: ");
+rossi.mostraNome();
+System.out.println ("Età: " + 
+rossi.calcolaEta(2000));
+System.out.println ("Stipendio: " + rossi.calcolaStipendio());
+
+Impiegato verdi = new Impiegato ("Valerio" , "Verducci" , 1970, "Manovale");
+System.out.println("
+Dati relativi all'impiegato Verducci.");
+System.out.print ("Nome: ");
+verdi.mostraNome();
+System.out.println ("Età: " +verdi.calcolaEta(2000));
+System.out.println ("Stipendio: " +verdi.calcolaStipendio());
+
+System.out.println("
+Aumentiamo lo stipendio di Rossi di 500 euro.");
+rossi.aumentaStipendio(500);
+System.out.println ("Il nuovo stipendio è: " +rossi.calcolaStipendio());
+
+System.out.println("
+Diminuiamo lo stipendio di Verducci di 300 euro.");
+System.out.println("L'operazione non 
+verrà eseguita in quanto");
+System.out.println("lo stipendio diventerebbe inferiore a stipendioMin.");
+verdi.riduciStipendio(300);
+System.out.println ("Lo stipendio rimane 
+inalterato, pari al minimo: " +verdi.calcolaStipendio());
+} }
