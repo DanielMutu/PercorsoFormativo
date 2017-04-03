@@ -1,0 +1,24 @@
+----- Passaggio dei parametri in Java ----------
+
+Due tipi di passaggio di parametri:
+  Chiamata per valori
+  chiamata per riferimento
+  
+-------------------  IN JAVA  IL PASSAGGIO AVVIENE SEMPRE PER VALORE ---------------------------
+Esempio di un codice: 
+
+//********************************************************************************
+class Parametri1 {
+  public static void main (String [ ] args) { 
+   int number = 30; 
+    nonAnnulla(number); 
+    System.out.println("number vale: " + number); 
+          // Stampa 30 
+  } 
+  static void nonAnnulla(int i) { 
+     i = 0; 
+  } 
+}
+//********************************************************************************
+
+  
