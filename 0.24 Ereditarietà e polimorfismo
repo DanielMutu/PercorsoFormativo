@@ -1,0 +1,17 @@
+      ----  Ereditarietà ----
+
+Strumento tipico dell’OOP per riusare il codice e creare una gerarchia di astrazioni.
+Esempio:
+  class Impiegato extends Persona
+    {. . .}
+    
+- La nuova classe può aggiungere nuovi dati o metodi.
+- Può accedere ai dati ereditati purché il livello di protezione lo consenta.
+- Può accedere ai dati ereditati purché il livello di protezione lo consenta.
+- Non può eliminare dati o metodi perché il principio di base dei linguaggi OO è che dovunque si usa un oggetto della classe madre deve essere possibile sostituirlo con un
+oggetto di una qualunque delle classi figlie.
+- La classe derivata condivide quindi la struttura e il comportamento della classe base.
+
+     ---- Polimorfismo ----
+     
+Un metodo si dice polimorfo quando è in grado di adattare il suo comportamento allo specifico oggetto su cui deve operare. 
