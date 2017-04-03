@@ -1,0 +1,5 @@
+                      Identità di un oggetto
+
+L'identita' di un oggetto e' la locazione di memoria dove stanno scritti i suoi dati. I valori contenuti in questa locazione possono cambiare nel tempo ma la locazione e' sempre la stessa. Un oggetto e' la "nobilitazione" di un puntatore (per chi sa che cosa sono).
+
+Identita' e' rappresentata da numero detto OID (Object IDentifier, identificatore di oggetto).
