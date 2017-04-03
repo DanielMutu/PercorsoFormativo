@@ -1,5 +1,20 @@
-    Variabili e costanti 
+    --- Variabili e costanti 
 
 - Deve essere dichiarata anteponendo il nome del tipo al nome della variabile. 
 - Esempio assegnamento: valoreInt = 1000;
 - Devono essere dichiarati con la lettera minuscola.
+
+    --- Variabili locali
+
+- Una variabile locale è una variabile dichiarata all'interno del corpo di un metodo e che quindi non è visibile all'esterno di esso.
+- Non è automaticamente inizializzata e se si tenta di usarla prima di assegnargli un valore, si produce un errore.
+
+	--- Esempio assegnamento
+
+String a=5;
+
+Una variabile locale può essere marcata solamente col modificatore final. Se marcata final, significa che il valore della variabile può essere assegnato una sola volta, cioè non può più essere modificato. 
+
+Esempio: final double CM_PER_INCH = 2.54;
+
+I principali modificatori che possono marcare un campo sono public, private, static e final5. Il modificatore FINAL ha lo stesso significato delle variabili locali. STATIC marca un campo come statico, cioè campo della classe, se non ha tale modificatore è un campo dell'oggetto. I modificatori PUBLIC, e PRIVATE riguardano il livello di accessibilità di un campo. Ad esempio, PUBLIC significa che il campo è accessibile da ovunque sia visibile la classe in cui è dichiarato. Ritorneremo su questi e gli altri modificatori in seguito.
