@@ -1,0 +1,22 @@
+  Fondamenti del linguaggio Java
+  
+  Primo programma
+
+''''''''''''''''''''''''''''''''''''''''''''''''
+public class First {
+    public static void main(String[] args) {
+        System.out.println("Hello Java!");
+    }
+}
+'''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+
+- Parola chiave class → Definizione di una classe
+- Nome della classe First
+- L'esecuzione di un programma Java inizia sempre eseguendo il metodo speciale "main" di una classe.
+- Void: significa che non ritorna nulla.
+
+String[] args → Lista dei parametri.
+
