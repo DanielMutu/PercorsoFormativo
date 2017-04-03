@@ -1,0 +1,24 @@
+----- Metodi di accesso e modifica ----- 
+
+//*******************  Esempio di una classe incapsulata   ***********************
+
+Ogni volta che voglio memorizzare un valore in e.x, faccio e.setX(valore).
+
+Per vedere il valore di e.x, uso e.getX()
+
+class Prova {
+  public static void main(String args[]) {
+    Esempio e;
+    e=new Esempio();
+
+    // e.x=12;
+    e.setX(12);
+
+    // System.out.println(e.x);
+    System.out.println(e.getX());
+  }
+}
+
+Le linee commentate davano errore.
+
+//*******************************************************************************
