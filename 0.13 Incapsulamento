@@ -18,3 +18,17 @@ class Esempio {
   }
 }
 //*********************************************************
+
+//************** Altro esempio di incapsulamento **********
+class Prova {
+  public static void main(String args[]) {
+    Esempio e;
+    e=new Esempio();
+
+    // e.x=12;
+    e.setX(12);
+
+    // System.out.println(e.x);
+    System.out.println(e.getX());
+  }
+}
