@@ -1,0 +1,13 @@
+      Convenzioni Codice Java
+      
+- Nomi di pacchetto: sempre con lettere minuscole e preferibilmente costituiti da un’unica parole (es. package veicoli.auto).
+
+- Nomi delle classi: sempre al plurale e con la prima lettera maiuscola, le altre a seguire minuscole (es. Saluti). Se si hanno più parole si seguono le stesse regole (TestSaluti). Seguono le stesse regole le interfacce (le vedremo in seguito).
+
+- Nomi dei metodi: sempre con lettere minuscole (es. inizializza). Se il nome del metodo è costituito da più parole, solo l’iniziale delle altre parole sarà maiuscola (es. inizializzaNome).
+
+- Nomi di variabili: seguono le stesse regole dei metodi (es. nomeAnimale).
+
+- Costanti: sempre con lettere maiuscole (COSTANTE), se il nome è costiuto da più parole vengono separate con l’underscore (es. PI_GRECO).
+
+- Spaziatura: per rendere il codice più leggibile si utilizzano sempre due spazi per l’indentazione.
