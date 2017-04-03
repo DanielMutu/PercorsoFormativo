@@ -1,0 +1,20 @@
+    --- Incapsulamento ---
+
+- Tramite esso, una classe riesce ad acquisire caratteristiche di robustezza, indipendenza e riusabilità.
+
+- Impedisco l'accesso diretto alla componente dell'oggetto.
+- Permetto la modifica/uso della componente attraverso i metodi.
+
+//********************* Esempio codice incapsulamento  ************
+class Esempio {
+  private int x;
+
+  void setX(int n) {
+    this.x=n;
+  }
+
+  int getX() {
+    return this.x;
+  }
+}
+//*********************************************************
