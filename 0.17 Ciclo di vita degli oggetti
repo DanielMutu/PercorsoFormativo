@@ -1,0 +1,6 @@
+In java, il ciclo di vita di un oggetto parte dal momento della sua creazione (cioè quando si usa la parola chiave new) e finisce quando l’oggetto è eliminato dal garbage collector.
+
+Gli oggetti vengono allocati nella RAM nella parte heap();
+
+Ogni tanto utilizza pulisce lo spazio grazie a GARBAGE COLLECTOR.
+A tale scopo essa usa il garbage collector (gc). Esso è autonomamente in grado di decidere quali oggetti eliminare e quali no.
