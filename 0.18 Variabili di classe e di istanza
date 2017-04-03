@@ -1,0 +1,16 @@
+Le variabili di istanza sono dichiarate in una definizione di classe, esternamente alle dichiarazioni di metodi (si
+distinguono dalle variabili locali sulla base della loro posizione, poiche le variabili locali sono dichiarate all’interno `
+dei metodi).
+
+class Bicycle extends PersonPoweredVehicle {
+
+  String bikeType;
+  int chainGear;
+  int rearCogs;
+
+}
+
+Le variabili di classe (static) appartengono a tutti gli oggetti della classe, non alle singole istanze.
+
+static int sum;
+static final int maxObjects = 10;
