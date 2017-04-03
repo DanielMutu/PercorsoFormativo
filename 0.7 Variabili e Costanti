@@ -1,0 +1,5 @@
+    Variabili e costanti 
+
+- Deve essere dichiarata anteponendo il nome del tipo al nome della variabile. 
+- Esempio assegnamento: valoreInt = 1000;
+- Devono essere dichiarati con la lettera minuscola.
