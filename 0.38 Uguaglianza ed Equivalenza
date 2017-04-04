@@ -1,0 +1,13 @@
+Esempio codice:
+
+System.out.println("Inserisci il primo nome da confrontare:  ");
+		Scanner input3 = new Scanner(System.in);
+		String primoNome=input3.nextLine();
+		System.out.println("Inserisci il secondo nome da confrontare:  ");
+		Scanner input4 = new Scanner(System.in);
+		String secondoNome=input4.nextLine();
+		if(primoNome.equals(secondoNome)){
+			System.out.println("I due nomi sono uguali");
+		}else{
+			System.out.println("I due nomi sono diversi");
+		}
