@@ -1,0 +1,47 @@
+import java.util.*;
+
+class tabella{
+//attributi	
+	int numero;
+	int i;
+	int result;
+//costruttore 
+	public tabella(int numero, int i, int result){
+		this.numero=0;
+		this.i=1;
+		this.result=0;
+	}
+
+	//set Età
+	public void setNumero(int setNumero){
+		this.numero=setNumero;
+	}
+
+//get
+	public int numeroF(){
+	//for(int i=0; i<10; i++){
+		result=numero*i;
+		i++;
+		return result;	
+	//	}	
+	}
+}
+
+public class multi{
+public static void main(String [] args){
+	
+	tabella t=new tabella(0, 0, 0);
+	
+	int setNumero;
+	System.out.println("Inserisci il numero del quale vuoi fare la tabella");
+	Scanner input =new Scanner(System.in);
+	setNumero=input.nextInt();
+	t.setNumero(setNumero);
+	
+	for(int i=1; i<11; i++){
+		System.out.println(setNumero+"x"+i+"="+t.numeroF());
+	}
+	
+
+}
+}
