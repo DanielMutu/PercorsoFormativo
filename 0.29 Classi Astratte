@@ -1,0 +1,5 @@
+sito di riferimento:  http://www.diit.unict.it/users/alongheu/linguaggi/aa0910/lezione08_classi_astratte_e_interfacce.pdf
+
+- Può avere  metodi ed attributi e si riconosce solitamente dal fatto che ha un metodo dichiarato ma non sviluppati.
+- E' caraterizzato dalla parola chiave "abstract".
+- Suppone l'esistenza di almeno una sottoclasse.
