@@ -1,0 +1,15 @@
+Conversione di un dato da un tipo ad un altro.
+
+Esempio:
+  
+  double v1 = 10.0;
+  float v2;
+  int v3 = 5;
+  
+v2 = v1; // non si può assegnare un double a un float
+v1 = v3; // non si può assegnare un intero a un double
+
+ PER POTER FARE QUESTA COSA DOBBIAMO UTILIZZARE I CAST
+ 
+v2 = (float) v1;
+v1 = (double) v3;
