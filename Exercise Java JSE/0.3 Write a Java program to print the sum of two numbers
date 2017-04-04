@@ -1,0 +1,8 @@
+public class sum{
+	public static void main(String [] args ){
+		int one=5;
+		int two=10;
+		int result=one+two;
+		System.out.println("result:  "+result);
+	}
+}
