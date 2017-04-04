@@ -1,0 +1,6 @@
+
+Super puntatore implicito che punta al costruttore della classe madre.
+
+Utilizzo: 
+-Si utilizza nella classe derivata
+-Va richiamata come prima istruzione
