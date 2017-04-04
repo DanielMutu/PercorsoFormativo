@@ -1,0 +1,13 @@
+Link utile: http://www.dis.uniroma1.it/~liberato/laboratorio/late/late.html
+
+      ---Cos'è il late-binding
+
+Quando si estende una classe, si possono aggiungere componenti e metodi.
+
+Possono avere gli stessi nomi di componenti e metodi già esistenti
+
+componenti:
+  si aggiungono a quelle che esistono
+
+metodi:
+  sovrascrivono (overriding) quelli di prima
