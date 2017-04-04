@@ -1,0 +1,12 @@
+class fresh{
+	enum freshEnum{orange, apple, bananas }
+	freshEnum size;
+}
+
+public class FruitFresh{
+public static void main(String [] args){
+	fresh f=new fresh();
+	f.size=fresh.freshEnum.orange;
+	System.out.println("stampa: "+f.size);
+	}	
+}
