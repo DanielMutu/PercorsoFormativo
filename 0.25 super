@@ -4,3 +4,28 @@ Super puntatore implicito che punta al costruttore della classe madre.
 Utilizzo: 
 -Si utilizza nella classe derivata
 -Va richiamata come prima istruzione
+
+eSEMPIO:
+
+public class Studente extends Persona {
+
+ private int matricola;
+
+ public Studente() {
+ super();
+ matricola = 0;
+ }
+
+ public Studente(String nome, int matricola) {
+ super(nome);
+ this.matricola = matricola;
+ }
+
+ public void setMatricola(int nuovaMatricola) {
+ matricola = nuovaMatricola;
+ }
+
+ public void reimposta(String nuovoNome, int nuovaMatricola) {
+ setNome(nuovoNome);
+ setMatricola(nuovaMatricola);
+ }
