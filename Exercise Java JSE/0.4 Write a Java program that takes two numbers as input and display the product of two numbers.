@@ -1,0 +1,60 @@
+import java.util.*;
+class Sum{
+		//attributes
+		int first;
+		int second;		
+		int result;
+		
+		//costructor
+		public Sum(int first, int second, int result){
+			first=0;
+			second=0;	
+			result=0;
+		}
+		//set  first
+		public void setFirst(int setFirst){
+			this.first=setFirst;			
+		}
+		//set  second
+		public void setSecond(int setSecond){
+			this.second=setSecond;
+		}
+		//set result 
+		public void setResult(int setResult){
+			this.result=setResult;
+		}
+		
+		//get 
+		public int getFirst (){
+			return first;			
+		}
+		//get
+		public int getSecond(){
+			return second;
+		}
+	
+		//Somma
+		public int somm(){
+		result=first+second;
+		return result;
+		}
+}
+public class inputSum{
+	public static void main(String[] args){
+		Sum s=new Sum(0,0,0);
+		int first;
+		int second;
+		
+		System.out.println("Inserisci il primo numero:  ");
+		Scanner input=new Scanner(System.in);
+		first=input.nextInt();
+		s.setFirst(first);
+		
+		System.out.println("Inserisci il Secondo numero:  ");
+		Scanner input2=new Scanner(System.in);
+		second=input.nextInt();
+		s.setSecond(second);
+		
+		System.out.println("La somma è:  "+s.somm());
+	} 
+}
