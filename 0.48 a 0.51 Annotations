@@ -1,0 +1,26 @@
+                ---- Annotations:  ----
+Cosa sono?
+
+Appunto che mettiamo per specificare qualcosa relativo al codice che stiamo scrivendo, un attributo particolare, un metodo o una classe che hanno delle peculiarità.
+
+Esempio:  
+- @Override
+- @Deprecated
+- @SuppressWarnings
+
+Example @Override
+//***********************************************************
+public class MyParentClass {
+    public void justaMethod() {
+        System.out.println("Parent class method");
+    }
+}
+
+
+public class MyChildClass extends MyParentClass {
+    @Override
+    public void justaMethod() {
+        System.out.println("Child class method");
+    }
+}
+//***********************************************************
