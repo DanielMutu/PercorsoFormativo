@@ -1,0 +1,18 @@
+        ----- La super classe Object -----
+        
+ Qunado codifichiamo una classe qualsiasi, ereditiamo i metodi della classe Object.
+ Abbiamo:
+  -toString() --> con il compito di restituire una stringa descrittrice dell'oggetto.
+  -equals()   --> restituisce "true" quando due oggetti hanno lo stesso contenuto.
+  -hashCode() --> confronta l'uguaglianza di due oggetti presenti nella stessa collezione. (Usato dal framework hashCode() per esempio) / E' un "int" che rappresenta l'unicità di un oggetto / Se due oggetti sono uguali per il metodo equals() allora hanno lo stesso hashCode() ma non vale il contrario.
+  -clone()    --> clonazione dell'oggetto corrente, produce un oggetto derivante dalla classe principale, con variabili d'istanza contenenti gli stessi valori.
+              --> Per lanciare clone ho bisogno di implementare l'interfaccia "Clonable" sulla classe madre altrimenti mi uscirà un eccezione.
+  Esempio di codice clonato:
+  
+  CloneableClass cloneableClass=new CloneableClass();
+  cloneableClass.setCampo("Test");
+  System.out.println(cloneableClass);
+  System.out.println(cloneableClass.clone());
+  
+  !ATTENZIONE: una copia dell'oggetto si limina a copiare i valori d'istanza dell'oggetto.
+  
