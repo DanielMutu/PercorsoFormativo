@@ -1,0 +1,67 @@
+Cos'è la programmazione  generica?
+
+LINK UTILE: 
+    https://www.sci.unich.it/~fioravan/labprog2/cap16.pdf
+    http://pages.di.unipi.it/corradini/Didattica/LIP-07/Generici/TipiGenerici/main.html
+    
+Vers. Java 5
+
+-Consiste nella creazione di costrutti di programmazione che possono essere utilizzati con diverso tipo di dati.
+
+Definizione di un tipo di classe generica.
+
+NomeClasseGenerica <Tipo1, Tipo2, . . .>
+
+Esempio:
+  - ArrayList<BankAccount>
+  - HashMap<String, Integer>
+  
+Altro Esempio di classe generica:
+LEGENDA: 
+  T-> ELEMENTO GENERICO
+  S-> ALTRO ESEMPIO DI ELEMENTO GENERICO
+
+public class Pair<T, S>
+{
+  public Pair(T firstElement, S secondElement)
+  {
+    first = firstElement;
+    second = secondElement;
+  }
+  public T getFirst() { return first; }
+  public S getSecond() { return second; }
+  private T first;
+  private S second;
+}
+
+N.B: Se una classe generica utilizza classi ausiliarie, anch'esse devono diventare ausiliarie.
+
+in Java 5.0 si indica esplicitamente il tipo degli oggetti che il vettore conterrà, e questo consente maggiori controlli a tempo di compilazione: di conseguenza il codice è più robusto;
+
+Esempio di interfaccia generica:
+ 
+public interface Comparable<T>{
+    int compareTo(T o);
+  }
+  
+ Altro esempio utile di classe generica:
+ 
+ public class Coppia<E,F>{
+ 
+    private E fst;
+    private F snd;
+
+    public Coppia(E fst, F snd){
+        this.fst = fst;
+        this.snd = snd;
+    }
+
+    public E getFst(){return fst;}
+    public F getSnd(){return snd;}
+
+    public String toString(){
+        return "("+ fst + "," + snd + ")";
+    }
+}
+ 
+E ed F sono tipi generici (nota personale: come String, int ecc.. sarebbe il tipo della variabile).
