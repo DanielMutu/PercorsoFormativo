@@ -1,0 +1,14 @@
+      ---- Modello di gestione degli errori ----
+
+link utile: http://www.di-srv.unisa.it/professori/masucci/LPII-0405/slides/Lez11.pdf
+
+La superclasse Throwable ha due sottoclassi dirette, sempre in java.lang
+MOLTO IMPORTANTE:
+Error: 
+    -Errori fatali, dovuti a condizioni incontrollabili
+    -Esaurimento delle risorse di sistema necessarie alla JVM, incompatibilità di versioni,…
+    -In genere i programmi non gestiscono questi errori
+Exception
+     -Tutti gli errori che non rientrano in Error
+     -I programmi possono gestire o no questi errori a seconda
+dei casi
