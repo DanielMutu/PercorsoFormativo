@@ -1,0 +1,20 @@
+    ---- Interfaccia Comparable ----
+ 
+public interface Comparable<T>{
+    public int compareTo(T  o);
+} 
+
+A differenza di .equals() compareTo serve ad ordinare un insieme di oggetti secondo una regola impostata da noi.
+
+- Quindi compareTo definisce il criterio di ordinamento per gli oggetti.
+- compareTo che consente di effettuare l’ordinamento, accetta un argomento di tipo Object e restituisce un intero.
+
+Precondizione: l’oggetto x è confrontabile con this;
+
+Postcondizione:
+  -Restituisce un valore negativo se this < x;
+  -Restituisce zero se this = x;
+  -Restituisce un valore positivo se this > x;
+Errori: lancia ClassCastException (non verificata) se x non è confrontabile con this.
+
+L'ordinamento della classe String avvine secondo un ordinamento numerico.
