@@ -1,0 +1,19 @@
+  ---- Callback ----
+
+A cosa serve?
+Link utile: http://www.iet.unipi.it/g.dini/Teaching/tiga/materiale-didattico/java/Java-RMI.new.pdf
+
+
+In certe applicazioni può essere necessario che il cliente si sincronizzi con eventi che si verificano sul server. 
+
+Possibili approcci:
+– polling
+– callback
+
+Polling. Il cliente periodicamente chiede al server se l’evento
+si è verificato
+• Il polling presenta due svantaggi:
+– le prestazioni del server possono degradare
+– il cliente non è avvisato tempestivamente
+• Callback. Il server notifica al cliente il verificarsi dell’evento
+– Il callback risolve i problemi del polling
