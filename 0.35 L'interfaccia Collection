@@ -1,0 +1,12 @@
+Cos'è l'interfaccia collections?
+
+link di riferimento: 
+  http://home.deib.polimi.it/dubois/provafinale/collections.pdf
+  http://www.javatpoint.com/collections-in-java
+
+Collections: framework che serve ad immagazinare e manipolare un gruppo di oggetti.
+
+Una collection è un singolo oggetto di un insieme più grande.
+
+
+Dove si trova: Si trova in "java.util"
