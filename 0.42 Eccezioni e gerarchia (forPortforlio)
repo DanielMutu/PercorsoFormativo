@@ -1,0 +1,173 @@
+    --- Eccezioni/Asserzioni e Errori con gerarchia ---
+    
+Link Utile: http://pages.di.unipi.it/corradini/Didattica/LIP-07/Eccezioni/Throw/main.html
+
+Le eccezioni in Java sono oggetti, istanze (di sottoclassi) della classe Throwable (lanciabile);
+
+Eccezione: 
+  -Situazione imprevista che può verificarsi durante il flusso di un applicazione.
+  -Può essere usata con cinque semplici parole: "try", "catch", "finally", "throw" e "throws".
+  
+Esempio di eccezione: 
+  -Programma che divide due variabili e divisore ha valore 0. (Situazione non possibile).
+
+Quando viene  lanciata un eccezione e come se il compilatore scrivesse:
+
+ArithmeticException exc = new ArithmeticException();
+throw exc;
+
+Esempio di programma che lancia un eccezione:
+  
+  public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+    int c=a/b;
+    System.out.println(c);
+    }
+  }
+
+(Scrivere output  da terminale)
+
+Esempio con lancio eccezione:
+
+  public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(ArithmeticException exc){
+        System.out.println("Eccezione lanciata.... ");
+      }
+    }
+  }
+
+!ATTENZIONE: Il blocco catch deve lanciare un oggetto fra parentesi.
+
+
+Esempio con lancio eccezione 2:
+
+  public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(ArithmeticException exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+      }
+    }
+  }
+
+!ATTENZIONE: Importante che si dichiari il tipo giusto di eccezione. 
+Per esempio, c=a/b crea un eccezione di tipo ArithmeticException, se si dichiara l'eccezione di tipo sbagliato avremmo la chiusura del programma.
+
+Esempio con lancio eccezione 3:
+
+public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(Exception exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+      }
+    }
+  }
+
+In questo esempio, abbiamo dichiarato la superclasse Exception, in questo caso indipendentemente dall'eccezione che verrà lanciata il programma andrà a finire nel blocco del "catch".
+
+Esempio con lancio eccezione 4:
+
+public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(Exception exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+      }catch(ArithmeticException exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+    }catch(Exception exc){
+    System.out.println("Altra eccezione");
+      }
+  }
+
+In questo caso, abbiamo più eccezioni, avremmo quindi un programma più robusto perchè è in grado di gestire diversi tipi di eccezioni.
+E se non è prevista questa eccezione l'ultimo blocco catch gestirebbe questa eccezione.
+!ATTENZIONE: E' fondamentale l'ordine in cui sono scritti i "catch".
+
+Esempio con lancio eccezione 5:
+
+public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(Exception exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+      }catch(ArithmeticException | NullPointerException  exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+    }catch(Exception exc){
+    System.out.println("Altra eccezione");
+      }
+  }
+In questo caso invece, per evitare rindondanze possiamo mettere in un unico catch più eccezioni.
+
+Esempio con lancio eccezione 6:
+
+public class Ecc1{
+  public static void main(String [] args){
+    int a=10;
+    int b=0;
+      try{
+        int c=a/b;
+        System.out.println(c);
+        }catch(Exception exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+      }catch(ArithmeticException | NullPointerException  exc){
+        System.out.println("Eccezione lanciata.... ");
+        exc.printStackTrace();
+    }catch(Exception exc){
+    System.out.println("Altra eccezione");
+      }finally{
+        System.out.println("Clausola che viene eseguita in ogni caso");
+      }
+  }
+
+CLAUSOLA: Finally
+
+Questa clausola invece viene invocata sempre indipendentemente che venga lanciata un eccezione o meno. 
+
+
+Errore:
+  -Situazione non gestibile dal programmatore.
+  -Esiste la classe error che si occupa di  mostrare gli errori
+  
+Esempio di errore:
+  -Fine dello spazio in memoria
+  
+Asserzioni:
+  -Condizione che deve essere verificata affinchè il programmatore consideri corretta una parte di codice.
+  -Strumento che serve per testare la robustezza del codice.
+  -Si possono abilitare in fase di "sviluppo software" e disabilitare durante "la fase di rilascio".
+  -Si implementa con la parola chiave "assert".
+ 
+  
+  
