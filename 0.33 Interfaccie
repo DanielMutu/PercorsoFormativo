@@ -1,12 +1,14 @@
 Cos'è un interfaccia?
 
-- Stablisce una forma base, permette di conoscere cosa c'è in comune fra tutte le classi.
+- E' un evoluzione della classe astratta.
 
 Vantaggi?
 
-- Il vantaggio principale di una interfaccia è quello che oltre ad essere estesa può essere implementata. 
-La differenza tra estendere e implementare è molto grande in quanto una classe può essere eriditata solo ed esclusivamente una volta, mentre una classe può implementare infinite interfacce permettendo così l'ereditarietà multipla.
+- Un interfaccia sarà sempre astratta.
+- Un interfaccia non si può istanziare ma deve essere implementata da una classe.
+- Può avere solo metodi dichiarati "public" e "abstract", in caso contrario verrà mostrato un errore. 
 
 
 ------ Sono simili alle classi, ma contengono solo dichiarazioni di metodo -----
+
        Dichiarare un metodo=garantire che sarà presente in tutte le sottoclassi
