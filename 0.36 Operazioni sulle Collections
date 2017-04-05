@@ -1,5 +1,7 @@
 Quali sono le operazioni principali?
 
+link utile: http://www-db.disi.unibo.it/courses/FIT1-LZ/SLIDE/collezioni.pdf
+
 - boolean add(Object o)
 - boolean contains(Object o)
 - boolean remove(Object o)
