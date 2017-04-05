@@ -1,0 +1,51 @@
+      ----  Gestione degli errori  ----
+      
+link utile: http://lia.deis.unibo.it/Courses/FondB0607-INF-LZ/materiale/eccezioni.pdf
+  
+Ci sono istruzioni critiche che possono produrre errori.
+
+Di solito si utilizzano if/else per la gestione degli errori, ma a i seguenti difetti:
+  
+  - non è facile prevedere tutte le situazioni che potrebbero produrre l’errore.
+  - “gestire” l’errore spesso significa solo stampare a video un messaggio.
+  
+  Java produce eccezioni anzichè prevedere tutte le possibili scampatoie.
+  
+  Come scrivere un eccezione:
+
+//*****************************************
+
+try {
+    /* operazione critica che può
+    sollevare eccezioni */
+    }
+catch (Exception e) {
+     /* gestione dell’eccezione */
+}
+
+//****************************************
+Esempio di programma che utilizza un eccezione:
+
+class EsempioEccezione {
+  public static void main(String args[]){
+  int a = 0;
+  String s = "1123";
+  try {
+    a = Integer.parseInt(s);
+    }
+catch (NumberFormatException e) {
+ System.out.println("Stringa mal fatta");
+}
+ }
+}
+
+//****************************************
+Altre informazioni utili:  
+
+Una eccezione è un oggetto, istanza di java.lang.Throwable o di una sua
+sottoclasse.
+• Le due sottoclassi più comuni sono:
+  java.lang.Exception
+  java.lang.Error
+• La parola “eccezione” è però spesso riferita a entrambe
+
