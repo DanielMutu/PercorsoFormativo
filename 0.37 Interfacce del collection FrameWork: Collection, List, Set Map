@@ -1,0 +1,21 @@
+      ----  Interfaccia List  ----
+  
+link utile: 
+    http://www.javatpoint.com/java-list
+   
+  
+E' un interfaccia che contiene metodi di inserimento ed eliminazione di index di collection.
+  
+Dichiarazione:    
+    public interface List<E> extends Collection<E>  
+    
+(Guardare tabella per vedere come utilizzare i metodi).
+
+      ---- Map Interface ----
+ 
+ Link Utile: 
+      http://www.javatpoint.com/java-map
+ 
+ Contiene un insieme di chiavi e un valore associato ad ogni chiave. 
+
+(Guardare tabella per utilizzare i metodi).
