@@ -10,5 +10,16 @@ Error:
     -In genere i programmi non gestiscono questi errori
 Exception
      -Tutti gli errori che non rientrano in Error
-     -I programmi possono gestire o no questi errori a seconda
-dei casi
+     -I programmi possono gestire o no questi errori a seconda dei casi
+
+Esempio di eccezione:
+
+public class Coin
+{
+public void read(BufferedReader in) throws IOException
+{
+value = Double.parseDouble(in.readLine());
+name =in.readLine();
+}
+...
+}
