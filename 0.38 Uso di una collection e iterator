@@ -1,0 +1,7 @@
+      ---Come usare una iterator in una collections---
+      
+      A cosa serve Iterator?
+      
+Si vuole per scorrere gli elementi di una collezione. Ad esempio, si potrebbe desiderare di visualizzare ogni elemento. Il modo più semplice per farlo è di impiegare un iteratore, che è un oggetto che implementa sia l'Iterator o l'interfaccia ListIterator.
+
+Link per visualizzare i metodi di Iterator: https://www.tutorialspoint.com/java/java_using_iterator.html
