@@ -18,3 +18,31 @@ Postcondizione:
 Errori: lancia ClassCastException (non verificata) se x non è confrontabile con this.
 
 L'ordinamento della classe String avvine secondo un ordinamento numerico.
+
+
+
+            ----- Interfaccia Comparator -----
+            
+  -L'interfaccia comparator ha il compito di specificare come avviene l'ordinamento degli oggetti.
+  
+  -Si possono specificare più comparatori e specificare il comparatore ideale al momento.
+  
+  -Si trova in java.util quindi va importato tale pacchetto
+  
+  Esempio codice:
+  
+public interface Comparator <T>{    
+    int compare (T o1, T o2);
+    }
+    
+Un esempio mettendo in risalto la differenza tra utilizzo di interfaccia Comparable e Comparator:
+    List <Persona> persone = new ArrayList<Persona>();
+    
+    // si riempie la lista con oggetti Persona
+    ...
+    //1. In questo caso si ordina secondo l'ordine naturale Collections.sort (persone); // nb: Collections.sort(......) esiste solo per le liste
+
+    //2. Se si vuole ordinare in un altro modo si usa Comparator Collections.sort (persone, new ComparaPerNome()); // anche inner class o uso costanti
+Nel primo caso si otterranno gli elementi ordinati per cognome e nome, mentre nel secondo caso si
+avranno gli elementi ordinati per nome.   
+  
