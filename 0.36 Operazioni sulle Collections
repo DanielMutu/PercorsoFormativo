@@ -1,0 +1,36 @@
+Quali sono le operazioni principali?
+
+- boolean add(Object o)
+- boolean contains(Object o)
+- boolean remove(Object o)
+- int size()
+- boolean isEmpty()
+- Iterator iterator()
+
+-Esempio di programma che utilizza i metodi di collection
+
+import java.util.*;
+
+ Set s; // un insieme di stringhe
+ /* crea un nuovo insieme s */
+ s = new HashSet();
+ /* inserisce alcune stringhe nell’insieme s */
+ s.add("uno");
+ s.add("due");
+ s.add("tre");
+ /* accede all’insieme */
+ System.out.println( s.size() ); // 3
+ System.out.println( s.contains("uno") ); // true
+ System.out.println( s.contains("sei") ); // false
+ System.out.println( s.toString() ); // [tre, uno, due] 
+
+ /* modifica l’insieme s */
+ 
+ s.add("uno"); // s non cambia
+ System.out.println( s.size() ); // 3
+ s.remove("due");
+ System.out.println( s.size() ); // 2
+ System.out.println( s.toString() ); // [tre, uno]
+ s.add("alfa");
+ s.add("beta");
+ System.out.println( s.size() ); // 4
