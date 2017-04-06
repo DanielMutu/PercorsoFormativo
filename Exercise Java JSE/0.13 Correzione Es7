@@ -1,0 +1,19 @@
+public class Sequence{
+	
+	//Questo metodo viene invocato subito dopo il static
+	Sequence(){
+		System.out.println("c  ");		
+	}
+	{
+		System.out.println("y  ");
+	}
+	public static void main(String [] args ){
+		new Sequence().go();
+	}
+	void go(){
+		System.out.println("g  ");
+	}
+	static {
+		System.out.println("x  ");
+	}
+}
