@@ -1,0 +1,13 @@
+import java.util.*;
+
+public class primes{
+public static void main(String [] args){
+	List<Integer> myList = new ArrayList<Integer>();
+	myList.add(5);
+	myList.add(2);
+	myList.add(7);
+	myList.add(2);
+	//myList.sort();
+	System.out.println(myList);
+	}
+}
