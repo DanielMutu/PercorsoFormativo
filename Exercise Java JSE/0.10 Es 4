@@ -1,0 +1,14 @@
+public class myLoop{
+	
+	public static void main(String [] args ){
+		String [] sa={"tom", "jerry"};
+		int i=0;
+		for(int x=0; x<3; x++){		
+				System.out.println(x+"    "+sa[i]);
+				i++;
+				if(x==1) break;
+		}
+		
+	}
+	
+}
