@@ -1,0 +1,85 @@
+      ---- GRANT ----
+Il comando GRANT permette allo stesso tempo di creare un utente e di assegnargli dei permessi specifici. 
+
+Sintassi::
+  GRANT <istruzioni_consentite>
+  ON <database>.<tabella>
+  TO <utente>@<host>
+  IDENTIFIED BY <password>;
+ 
+ <Istruzioni_consentite> -->  Lista di istruzione che si vuole concedere all'utente (CREATE, SELECT, UPDATE, DELETE, ALTER, DROP), se si vogliono consentire tutti i privilegi si può anche utilizzare la clausola 'ALL'.
+ 
+ <database> nome del database al quale facciamo riferimento. Se utilizziamo "*", si fa riferimento a tutti i database che abbiamo a dispozione.
+ 
+ <tabella> specificando i nomi di una tabella si farà riferimento solo ad essa. I permessi dunque riguarderanno solo questa e non altre presenti nel database. Se si utilizza "*" si fa riferimento a tutte le tabelle del database. 
+ 
+ <utente> specifica l'utente che vogliamo assegnare nuovi permessi.
+ 
+ <host> Specifica il/gli host da cui è ammessa la connessione. (Nessuna limitazione di host: @'%').
+ 
+ <password> Si deve far precedere la stringa criptata dalla parola PASSWORD, se si vuole criptare la password.
+ 
+ 
+    ---- REVOKE -----
+    
+La clausola Revoke serve per rimuovere i permessi alll utente, quindi svolge la funzione opposta al GRANT.
+
+Vediamo un esempio:  
+    REVOKE <istruzioni_revocate>
+    ON <database>.<tabella>
+    FROM <utente>@<host>
+
+Per un'azione globale è possibile utilizzare: 
+
+  REVOKE ALL PRIVILEGES, GRANT OPTION
+  FROM <utente>@<host>
+
+!ATTENZIONE: Utilizzare sempre la stessa accopiata nome utente e host, in caso contrario verrà creato un nuovo utente e non verrà modificato quello sul quale si desidera agire.
+      
+      ---- Conoscere tutti i permessi di un utente specifico ----
+      
+ Per conoscere i permessi dell'utente attualmente loggato:
+ SHOW GRANTS FOR CURRENT_USER;
+ 
+ Per conoscere i permessi di un utente specifico invece:
+ SHOW GRANTS FOR 'editore'@'localhost';
+
+      ---- CANCELLARE UN UTENTE SPECIFICO----
+
+E' buona norma revocare tutti i permessi di un utente prima di eliminarlo.
+
+REVOKE ALL PRIVILEGES, GRANT OPTION
+FROM 'editore'@'localhost'  
+
+DROP USER 'editore'@'localhost'
+
+
+      ----- SYNONYM ------ 
+
+Un SYNONYM è un modo “compatto” per denominare/identificare un oggetto all’interno di un database SQL Server 2005.
+
+Esempio di creazione di un Synonym
+
+Codice:
+    CREATE SYNONYM OrdiniClienti 
+    FOR DB_ECommerce.Business.Ordini
+
+Usare il synonym:
+    –forma compatta
+    SELECT * FROM OrdiniClienti 
+    –forma prolissa
+    SELECT * FROM DB_ECommerce.Business.Ordini 
+
+I Synonym aiutano lo sviluppatore ad avere un cpdice più compatto quindi più facilmente leggibile.
+
+      ----  Partizionamento ----
+
+Definizione di partizionamento: processo nel quale si decompongono tabelle di grandi dimensioni in tabelle più piccole facili da maneggiare.
+
+Quali sono le caratteristiche di una partizione?
+  
+
+
+
+
+ 
