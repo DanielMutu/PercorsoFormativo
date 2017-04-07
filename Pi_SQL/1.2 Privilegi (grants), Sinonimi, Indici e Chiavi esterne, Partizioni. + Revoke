@@ -79,7 +79,7 @@ Definizione di partizionamento: processo nel quale si decompongono tabelle di gr
 Quali sono le caratteristiche di una partizione?
   
 
-
+Il partizionamento di indici e tabelle è disponibile solo nelle edizioni Enterprise, Developer ed Evaluation di SQL Server.
 
 
  
