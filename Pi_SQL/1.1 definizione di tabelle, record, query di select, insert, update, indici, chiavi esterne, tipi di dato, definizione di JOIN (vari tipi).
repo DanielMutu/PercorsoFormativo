@@ -1,0 +1,130 @@
+                           ---- Tabella ----
+
+Link di riferimento: http://www.html.it/pag/31831/i-tipi-di-dati-in-sql-server/
+
+Definizione di tabella di un database: 
+
+     -  E' la struttura fondamentale di un database in cui vengono raccolti i dati.
+     -  Con la tabella si rappresentano le entità e le relazioni delo schema relazionale.
+     -  Una tabella  e composta da record (righe) e campi (fields).
+     
+Definizione di record di una tabella:
+     - Viene definita come struttura di dati eterogenea contenente un insieme di elementi.     
+
+Query di SELECT:
+     - Attraverso l'operazione di SELECT vengono selezionati più dati e restituiti all'utente atttraverso una nuova tabella.
+     RISULTATO: Formato da colonne tante quante sono state definite nella query di SELECT e righe quante sono state possibili da estrarre dal database.
+     Esempio: "SELECT * FROM nome_tabella"
+     
+Query di UPDATE:
+     - MySQL consente di effettuare operazioni di modifica sui dati mediante il comando UPDATE di SQL, si utilizza con la clausola SET.
+     - Esempio: "UPDATE amici SET cognome = 'Verdi' WHERE id = 1" 
+     
+Query di INSERT: 
+    - La Query di INSERT viene utilizzata per inserire nuovi record in una tabella
+    - E' possibile scrivere la query di inserimento in due modi:
+    
+    1 Esempio:  INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+    2 Esempio:  INSERT INTO table_name VALUES (value1, value2, value3, ...);
+   
+Indici in SQL:
+
+    - Sono una specie di shedario dove sono contenuti i dati di riferimento di dove si trovano i dati all'interno del database. 
+    - L'indice è quindi una tabella stesse che contiene la posizione dei dati all'interno del database.
+    - Un nuovo record in una tabella seguirà un ordine, cioè l'ordine di inserimento.
+    - Un operazione che contrige  la ricerca costringe la scansione dell'intera tabella (TABLE SCAN).  
+    - Con un indice appropriato, invece, il database è capace di recuperare i dati necessari direttamente consultando l’indice.
+    
+Chiavi esterne in SQL: 
+    - Una chiave esterna uno o più campi che ffanno riferimento ai campi di un' altra tabella.
+    - LO SCOPO E' QUELLO DI GARANTIRE L'INTEGRITA' REFERENZIALE DEI DATI.
+    
+Tipi di dato in SQL:
+    - Dati binari: ha una lunghezza fissa e può contenere fino ad 8000 bytes di dati binari.
+    - Varbinary: ha una lunghezza variabile e può contenere fino ad 8000 bytes di dati binari.
+
+Per i caratteri si utilizza:    
+    - Char: 8000 bytes (8000 caratteri) (lunghezza fissa)
+    - Varchar: 8000 bytes (8000 caratteri) (lunghezza variabile)
+    - nchar: 8000 bytes ( 4000 caratteri UNICODE ) (2 byte per ogni carattere ) (lunghezza fissa)
+    - nvarchar: 8000 bytes ( 4000 caratteri UNICODE ) (2 byte per ogni carattere ) (lunghezza variabile) 
+    
+Dati ora e data:
+    -datatime
+    -smalldatetime
+
+Dati numerici approssimati:    
+    - float: Contiene numeri a virgola mobile positivi e negativi
+    - real: Contiene numeri a virgola mobile positivi e negativi
+    
+Dati numerici esatti:
+    - decimal / numeric:  possono avere valori compresi fra 10^38 – 1 e – 10^38 -1.
+    - int: occupa 4 byte di memoria e memorizza i valori da -2147483648 a 2147483647.
+    - smallint: occupa 2 byte di memoria e memorizza i valori da -32768 a 32,767
+    - tinyint: occupa 1 byte di memoria e memorizza i valori da 0 a 255
+
+Info: Mira a supportare, a differenza di ansi tutti i caratteri del mondo.
+
+                ---- JOIN ----
+                
+Link Utile: https://i.stack.imgur.com/1UKp7.png
+
+Un Join ha il compito di combinare i dati di due tabelle basandosi su delle regole logiche.
+
+    - INNER JOIN
+    - OUTER JOIN
+    - Full Outer Join
+    - CROSS JOIN
+
+Inner Join:  
+  Link Utile: https://www.w3schools.com/sql/sql_join_inner.asp
+
+  Restituisce tutti i campi interessati dall'unione fra due tabelle. 
+  Esempio di utilizzo INNER JOIN: 
+  
+  " SELECT Orders.OrderID, Customers.CustomerName
+    FROM Orders
+    INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+  " 
+
+Full Outer Join: 
+  - Link Utile: https://www.w3schools.com/sql/sql_join_full.asp
+  - Link Utile2: https://technet.microsoft.com/it-it/library/ms187518(v=sql.105).aspx
+  
+  - Consente di includere tutte le righe di entrambe le tabelle, indipendentemente dalla presenza o meno di valori corrispondenti.
+  
+  "
+  SELECT p.Name, sod.SalesOrderID
+  FROM Production.Product p
+  FULL OUTER JOIN Sales.SalesOrderDetail sod
+  ON p.ProductID = sod.ProductID
+  WHERE p.ProductID IS NULL
+  OR sod.ProductID IS NULL
+  ORDER BY p.Name ;
+  "
+  
+  Outer Join: 
+      -  Outer join restituiscono invece tutte le righe di almeno una delle tabelle o viste specificate nella clausola FROM, a condizione che tali righe soddisfino una delle condizioni di ricerca della clausola WHERE o HAVING. 
+   
+  Cross Join: 
+  Link Utile: https://technet.microsoft.com/it-it/library/ms190690(v=sql.105).aspx    
+  Consente di ottenere il prodotto cartesiano delle tabelle specificate nel JOIN.
+
+  Left Join:
+  Link Utile: https://it.wikipedia.org/wiki/Join_(SQL)#Left_outer_join
+  
+  Definizione: Il risultato di una query left outer join (o semplicemente left join) per le tabelle A e B contiene sempre tutti i record della tabella di sinistra ("left") A, mentre vengono estratti dalla tabella di destra ("right") B solamente le righe che trovano corrispondenza nella regola di confronto della join. Questo significa che se la clausola ON trova 0 (zero) righe in B, la join mostrerà una riga risultante con valore NULL in tutte le colonne corrispondenti al risultato per le colonne di B.
+ 
+ Esempio query: 
+ SELECT *  
+FROM   Impiegati  LEFT OUTER JOIN Dipartimenti  ON Impiegati.ID_dipartimento = Dipartimenti.ID_dipartimento     
+          
+ Right Join: 
+ Link Utile: https://it.wikipedia.org/wiki/Join_(SQL)#Left_outer_join
+ 
+ Definizione: Il risultato di una query right outer join per le tabelle A e B contiene sempre tutti i record della tabella di destra ("right") B, mentre vengono estratti dalla tabella di sinistra ("left") A solamente le righe che trovano corrispondenza nella regola di confronto della join. Questo significa che se la clausola ON trova 0 (zero) righe in A, la join mostrerà una riga risultante con valore NULL in tutte le colonne corrispondenti al risultato per le colonne di A.
+ 
+ Esempio utilizzo: 
+ SELECT * 
+ FROM   Impiegati RIGHT OUTER JOIN Dipartimenti ON Impiegati.ID_dipartimento = Dipartimenti.ID_dipartimento
+          
