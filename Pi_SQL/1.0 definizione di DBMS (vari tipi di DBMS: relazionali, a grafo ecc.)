@@ -1,0 +1,78 @@
+                              ----- Definizione di base di dati ----
+      
+- DBMS: Un insieme di dati correlati fra loro, in aggiunta un software per la loro gestione.
+
+- Definizione di database:  Insieme di dati fra loro correlati: memorizzati su un supporto di memoria di massa che possono essere manipolati da più programmi applicativi. 
+
+Operazioni Applicabili al DATABASE: Inserimento, cancellazione, modifica, ricerca, ordinamento e stampa di rapporti o relazioni.
+
+  Ci sono diversi tipi di database:   
+   Database gerarchici
+   Database reticolari
+   Database ad oggetti
+   Database relazionali
+
+
+Database generici: Generalmente hanno una STRUTTURA AD ALBERO, ma utilizzati anche ai giorni nostri.
+
+Database reticolati (CODASYL) o a rete: basati sull'uso di grafici e sono stati sviluppati successivamente al modello gerarchico.
+
+Database ad Oggetti: Evoluzione del database relazionale, estendono il paradigma della programmazione ad oggetti.
+
+Database RELAZIONALI: 
+
+  - Rappresentano i dati in tabelle. 
+  - Sono i più utilizzati.
+  
+ VANTAGGI DEI DATABASE:
+ 
+  - USO AMICHEVOLE DELLE PROCEDURE DI GESTIONE ATTRAVERSO MENU ED INTERFACCE GRAFICHE.
+  - PERMETTONO RELAZIONI FRA LORO IN QUESTO MODO SI RIDUCE DI MOLTO LA DUPLICAZIONE.
+  - I DATABASE SONO PRODOTTI STANDARD PER QUESTO RIDUCONO I COSTI RISPETTO A SOFTWARE FATTI SU MISURA.
+  - GARANTISCE UN CERTO LIVELLO DI SICUREZZA SOPRATUTTO IN AMBIENTE MULTI UTENTE.
+  
+  
+ELEMENTI CARATTERISTICI DI UN DATABASE:
+
+   Tabelle
+   Maschere
+   Query
+   Report
+ 
+ Le informazioni di in database sono raggruppate in tabelle, una tabella è formata di righe (record) e colone (campi).
+ 
+ La prima riga è detta intestazione e contiene i nomi dei campi.
+ 
+ CHIAVE PRIMARIA: E' un campo che identifica in modo univoco i records di una tabella. 
+ 
+ ----- TIPI DI RELAZIONI -----
+ 
+UNO A UNO:
+- Si tratta di relazioni tra elementi che hanno una corrispondenza univoca: ad un elemento di una tabella ne corrisponde uno soltanto in un'altra e viceversa;
+UNO A MOLTI: 
+- Sono relazioni che si stabiliscono tra un record di una tabella e più records di un'altra tabella, ma
+non il contrario;
+MOLTI A MOLTI: 
+-Un record può essere relazionato a più di un record di un'altra tabella e viceversa; questo tipo di relazione è normalmente definita tramite una terza tabella che costituisce un "ponte" tra le due da relazionare.
+
+    ---- LE MASCHERE ----
+    
+I dati in una tabella possono essere usati: utilizzando le maschere oppure come l'inserimento in una tabella Excel.
+Le maschere sono utili anche per la viosualizzazione ordinata dei record della tabella.
+
+Una query è uno strumento che consente di effettuare interrogazioni sui contenuti delle tabelle e anche di eseguire specifiche azioni sui dati.
+   
+SQL: E’ un linguaggio utilizzato per interagire con i database relazionali, l'acronimo sta per Structure Query Language.
+
+E' universalmente accettato da:
+  Microsoft Access, Microsoft SQL server
+ Oracle
+ IBM DB2
+
+Può interagire con C,C++ e Java.
+
+- Effettua operazioni di interrogazione, inserimento di nuovi dati, modifica dei dati esistenti.
+- Un report consente di visualizzare i dati memorizzati in tabelle o query del DB,  Ha lo scopo di presentare i dati i video.
+
+
+
