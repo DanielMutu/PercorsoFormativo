@@ -1,6 +1,6 @@
 sito di riferimento:  http://www.diit.unict.it/users/alongheu/linguaggi/aa0910/lezione08_classi_astratte_e_interfacce.pdf
 
-- Può avere  metodi ed attributi e si riconosce solitamente dal fatto che ha un metodo dichiarato ma non sviluppati.
-- E' caraterizzato dalla parola chiave "abstract".
-- Suppone l'esistenza di almeno una sottoclasse.
-- La classe astratta non può avere oggetti.
+1. - Può avere  metodi ed attributi e si riconosce solitamente dal fatto che ha un metodo dichiarato ma non sviluppati.
+2. - E' caraterizzato dalla parola chiave "abstract".
+3. - Suppone l'esistenza di almeno una sottoclasse.
+4. - La classe astratta non può avere oggetti.
