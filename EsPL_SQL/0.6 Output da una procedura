@@ -1,0 +1,16 @@
+DECLARE 
+   c varchar2(20):=NULL;
+PROCEDURE findMin IS 
+BEGIN 
+   SELECT NOME_ARTICOLO
+    INTO c
+   FROM ACQUISTI
+   WHERE IDART='2';
+END;   
+BEGIN 
+   findMin(); 
+    
+   dbms_output.put_line(' Nome trovato è : ');
+END; 
+/
+
