@@ -1,0 +1,12 @@
+    /* 0.3 Esempio esercizio con dichiarazioni ancorate  "Anagrafica.Nome%TYPE" */
+    /*!ATTENZIONE:  nomePreso ha il tipo ancorato di NOME_ARTICOLO, quindi devo riscrivere nomeTabella.NomeCampo%TYPE*/
+DECLARE
+nomePreso ACQUISTI.NOME_ARTICOLO%TYPE:=NULL;
+BEGIN
+SELECT NOME_ARTICOLO
+INTO nomePreso 
+FROM ACQUISTI
+WHERE IDART=2; 
+ dbms_output.put_line(nomePreso);
+END;
+/
