@@ -1,0 +1,3 @@
+
+Dichirazione di una costante: 
+    <nome_variabile> [costant] <tipo di dati> [not null] [:=<espressione>];
