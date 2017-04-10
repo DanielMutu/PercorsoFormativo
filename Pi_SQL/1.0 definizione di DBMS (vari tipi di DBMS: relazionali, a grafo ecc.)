@@ -13,7 +13,7 @@ Operazioni Applicabili al DATABASE: Inserimento, cancellazione, modifica, ricerc
    Database relazionali
 
 
-Database generici: Generalmente hanno una STRUTTURA AD ALBERO, ma utilizzati anche ai giorni nostri.
+Database gerarchici: Generalmente hanno una STRUTTURA AD ALBERO, ma utilizzati anche ai giorni nostri.
 
 Database reticolati (CODASYL) o a rete: basati sull'uso di grafici e sono stati sviluppati successivamente al modello gerarchico.
 
@@ -58,7 +58,7 @@ MOLTI A MOLTI:
     ---- LE MASCHERE ----
     
 I dati in una tabella possono essere usati: utilizzando le maschere oppure come l'inserimento in una tabella Excel.
-Le maschere sono utili anche per la viosualizzazione ordinata dei record della tabella.
+Le maschere sono utili anche per la visualizzazione ordinata dei record della tabella.
 
 Una query è uno strumento che consente di effettuare interrogazioni sui contenuti delle tabelle e anche di eseguire specifiche azioni sui dati.
    
