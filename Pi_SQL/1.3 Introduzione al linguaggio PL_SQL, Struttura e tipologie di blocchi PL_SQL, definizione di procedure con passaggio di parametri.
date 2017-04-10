@@ -41,7 +41,19 @@ PL/SQL è diviso in blocchi logici di codice, ogni nlocco contiene tre sottopart
   / 
   La linea " / " segna la fine del blocco PL/SQL
   
- - La procedura scrive l’’output su un buffer dell’SGA da cui può
+-------------------  PROCEDURA ----------------------
+Sintassi procedura:
+
+       CREATE [or REPLACE] PROCEDURE <nome_procedura> [(<lista di parametri>)] IS
+        <dichiarazione>
+        BEGIN
+        <sequenza di istruzioni>
+        [exception
+        <routine di gestione dell’'eccezione>]
+       END [<nome procedura>];
+  
+  
+ - La procedura scrive l’output su un buffer dell’SGA da cui può
    essere letto mediante il comando .get_line.
  - DBMS_OUTPUT è un package.
  - .PUT_LINE è una procedura all'interno del packege.
