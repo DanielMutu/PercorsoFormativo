@@ -1,0 +1,17 @@
+  /* 0.4 Esercizio che mi restituisce un record intero di una tabella e me lo immagazzina all'interno di una mia variabile "Anagrafica%ROWTYPE" */
+  /* !ATTENZIONE1: Non faccio assegnazione di nomeTubla a NULL perchè mi restituisce un insieme di campi */
+  /* !ATTENZIONE2: nell'output  devo richiamare un campo alla volta con il dome della mia variabile+ il nome della colonna che mi interessa */
+  
+  
+DECLARE
+nomeTupla ACQUISTI%ROWTYPE;
+BEGIN
+SELECT *
+INTO nomeTupla 
+FROM ACQUISTI
+WHERE IDART=2; 
+ dbms_output.put_line('Nome articolo: '||nomeTupla.NOME_ARTICOLO);
+ dbms_output.put_line('Prezzo articolo: '||nomeTupla.PREZZO_ARTICOLO);
+ dbms_output.put_line('ID Persona: '||nomeTupla.ID_PERSONA);
+END;
+/
