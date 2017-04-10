@@ -1,0 +1,4 @@
+            ----- Binding in Java -----
+
+Binding è il processo tramite cui viene effettuato il collegamento fra una entità di un software ed il suo corrispettivo valore.
+Tale decisione può essere stata stabilita in anticipo in maniera fissa, e in tal caso si parla di binding statico (o early binding); oppure può essere presa a tempo di esecuzione, in maniera dinamica, e in tal caso si parla di binding dinamico.
