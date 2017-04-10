@@ -1,0 +1,11 @@
+CREATE OR REPLACE PROCEDURE primaProcedura 
+AS 
+BEGIN 
+UPDATE  ACQUISTI
+SET NOME_ARTICOLO='Daniel'
+WHERE NOME_ARTICOLO='Pippo';
+dbms_output.put_line('CODICE ESEGUITO'); 
+END; 
+/
+EXECUTE primaProcedura;
+
