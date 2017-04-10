@@ -1,0 +1,104 @@
+----- 1.3 Introduzione al linguaggio PL_SQL, Struttura e tipologie di blocchi PL_SQL, definizione di procedure con passaggio di parametri. -----
+
+PL/SQL è una combinazine fra SQL e le caratteristiche di un linguaggio di programmazione.
+PL/SQL è stato sviluppato da Oracle Corporation.
+
+PL/SQL è completamente portatile.
+La sintassi di PL/SQL è basata su ADA e PASCAL.
+
+Ha le seguenti caratteristiche: 
+    - E' integrato con SQL.
+    - Offre ampio controllo errori.
+    - Una grande varietà di variabili.
+    - Supporta la programmazione strutturata attraverso funcioni e procedure.
+    - Supporta la programmazion orientata agli oggetti.
+    - Supporta lo sviluppo di applicazioni WEB e server Pages.
+
+//sintassi DI BASE pl/sql
+PL/SQL è diviso in blocchi logici di codice, ogni nlocco contiene tre sottoparti :
+  - Declarations: contiene la parola chiave DECLARE, è una sezione opzionale che definisce, tutte le variabili, cursori, sottoprogrammmi ed altri elementi che saranno utilizzati nel programma.
+  - Executable Commands: la sezione è chiusa fra le paroli chiave BEGIN ed END ed è una sezione obbligatoria.
+  
+  -Exception Handling: Questa sezione inizia con la parola chiave EXCEPTION e si occupa degli errori del programma.
+  
+  La struttura di base è:
+  
+  DECLARE 
+   <declarations section> 
+  BEGIN 
+   <executable command(s)>
+  EXCEPTION 
+   <exception handling> 
+  END;
+
+" Esempio di Hello WOrld "
+
+  DECLARE 
+     message  varchar2(20):= 'Hello, World!'; 
+  BEGIN 
+     dbms_output.put_line(message); 
+  END; 
+  / 
+  La linea " / " segna la fine del blocco PL/SQL
+  
+ - La procedura scrive l’’output su un buffer dell’SGA da cui può
+   essere letto mediante il comando .get_line.
+ - DBMS_OUTPUT è un package.
+ - .PUT_LINE è una procedura all'interno del packege.
+  
+  
+  Cos'è una procedura?
+  
+ Una procedura è un blocco di codice PL/SQL con un nome che viene mantenuto all'interno del database.
+ 
+ Esempio di procedura: 
+ 
+CREATE OR REPLACE PROCEDURE nome_procedura
+  [(parametri)] IS
+  Definizioni;
+BEGIN
+  Corpo procedura;
+END;
+
+La clausola IS sotituisce il DECLARE.  
+Una procedura può essere richiamata con il seguente comando
+CALL nome_procedura([parametri]);
+
+Dichiarazione di una variabile PL/SQL:
+"
+identifier [CONSTANT] datatype [NOT NULL]
+[:= | DEFAULT expr];
+"
+- La dichiarazione deve essere effettuata nella sezione DECLARE.
+- Per default le variabili sono inizializzate a NULL.
+- Le variabili sono inizializzateogni volta che si acced al blocco.
+- Due variabili con lo stesso nome devono essere inizializzate in blocchi diversi.
+
+Assegnazione di un valore a una variabile:
+
+variablename := expression;
+
+4 tipi di variabili:
+  -Scalar: contengono un singolo valore (Corrispondono ai tipi di dati presesenti nelle tabelle Oracle) 
+  -Composite: Permettono di manipolare gruppi di campi.
+  -Reference: contiene Puntatori.
+  -LOB (Large Object): contengono elementi chiamati locators, che speficano la posizione di oggetti di grosse dimensioni(es. immagini)
+  
+  ----- Principali tipi di dati scalari -----
+  
+  VARCHAR2 (lunghezza massima)
+  CHAR [( lunghezza massima )]
+  DATE di tipo data
+  BOOLEAN true, false o null
+  
+  Esempio:
+  
+  CREATE PROCEDURE Esempio IS
+  v_job VARCHAR2(9);
+  v_total_sal NUMBER(9,2) := 0;
+  v_duedate DATE := SYSDATE + 7;
+  v_valid BOOLEAN NOT NULL := TRUE;
+  c_tax_rate CONSTANT NUMBER(3,2) := 8.25;
+  BEGIN………………
+
+
