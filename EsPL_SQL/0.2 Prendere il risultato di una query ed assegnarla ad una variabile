@@ -1,0 +1,12 @@
+/* 0.2 Prendere il risultato di una query ed assegnarla ad una variabile */
+
+DECLARE
+nomePreso VARCHAR2(10):=NULL;
+BEGIN
+SELECT NOME_ARTICOLO
+INTO nomePreso 
+FROM ACQUISTI
+WHERE IDART=1; 
+ dbms_output.put_line(nomePreso);
+END;
+/
