@@ -1,0 +1,26 @@
+---- Polimorfismo ----
+
+Polimorfismo in Java significa eseguire un azione in diversi modi. 
+
+Ci sono due tipi di polimorfismo in Java:
+    - Compile time polymorphism:  indica il tempo di compilazione di un programma. 
+    - Runtime polymorphism: momento in cui programma viene eseguito.
+ 
+In Java puoi eseguire il polimorfismo con l'azione di @overriding ed @overloading
+
+Runtime polymorphism: è un processo che chiama un metodo in override.
+
+----- Upcasting -----
+
+class Bike{
+   void run(){System.out.println("running");}
+ }
+ class Splender extends Bike{
+   void run(){System.out.println("running safely with 60km");}
+ 
+   public static void main(String args[]){
+     Bike b = new Splender();//upcasting
+     b.run();
+   }
+ }
+N.B. "Bike b = new Splender();" --> Questo metodo chiama il metodo "b.run()" e avrà come output   "running safely with 60km".
