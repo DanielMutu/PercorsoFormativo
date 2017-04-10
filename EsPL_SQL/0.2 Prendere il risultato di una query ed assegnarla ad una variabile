@@ -10,3 +10,5 @@ WHERE IDART=1;
  dbms_output.put_line(nomePreso);
 END;
 /
+
+!ATTENZIONE: Per fare un operazione del genere dovremo essere certi, però, che la query ritorni un unico valore, altrimenti la nostra assegnazione andrà in errore.
