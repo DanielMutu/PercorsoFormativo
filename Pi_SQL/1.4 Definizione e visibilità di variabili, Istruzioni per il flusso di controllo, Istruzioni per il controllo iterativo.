@@ -11,4 +11,56 @@ Cambiare il normale flusso di esecuzione di un programma si utilizza:
    If-then-else: Seleziona quale azione deve essere eseguita in mutua esclusione.
    If-THEN-IF: Insieme di "IF" annidati.
    
----- Istruzioni Iterative PL/SQL ----
+  ---- Istruzioni Iterative PL/SQL ----
+
+Consentono di eseguire ciclicamente una serie di azioni fino a quando non si verifica un azione oppure terminano gli elementi da ciclare.
+
+  ---- LOOP INFINITO ----
+" 
+ LOOP
+  Istruzioni;
+ END LOOP;
+"
+  ----- LOOP CON AZIONE CHE TERMINA ----
+ " 
+LOOP
+  Istruzioni;
+  EXIT WHEN condizione;
+END LOOP;
+"
+
+Esempio pratico di utilizzo LOOP:
+"
+DECLARE
+  Contatore NUMBER(2):= 1;
+BEGIN
+  LOOP 
+    contatore := contatore +1;
+    INSERT INTO Log (Messaggio) VALUES ('Contatore CICLO SEMPLICE: ' || contatore);
+    EXIT WHEN contatore >= 10;
+  END LOOP;
+END;
+"
+    ----- CICLO WHILE -----
+
+Esempio utilizzo ciclo WHILE:
+
+DECLARE
+  Contatore NUMBER(2):= 1;
+BEGIN
+  WHILE contatore <= 10
+  LOOP
+    contatore := contatore +1;
+    INSERT INTO Log (Messaggio) VALUES ('Contatore CICLO WHILE: ' || contatore);
+  END LOOP;
+END;
+
+  ----- FOR -----
+
+DECLARE
+BEGIN
+  FOR contatore IN 1..10
+  LOOP
+    INSERT INTO Log (Messaggio) VALUES ('Contatore CICLO FOR: ' || contatore);
+  END LOOP;
+END;
