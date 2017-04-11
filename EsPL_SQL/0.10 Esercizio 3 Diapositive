@@ -13,6 +13,10 @@ END;
 
 /*  Esercizio avanzato con procedura */
 
+
+/* Scrivere una procedura che calcoli il valore totale degli ordini e indichi in 
+output se tale valore è superiore o inferiore a 1000   */
+
 DECLARE
 o int(20);
 
@@ -22,8 +26,12 @@ output int(20);
 BEGIN
 
 SELECT SUM(PREZZO) INTO output FROM ORDINI;
-DBMS_OUTPUT.PUT_LINE('Query: ' ||output);
 
+IF output<1000 THEN
+DBMS_OUTPUT.PUT_LINE('Minore di mille: ' ||output);
+ELSE
+DBMS_OUTPUT.PUT_LINE('Maggiore di mille: ' ||output);
+END IF;
 END;
 
 BEGIN
