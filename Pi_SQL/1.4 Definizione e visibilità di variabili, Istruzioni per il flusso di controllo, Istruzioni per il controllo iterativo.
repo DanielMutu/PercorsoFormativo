@@ -1,0 +1,14 @@
+  ------- Visibilità di una variabile -------
+  
+  - La variabile dichiarata in un blocco PL/SQL sono locali per il blocco ma sono considerate GLOBALI per tutti i sottoblocchi.
+  - La visibilità è inibita se nel blocco viene dichiarata una variabil con lo stesso nome.
+  
+
+------- Istruzioni per il flusso di controllo --------
+
+Cambiare il normale flusso di esecuzione di un programma si utilizza:
+   IF - THEN: Seleziona se eseguire o meno un comando.
+   If-then-else: Seleziona quale azione deve essere eseguita in mutua esclusione.
+   If-THEN-IF: Insieme di "IF" annidati.
+   
+---- Istruzioni Iterative PL/SQL ----
