@@ -1,0 +1,20 @@
+DECLARE
+cognome varchar2(50);
+
+Procedure mioUpdate(lol IN varchar2) IS
+v_query varchar2(1000);
+
+idMio number(10):=2;
+BEGIN
+v_query:= 'UPDATE ANAGRAFICA SET COGNOME ='''||lol||''' WHERE ID=2';
+
+EXECUTE IMMEDIATE v_query;
+DBMS_OUTPUT.PUT_LINE('Query: ' || v_query);
+END;
+
+
+BEGIN
+cognome:='PIPPO';
+mioUpdate(cognome);
+END;
+/
