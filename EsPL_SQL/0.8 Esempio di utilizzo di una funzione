@@ -1,0 +1,25 @@
+CREATE OR REPLACE FUNCTION miaFunzione
+RETURN number IS
+   numeroAnagrafica number(2) := 0;
+BEGIN
+   SELECT count(*)
+   into numeroAnagrafica
+   FROM ANAGRAFICA;
+   
+   RETURN numeroAnagrafica;
+END;
+/
+
+
+DECLARE
+c number(20);
+BEGIN
+c:=miaFunzione();
+IF c>2
+  THEN
+dbms_output.put_line('MAggiore di 2:   ' || c);
+ELSE
+dbms_output.put_line('Non è maggiore di due:   ' || c);
+  END IF;
+END;
+/
