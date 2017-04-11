@@ -1,0 +1,96 @@
+          ---- Partizionamento di Tabelle-----
+
+Definizione: procedura nel quale si dividono tabelle ed indici di grosse dimensioni in tabelle più piccole.
+
+  -Indici e tabelle non devono far parte di un cluster per essere partizionate.
+
+  -Statement SQL DML non devono essere modificati per accedere alle tabelle.
+  
+ Caratteristiche:
+  -Si può, per esempio fare l'alter di una sola sola tabella ma una SELECT dell'intera tabella.
+  -Le partizioni sono trasparenti all'utente.
+  -Ogni tabella ha gli stessi nomi di colonne, tipi di dato,  ecc...
+  
+  Tutte le partizioni devono risiedere nel blocco TABLESPACE di un singolo formato di blocco.
+  
+  Vantaggi:
+  
+  - Migliora operazioni come backup o restore.
+  - Miglioramento delle operazioni di query.
+  - Operazioni di manutenzione del database più semplici in quanto vengono eseguite solo una parte dell'oggetto.
+  
+  Chiave di partizionamento:
+  
+  LA chiave di partizionamento è un insieme di una o più colonne che determina a quale partizione fa parte un determinato record.
+  
+ La chiave di partizione non può contenere valori di tipo ROWID.
+ Non può contenere colonne con valori "null".
+ 
+ Tipi di partizionamento:
+ 1- Range Partitioning
+ 2- List Partitioning
+ 3- Hash Partitioning
+ 4- Composite partitioning (Range - Hash) oppure (Range - List)
+ 
+ Range Partitioning: 
+  - Metodo più utilizzato quando c'è un range Logico (Es: date, numeri)
+  - Ogni partizione ha una clausola del tipo "VALUE LESS THAN" <=numero, tutti i numeri che non appartengono a questo range appartengono ad un'altra partizione.
+  - E' possibile definire un MAXVALUE per la partizione più grande.
+  
+ List Partitioning:
+ - Concede controllo esplicito all’utente mediante definizione di un insieme discreto di valori
+- Mappa i dati nella rispettiva partizione a condizione che il valore della partition key sia contenuta tra i valori specificati per la partizione.
+ 
+  Esempio di partizionamento:
+  "
+  CREATE TABLE Vendite
+  (CodVendita NUMBER(5),
+  …………... ……………..
+  Regione_Vendita VARCHAR(20)
+  PARTITION BY LIST (Regione_Vendita)
+  (PARTITION NordOvest VALUES (’Lombardia’,’Piemonte’),
+  PARTITION NordEst VALUES (’Veneto’,’Friuli’))
+  "
+ 
+ Hash Partitioning:
+ - Utilizzato quando non è possibile utilizzare il metodo range o List
+ - Semplice da implementare
+ - Sfrutta una sintassi semplice
+ - Partiziona range
+ 
+ Quando si utilizza:
+ - Quando non si conoscono i dati da mappare 
+ - Ci sia poco bilanciamento ( cioè possono esserci una tabella con una grande quantità di dati e una con pochi ).
+ 
+ Esempio hash partitioning:
+ 
+ "
+ CREATE TABLE Vendite
+    (CodVendita NUMBER(5),
+    …………... ……………..
+    Cod_Venditore NUMBER(5))
+    PARTITION BY HASH (Cod_Venditore)
+    PARTITIONS 4
+  STORE IN (’Venditore1’, ’Venditore2’, ’Venditore3’, ’Venditore4’)
+ "
+ 
+      ---- Partizionamento di Indici -----
+      
+Unique/Nonunique:
+  - La chiave utilizzata è unica.
+
+Composto:
+  - E' un riferimento ad un insieme di più colonne.
+
+    Organizzazione:
+    ● B Tree
+    ● Reverse Key
+    ● Bitmap
+  
+  Indici Locali:
+    - Collegati alla tabella direttamente.
+    - Facili da gestire.
+    - Diffusi in ambienti DSS.    
+    - Adatti ad applicazioni OLTP.
+    
+   
