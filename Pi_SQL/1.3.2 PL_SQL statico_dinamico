@@ -1,0 +1,54 @@
+    
+    ----- SQL Statico -----
+
+Si identica un pezzo di codice SQL direttamente incluso in PL/SQL e sottoposti al processo di compilazione.
+
+In SQL statico:
+   DDL non è supportato
+      • CREATE TABLE, CREATE INDEX, ALTER TABLE, DROP VIEW
+   DCL non è supportato
+      • GRANT, REVOKE, CREATE USER, DROP ROLE, ALTER USER
+   DML è supportato
+      • INSERT, UPDATE, DELETE
+   TCL è supportato
+      • COMMIT, ROLLBACK, SAVEPOINTC    
+
+    ----- SQL Dinamico -----
+ 
+ SQL dinamico si crea con le seguenti clusole
+ 
+   EXECUTE IMMEDIATE
+   OPEN FOR, FETCH, CLOSE
+   DBMS_SQL Package
+
+Sintassi di SQL dinamico:
+"
+EXECUTE IMMEDIATE [dynamic SQL string statement without
+terminator]
+[INTO {define_variable [, define_variable] ... | record}]
+[USING [IN|OUT|IN OUT] bind_argument [, [IN|OUT|IN OUT]
+bind_arguments] ]
+
+"
+Esempio pratico di PL/SQL:
+"
+DECLARE
+cognome varchar2(50);
+
+Procedure mioUpdate(lol IN varchar2) IS
+v_query varchar2(1000);
+
+idMio number(10):=2;
+BEGIN
+v_query:= 'UPDATE ANAGRAFICA SET COGNOME ='''||lol||''' WHERE ID=2';
+
+EXECUTE IMMEDIATE v_query;
+DBMS_OUTPUT.PUT_LINE('Query: ' || v_query);
+END;
+
+
+BEGIN
+cognome:='PIPPO';
+mioUpdate(cognome);
+END;
+"
