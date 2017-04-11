@@ -1,0 +1,30 @@
+
+/* Scrivere una procedura che calcoli il valore totale degli ordini e indichi in 
+output se tale valore è superiore o inferiore a 1000   */
+
+DECLARE
+o int(20);
+
+PROCEDURE miaProc (o OUT int) IS
+myQuery varchar2(50);
+output int(20);
+BEGIN
+
+SELECT SUM(PREZZO) INTO output FROM ORDINI;
+
+IF output<100 THEN
+DBMS_OUTPUT.PUT_LINE('Risultato Scarso: ' ||output);
+
+
+ELSIF output BETWEEN 100 AND  1000 THEN
+DBMS_OUTPUT.PUT_LINE('Risultato discreto: ' ||output);
+ELSE
+DBMS_OUTPUT.PUT_LINE('Risultato buono: ' ||output);
+END IF;
+END;
+
+BEGIN
+o:=NULL;
+miaProc(o);
+END;
+/
