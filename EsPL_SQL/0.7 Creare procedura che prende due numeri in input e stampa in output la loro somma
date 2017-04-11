@@ -1,0 +1,30 @@
+DECLARE
+a number;
+b number;
+q number;
+
+PROCEDURE uno(a IN number , b IN number, q OUT number)
+ IS
+  z varchar2(20):='Hello world';
+  c int(10):=null;
+BEGIN
+ c:=a+b;
+ dbms_output.put_line(' Nome trovato è : '|| z);
+dbms_output.put_line('Somma di a + b  '|| c);
+dbms_output.put_line('Q che è un out: '|| q);
+END;
+
+BEGIN
+a:=5;
+b:=10;
+uno(a,b, q);
+END;
+/
+
+/*
+ANNOTAZIONI IMPORTANTI: 
+1. Se inserisco una procedura dopo un blocco DECLARE non devo mettere CREATE OR REPLACE
+2. Quando richiamo la procedura devo mettere anche il parametro in OUT
+3. Una procedura la posso richiamare così oppure con la CLAUSOLA "CALL".
+
+*/
