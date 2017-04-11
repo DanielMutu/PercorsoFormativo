@@ -1,0 +1,33 @@
+esercizio Es 3: Scrivere una procedura che calcoli il valore totale degli ordini e indichi in output se tale valore è superiore o inferiore a 1000
+
+/*Esercizio base*/
+
+DECLARE
+myQuery varchar2(50);
+output int(20);
+BEGIN
+SELECT SUM(PREZZO) INTO output FROM ORDINI;
+DBMS_OUTPUT.PUT_LINE('Query: ' ||output);
+END;
+/
+
+/*  Esercizio avanzato con procedura */
+
+DECLARE
+o int(20);
+
+PROCEDURE miaProc (o OUT int) IS
+myQuery varchar2(50);
+output int(20);
+BEGIN
+
+SELECT SUM(PREZZO) INTO output FROM ORDINI;
+DBMS_OUTPUT.PUT_LINE('Query: ' ||output);
+
+END;
+
+BEGIN
+o:=NULL;
+miaProc(o);
+END;
+/
