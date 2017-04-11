@@ -3,23 +3,24 @@
 PL/SQL è una combinazine fra SQL e le caratteristiche di un linguaggio di programmazione.
 PL/SQL è stato sviluppato da Oracle Corporation.
 
+
 PL/SQL è completamente portatile.
 La sintassi di PL/SQL è basata su ADA e PASCAL.
 
 Ha le seguenti caratteristiche: 
-    - E' integrato con SQL.
-    - Offre ampio controllo errori.
-    - Una grande varietà di variabili.
-    - Supporta la programmazione strutturata attraverso funcioni e procedure.
-    - Supporta la programmazion orientata agli oggetti.
-    - Supporta lo sviluppo di applicazioni WEB e server Pages.
+   1 - E' integrato con SQL.
+   2 - Offre ampio controllo errori.
+   3 - Una grande varietà di variabili.
+   4 - Supporta la programmazione strutturata attraverso funzioni e procedure.
+   5 - Supporta la programmazion orientata agli oggetti.
+   6 - Supporta lo sviluppo di applicazioni WEB e server Pages.
 
-//sintassi DI BASE pl/sql
-PL/SQL è diviso in blocchi logici di codice, ogni nlocco contiene tre sottoparti :
+//sintassi DI BASE PL/SQL
+
+PL/SQL è diviso in blocchi logici di codice, ogni Blocco contiene tre sottoparti :
   - Declarations: contiene la parola chiave DECLARE, è una sezione opzionale che definisce, tutte le variabili, cursori, sottoprogrammmi ed altri elementi che saranno utilizzati nel programma.
-  - Executable Commands: la sezione è chiusa fra le paroli chiave BEGIN ed END ed è una sezione obbligatoria.
-  
-  -Exception Handling: Questa sezione inizia con la parola chiave EXCEPTION e si occupa degli errori del programma.
+  - Executable Commands: la sezione è chiusa fra le paroli chiave BEGIN ed END ed è una sezione obbligatoria.  
+  - Exception Handling: Questa sezione inizia con la parola chiave EXCEPTION e si occupa degli errori del programma.
   
   La struttura di base è:
   
@@ -31,7 +32,7 @@ PL/SQL è diviso in blocchi logici di codice, ogni nlocco contiene tre sottopart
    <exception handling> 
   END;
 
-" Esempio di Hello WOrld "
+Esempio di programma: "Hello WOrld "
 
   DECLARE 
      message  varchar2(20):= 'Hello, World!'; 
@@ -41,9 +42,12 @@ PL/SQL è diviso in blocchi logici di codice, ogni nlocco contiene tre sottopart
   / 
   La linea " / " segna la fine del blocco PL/SQL
   
+  
+  
+  
 -------------------  PROCEDURA ----------------------
 Sintassi procedura:
-
+        DECLARE (opzionabile)
        CREATE [or REPLACE] PROCEDURE <nome_procedura> [(<lista di parametri>)] IS
         <dichiarazione>
         BEGIN
@@ -61,7 +65,11 @@ Sintassi procedura:
   
   Cos'è una procedura?
   
- Una procedura è un blocco di codice PL/SQL con un nome che viene mantenuto all'interno del database.
+ - Una procedura è un blocco di codice PL/SQL con un nome che viene mantenuto all'interno del database.
+ - Il blocco è composto anche da un nome con cui può essere  richiamato da un altro blocco.
+ - Una procedura PL/SQL Invia al Server il codice SQL e il Procedural Statement Executor si occupa di eseguire il codice.
+ - Un blocco di codice prima di essere compilato, deve passare attraverso un controllo sintattico, un binding(che controllo che gli oggetti esistano realmente e seleziona il codice da affidare alla "Procedural Statement Executor").
+ - Il nome di una procedura viene mantenuto all'interno di un database.
  
  Esempio di procedura: 
  
@@ -77,13 +85,14 @@ Una procedura può essere richiamata con il seguente comando
 CALL nome_procedura([parametri]);
 
 Dichiarazione di una variabile PL/SQL:
+
 "
 identifier [CONSTANT] datatype [NOT NULL]
 [:= | DEFAULT expr];
 "
 - La dichiarazione deve essere effettuata nella sezione DECLARE.
 - Per default le variabili sono inizializzate a NULL.
-- Le variabili sono inizializzateogni volta che si acced al blocco.
+- Le variabili sono inizializzate ogni volta che si accede al blocco.
 - Due variabili con lo stesso nome devono essere inizializzate in blocchi diversi.
 
 Assegnazione di un valore a una variabile:
@@ -113,4 +122,38 @@ variablename := expression;
   c_tax_rate CONSTANT NUMBER(3,2) := 8.25;
   BEGIN………………
 
+
+//******************************************************************************
+//********************* ESEMPIO DI CREAZIONE DI UNA PROCEDURA ******************
+//******************************************************************************
+DECLARE
+a number;
+b number;
+q number;
+
+PROCEDURE uno(a IN number , b IN number, q OUT number)
+ IS
+  z varchar2(20):='Hello world';
+  c int(10):=null;
+BEGIN
+ c:=a+b;
+ dbms_output.put_line(' Nome trovato è : '|| z);
+dbms_output.put_line('Somma di a + b  '|| c);
+dbms_output.put_line('Q che è un out: '|| q);
+END;
+
+BEGIN
+a:=5;
+b:=10;
+uno(a,b, q);
+END;
+/
+
+/*
+ANNOTAZIONI IMPORTANTI: 
+1. Se inserisco una procedura dopo un blocco DECLARE non devo mettere CREATE OR REPLACE
+2. Quando richiamo la procedura devo mettere anche il parametro in OUT
+3. Una procedura la posso richiamare così oppure con la CLAUSOLA "CALL".
+
+*/
 
