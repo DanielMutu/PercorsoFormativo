@@ -14,6 +14,7 @@ Cambiare il normale flusso di esecuzione di un programma si utilizza:
   ---- Istruzioni Iterative PL/SQL ----
 
 Consentono di eseguire ciclicamente una serie di azioni fino a quando non si verifica un azione oppure terminano gli elementi da ciclare.
+/////////////////////////////////////////////////////////////////////////////////
 
   ---- LOOP INFINITO ----
 " 
@@ -21,13 +22,23 @@ Consentono di eseguire ciclicamente una serie di azioni fino a quando non si ver
   Istruzioni;
  END LOOP;
 "
-  ----- LOOP CON AZIONE CHE TERMINA ----
+  ----- LOOP CON AZIONE CHE TERMINA (POST TEST)  ----
  " 
 LOOP
   Istruzioni;
-  EXIT WHEN condizione;
+  EXIT WHEN condizione; EXIT WHEN condizione;
 END LOOP;
 "
+
+... oppure ci può essere un (PRE TEST) ...
+" 
+LOOP
+  EXIT WHEN condizione;
+  Istruzioni; 
+END LOOP;
+"
+...............................................................................
+///////////////////////////////////////////////////////////////////////////////
 
 Esempio pratico di utilizzo LOOP:
 "
