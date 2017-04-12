@@ -1,0 +1,33 @@
+DECLARE
+IDFATTURA varchar2(20);
+PROCEDURE proceduraCliente(x IN varchar2) IS
+o varchar2(20):=NULL;
+miaEccezione EXCEPTION;
+
+BEGIN
+ SELECT CLIENTE INTO o FROM FATTURA WHERE ID_FATTURA ='ax10' ;
+IF o IS NULL THEN
+RAISE NO_DATA_FOUND;
+
+ELSE
+  DBMS_OUTPUT.PUT_LINE('il mio OUTPUT è:   '||o );
+END IF;
+EXCEPTION WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('Entro nella mia eccezione' );
+
+
+END;
+
+BEGIN
+  IDFATTURA:=NULL;
+  proceduraCliente(IDFATTURA);
+END;
+/
+
+
+/* SELECT CLIENTE FROM FATTURA WHERE ID_FATTURA ='ax01'; */
+/*
+EX6: Scrivere una procedura che permetta di visualizzare il nome del cliente 
+relativo a una data fattura. Nel caso la fattura non sia presente visualizzare 
+tramite il comando RAISE “La fattura --- non è stata registrata”
+*/
