@@ -1,0 +1,20 @@
+CREATE OR REPLACE PROCEDURE cursoreProcedura IS
+CURSOR primoCursore IS SELECT TOTALE FROM FATTURA;
+v FATTURA.TOTALE%TYPE;
+
+BEGIN
+OPEN primoCursore;
+LOOP
+FETCH primoCursore INTO v;
+DBMS_OUTPUT.PUT_LINE('Riga:  '||v);
+EXIT WHEN primoCursore%NOTFOUND;
+END LOOP;
+CLOSE primoCursore;
+END;
+/
+BEGIN
+cursoreProcedura;
+END;
+/
+/*EX8: Creare un cursore che restituisca separatamente l’importo di tutte le
+fatture*/
