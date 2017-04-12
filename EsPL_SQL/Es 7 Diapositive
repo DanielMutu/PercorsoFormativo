@@ -1,0 +1,40 @@
+CREATE OR REPLACE PROCEDURE sommaFattura IS
+contatore varchar2(20);
+incrementa number(20):=1;
+nomeFattura varchar(20):='ax0';
+nomeComposto varchar2(20);
+miaSomma number(20);
+sommaFinale number(20):=0;
+BEGIN
+  FOR contatore IN 1..10
+  LOOP
+    /* creazione variabile */
+    nomeComposto:=nomeFattura||''||incrementa;
+    SELECT TOTALE INTO miaSomma FROM FATTURA WHERE ID_FATTURA=nomeComposto;
+
+    IF miaSomma IS NULL THEN
+    RAISE NO_DATA_FOUND;
+        
+    ELSE
+    
+    DBMS_OUTPUT.PUT_LINE('Il mio nome composto è:  '||nomeComposto||' E la somma è: '||miaSomma||'');
+    incrementa:=incrementa+1;
+    sommaFinale:=sommaFinale+miaSomma;
+    DBMS_OUTPUT.PUT_LINE('La sommma è:  '||sommaFinale);
+   
+  END iF;
+    
+  END LOOP;
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('Eccezione: UN ID FATTURA NON ESISTE' );
+END;
+/
+BEGIN
+  sommaFattura;
+END;
+/
+/* EX7: Calcolare il valore totale delle fatture con codice da 1 a 5 se una 
+fattura non è presente visualizzare un messaggio di errore tramite RAISE */
+
+/* Nota Se nel primo BEGIN/END metto un solo una stampa devo mettere lo / anche 
+alla fine del primo END; */
