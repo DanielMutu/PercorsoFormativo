@@ -1,0 +1,39 @@
+CREATE OR REPLACE PROCEDURE cursoreProcedura IS
+CURSOR primoCursore IS SELECT TOTALE FROM FATTURA ORDER BY TOTALE;
+v FATTURA.TOTALE%TYPE;
+
+minoreMille number(20):=0;
+maggioreMille number(20):=0;
+BEGIN
+OPEN primoCursore;
+LOOP
+
+FETCH primoCursore INTO v;
+EXIT WHEN primoCursore%NOTFOUND;
+  
+IF v<1000 THEN
+  minoreMille:=minoreMille+v;
+  /*DBMS_OUTPUT.PUT_LINE('A  Minore mille:  '||minoreMille);*/
+
+ELSIF v>1000 THEN
+
+  DBMS_OUTPUT.PUT_LINE('-------->   '||v);
+  maggioreMille:=maggioreMille+v;
+  
+END IF;
+
+END LOOP;
+CLOSE primoCursore;
+DBMS_OUTPUT.PUT_LINE('A  Minore mille:  '||minoreMille);
+DBMS_OUTPUT.PUT_LINE('B  Maggiore mille :  '||maggioreMille);
+END;
+/
+BEGIN
+cursoreProcedura;
+END;
+/
+
+
+
+/* EX9: Creare un cursore che restituisca separatamente la somma degli
+importi delle fatture di importo minore e maggiore di mille. */
