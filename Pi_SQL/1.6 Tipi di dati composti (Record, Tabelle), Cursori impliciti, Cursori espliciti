@@ -1,0 +1,110 @@
+
+---- Concetto di Cursore -----
+
+Ogni qualvolta si sottoponga al sistema un comando SQL, Oracle alloca un'area di memoria in cui il comando viene analizzato ed eseguito. Tale area è detta "context area".
+
+
+Un cursore è un puntatore alla locazione di memoria di una context area.
+
+Ogni comando SQL eseguito da Oracle ha associato un proprio cursore.
+
+-----  Cursori IMPLICITI /ESPLICITI ----
+
+COS'e' un cursore?
+  -Un cursore è un mezzo con il quale gestiamo una serie di tuple restituite da una query.
+  -Cursore: deve essere (se esplicito) immaginato come una variabile complessa.
+
+Esempio di cursore esplicito:  
+
+DECLARE
+  ...;
+  CURSOR nome_cursore IS
+  SELECT ...
+  FROM ...;
+BEGIN
+  Istruzione1;
+  ...;
+END;
+
+UNa volta dichiarato un cursore, per poterlo utilizzare dev'essere aperto, valorizzato ed infine chiuso.
+La prima operazione da eseguire quindi è la sua apertura.
+Sintassi:  OPEN nome_cursore;
+
+A questo punto possiamo valorizzare il nostro cursore, possiamo dunque scorrere la nostra serie di tuple, assegnare la tupla ad una variabile, poi elaborarla comodamente.
+Sintassi: FETCH nome_cursore INTO mia_variabile;
+Chiaramente mia_variabile deve essere stata precedentemente definita e deve essere del tipo idoneo a contenere la nostra tupla.
+Quindi, come vedremo nell'esempio, dato che la FETCH ci restituisce una tupla alla volta, dovremo utilizzare un ciclo per scorrere tutte le tuple.
+ Sintassi: CLOSE nome_cursore;
+ 
+ Esempio di sintassi:
+"
+DECLARE
+  ...;
+  CURSOR cur_anagrafica IS
+    SELECT Nome, Cognome, Stipendio, Ruolo
+    FROM Anagrafica;
+  rec_anagrafica Anagrafica%ROWTYPE;
+BEGIN
+  Istruzione1;
+  OPEN cur_anagrafica;
+  LOOP
+    FETCH cur_anagrafica INTO rec_anagrafica;
+    istruzione2;
+    ...;
+  END LOOP;
+  CLOSE cur_anagrafica;
+END;
+"
+//*************************************************************************************
+
+- Cursori impliciti: Il server Oracle apre implicitamente un cursore durante l'esecuzione di un comando DML o di ogni query PL/SQL SELECT INTO.
+
+  - Il cursore è gestito automaticamente.
+  - PL/SQL fa riferimento al più recente cursore implicito come "cursore SQL".
+
+Cursori Espliciti:
+  - Dichiarati e maneggiati direttamente dal codice.
+  - Utilizzati per processare singole righe restituite da un comando SQL "multiple-row".
+  - Puntano alla riga corrente nell'active set
+  
+  Attributi di cursori impliciti:
+      - SQL%ROWCOUNT --> Numero di righe coinvolte del più recente comando SQL.
+      - SQL%FOUND --> Attributo Boolean che è TRUE se l'ultimo comando SQL ha restituito una riga.
+      - SQL%NOTFOUND --> Attributo Boolean , che è TRUE se l'ultimo comando SQL non ha restituito nemmeno una riga.
+      - SQL%OPEN --> E' sempre FALSE poichè PL/SQL chiude i cursori impliciti immediatamente dopo l'esecuzione.
+ 
+ Esempio di utilizzo cursore esplicito:     
+ 
+CREATE PROCEDURE Esempio IS
+  -- nessun cursore è dichiarato esplicitamente
+  BEGIN
+  UPDATE writer
+  SET amount = amount * 1.25
+  WHERE freelancer = 'Y';
+  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT ||' rows changed.');
+  COMMIT;
+  END;
+  
+  Un record PL/SQL è un gruppo di attributi correlati ognuno con nome e tipo.
+  
+  -----------------------------    %ROWTYPE    -----------------------------
+  
+  Dichiara una variabile di tipo record basandosi su un insieme di campi appartenenti ad una tabella.
+  
+          ATTRIBUTI  CURSORI ESPLICITI
+ 
+ %ISOPEN -- BOOLEAN -- Restituise TRUE se il cursore è open.
+ %NOTFOUND -- BOOLEAN -- Restituisce TRUE se il FETCH più recente non ha restituito righe.
+ %FOUND --BOOLEAN -- Restituisce TRUE se il FETCH più recente ha restituito righe.
+ %ROWCOUNT -- NUMBER -- Restituisce il numero delle righe totali restituite (FETCHED).
+ 
+  Dichirazione di un cursore esplicito:
+"
+CURSOR cursor_name IS select_statement;
+"
+  Apertura di un cursore
+ 
+ "OPEN cursor_name;"
+  
+  
+      
