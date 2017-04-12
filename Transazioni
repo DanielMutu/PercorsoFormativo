@@ -1,0 +1,88 @@
+        ---- Transazioni ---- 
+        
+Link di riferimento: http://bias.csr.unibo.it/golfarelli/LabDB/MaterialeDidattico/Funzionalit%C3%A0AvanzateDBMS.pdf        
+        
+Unità logica che corrisponde ad un insieme di operazioni fisiche elementari.
+
+Ogni transazione deve essere ACID, cioè:
+A -> Atomicity: ogni transazione deve essere salvata nel database, come un unica unità di elaborazione.
+C -> Consistency: lascia il database in uno stato consistente, garantisce che nessun vincolo di integrità del database venga violato.
+I ->  Isolation: Se vengono eseguite più transaction contemporaneamente, il DBMS garantisce che l'effetto sia equivalent ad una serie di transaction in sequenza.
+D -> Durability: Una modifica al database deve essere durabile nel tempo.
+
+
+---- Una transazione può terminare solamente in due modi ----
+
+1 modo: Terminare correttamente: ciò avviene solo quando l’applicazione, dopo aver effettuato tutte le proprie operazioni, esegue una particolare istruzione SQL, detta COMMIT (o COMMIT WORK), che comunica “ufficialmente” al Transaction Manager il termine delle operazioni.
+
+2 modo: Transazione non termina correttamente, viene invocato il comando ROLLBACK
+Se per qualche motivo la transazione non va a buon fine, il sistema deve disfare le modifica fino ad ora apportate.
+
+E' possibile anche utilizzare le transazioni con SAVEPOINT per disfare solo parzialmente una transazione.
+
+Dichiarare un SAVEPOINT IN ORACLE: 
+    
+    SAVEPOINT <nome savepoint> ON ROLLBACK RETAIN CURSORS
+E per eseguire un rollback parziale
+     ROLLBACK WORK TO SAVEPOINT <nome savepoint>
+    
+ Possiamo avere un esecuzione seriale ed un'esecuzione concorrente delle transazioni, la consigliata è quella concorrente in quanto si garantiscono buone prestazioni, infatti mentre una transazione sta aspettando un valore I/O, un altra transazione può operare.
+ 
+ Il TRANSACTION MANAGER deve garantire che due transaction non si disturbino fra loro durante l'esecuzione, se questo dovesse accadere potremmo avere i seguenti problemi:
+ 
+- Lost Update
+- Dirty Read
+- Unrepeatable Read
+- Phantom Row
+
+
+Per ovviare a questi problemi si utilizzano i "LOCK" , che sono meccanismi usati dai sistemi operativi per gestire l'accesso alla stessa risorsa. 
+Per utilizzare una risorsa si utilizza un "lock" sulla risorsa (come se la stessi prenotando).
+Il Lock Manager è un modulo del DBMS che si occupa di tener traccia delle risorse correntemente in uso.
+
+
+ ---- Transazioni -----
+  
+Esempio transazione con "COMMIT"
+
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (1, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (2, 'Khilan', 25, 'Delhi', 1500.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (3, 'kaushik', 23, 'Kota', 2000.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (4, 'Chaitali', 25, 'Mumbai', 6500.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (5, 'Hardik', 27, 'Bhopal', 8500.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (6, 'Komal', 22, 'MP', 4500.00 );
+          COMMIT;
+
+
+Le modifiche apportate al database senza COMMIT, possono essere eliminate con "ROLLBACK".
+La sintasi è: 
+    ROLLBACK [TO SAVEPOINT < savepoint_name>];
+    
+ ---- Punti di salvataggio ----
+ 
+ La sintassi generale per il comando SAVEPOINT è: SAVEPOINT < savepoint_name >;
+ 
+
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (7, 'Rajnish', 27, 'HP', 9500.00 );
+          INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+          VALUES (8, 'Riddhi', 21, 'WB', 4500.00 );
+          SAVEPOINT sav1;
+
+          UPDATE CUSTOMERS
+          SET SALARY = SALARY + 1000;
+          ROLLBACK TO sav1;
+
+          UPDATE CUSTOMERS
+          SET SALARY = SALARY + 1000
+          WHERE ID = 7;
+          UPDATE CUSTOMERS
+          SET SALARY = SALARY + 1000
+          WHERE ID = 8;
+          COMMIT;
