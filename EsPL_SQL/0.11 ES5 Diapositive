@@ -1,0 +1,33 @@
+DECLARE
+
+miadatadato varchar2(20);
+
+PROCEDURE trovadata(miadatadato IN varchar2) IS
+v_query varchar(200);
+myout number(20);
+BEGIN
+DBMS_OUTPUT.PUT_LINE('data:  ' ||miadatadato);
+SELECT SUM(PREZZO) INTO myout FROM ORDINICONDATA WHERE  MIADATA Like miadatadato GROUP BY miadatadato;
+DBMS_OUTPUT.PUT_LINE('Somma:  ' ||myout);
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('0 righe restituite ' );
+END;
+
+BEGIN
+miadatadato:='1-DIC-16';
+trovadata(miadatadato);
+END;
+/
+/*
+Note importanti: per entrare in quest'eccezione bisogna utilizzare un GROUP BY, 
+se non utilizzo il GROUP BY mi restituisce un "NULL" ma così non entrerò MAI nell'eccezione. 
+*/
+
+/*
+EX5: Scrivere una procedura che calcoli il valore totale degli ordini effettuati 
+in una certa data. Nel caso in cui non sia presente nessun ordine viene 
+visualizzato il messaggio “Nessun ordine presente per la data: ---------” 
+*/
+
+/*SELECT SUM(PREZZO) AS temp FROM ORDINICONDATA WHERE MIADATA LIKE '24-DIC-16';*/
