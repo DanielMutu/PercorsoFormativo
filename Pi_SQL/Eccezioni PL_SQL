@@ -1,0 +1,48 @@
+----- Eccezione -----
+
+//------------------------  Sintassi  -------------------------------
+    DECLARE
+      ...;
+    BEGIN
+      Istruzione1;
+      istruzione2:
+      ...;
+      EXCEPTION
+        WHEN tipo_eccezione1 THEN
+          ...;
+        WHEN tipo_eccezione2 THEN
+          ...;
+        WHEN OTHERS THEN
+          ...;
+    END;
+//-------------------------------------------------------------------
+
+Nella clausola WHEN viene gestita l'eccezione, del tipo:
+
+  WHEN tipo_eccezione1 OR tipo_eccezione2 THEN......
+
+Eccezioni più comuni sono:
+    O_DATA_FOUND - un comando SELECT o FETCH non ha restituito nessuna tupla
+    TOO_MANY_ROWS - una SELECT INTO ha restituito più di una tupla
+    ZERO_DIVIDE - è stata tentata una divisione per 0
+    
+//Esempio di eccezione che scatta con il comando RAISE:
+
+    DECLARE
+      ...;
+      Mia_eccezione	EXCEPTION;
+      ...;
+    BEGIN
+      Istruzione1;
+      istruzione2;
+      ...;
+      IF condizione THEN
+        RAISE mia_eccezione;
+      END IF;
+      ...;
+    EXCEPTION
+      WHEN tipo_eccezione1 THEN ...;
+      WHEN tipo_eccezione2 THEN ...;
+      WHEN mia_eccezione THEN ...;
+      WHEN OTHERS THEN ...;
+    END;
