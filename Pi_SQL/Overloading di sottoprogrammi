@@ -1,0 +1,26 @@
+---- Overloading di sottoprogrammi ----
+
+  Codice:
+  
+  
+  
+ DECLARE
+   /* First version takes a DATE parameter. */
+   FUNCTION value_ok (date_in IN DATE) RETURN BOOLEAN
+   IS
+   BEGIN
+      RETURN date_in <= SYSDATE;
+   END;
+
+   /* Second version takes a NUMBER parameter. */
+   FUNCTION value_ok (number_in IN NUMBER) RETURN BOOLEAN
+   IS
+   BEGIN
+      RETURN number_in > 0;
+   END;
+BEGIN
+
+In questo caso abbiamo due funzioni con parametri di tipo diverso.
+DI conseguenza posso chiamare una delle due funzioni in questo modo:
+
+IF value_ok (SYSDATE) THEN ..
