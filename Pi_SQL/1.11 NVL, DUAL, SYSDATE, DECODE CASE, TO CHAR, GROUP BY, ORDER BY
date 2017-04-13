@@ -1,0 +1,28 @@
+        ----- NVL, DUAl, SYSDATE, DECODE CASE, TO CHAR, GROUP BY, ORDER BY   -----
+        
+        --------------------------------------------------- NVL -------------------------------------------
+   
+Link riferimento: https://www.techonthenet.com/oracle/functions/nvl.php   
+NVL Descrizione:
+     - La funzione di Oracle / PLSQL NVL consente di sostituire un valore quando viene rilevato un valore nullo.
+
+Sintassi:
+  NVL( string1, replace_with )
+  
+Esempio:
+  SELECT NVL(supplier_city, 'n/a')  FROM suppliers;
+
+     --------------------------------------------------- DUAL -------------------------------------------
+     
+DUAL è una tabella speciale presente in ORACLE database che contiene, una riga ed una colonna. 
+Dual internamente è formato così:
+        
+        ************************************
+        ** Inernamente DUal è fatto così  **
+        ************************************
+
+        DUMMY
+        ----------
+        X
+ 
+ 
