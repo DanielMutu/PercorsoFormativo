@@ -13,7 +13,9 @@ Esempio:
   SELECT NVL(supplier_city, 'n/a')  FROM suppliers;
 
      --------------------------------------------------- DUAL -------------------------------------------
-     
+
+Link di riferimento: http://www.w3resource.com/sql/sql-dual-table.php
+
 DUAL è una tabella speciale presente in ORACLE database che contiene, una riga ed una colonna. 
 Dual internamente è formato così:
         
