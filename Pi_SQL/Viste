@@ -1,0 +1,54 @@
+      ---- Viste ----
+  
+Una vista  è una tabella virtuale, si crea attraverso l'attributo "CREATE VIEW"...
+
+Esempio di creazione di una vista: 
+"
+  CREATE VIEW ProgSedi(CodProg,CodSede)
+  AS SELECT P.CodProg,S.Sede
+  FROM Prog P, Sedi S
+  WHERE P.Citta = S.Citta
+"
+
+Le viste si utilizzano per:
+  - Permette all'utente del database di avere una visione personalizzata .
+  - Semplificare la scrittura di Query complesse
+  - Possono anche essere utilizzati come meccanismi per il controllo degli accessi, fornendo ad ogni classe di utenti, i giusti privilegi.
+  
+  
+  ---- Esempio pratico: -----
+
+Si consideri la tabella "EsamiSIT(Matr,Cognome,Nome,DataProva,Voto)"
+Si vuole scomporre la seguente tabella in tabelle più piccole, del tipo:
+
+  - StudentiSIT(Matr,Cognome,Nome)
+  - ProveSIT(Matr,DataProva,Voto)
+  
+  E' possibile ripristinare la visione originale in questo modo:
+
+"
+CREATE VIEW EsamiSIT(Matr,Cognome,Nome,DataProva,Voto)
+AS SELECT S.*,P.DataProva,P.Voto
+FROM StudentiSIT S, ProveSIT P
+WHERE S.Matr = P.Matr
+"
+
+- Le viste possono essere utilizzate per le interrogazioni come se fossero tabelle del DB, ma per le operazioni di aggiornamento ci sono dei limiti.
+
+Non si possono aggiornare viste che contengono le seguenti clausole:
+
+ GROUP BY
+ Funzioni aggregate
+ DISTINCT
+ join (espliciti o impliciti) 
+
+
+Esempio di vista non aggoiornabile:
+
+    "
+    CREATE VIEW ImpBO(CodImp,Nome,Sede,Ruolo,Stipendio)
+    AS SELECT I.*
+    FROM Imp I JOIN Sedi S ON (I.Sede = S.Sede)
+    WHERE S.Citta = ‘Bologna’
+    "
+  
