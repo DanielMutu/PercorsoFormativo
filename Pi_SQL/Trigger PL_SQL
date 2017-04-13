@@ -1,0 +1,53 @@
+
+---- Trigger PL_SQL  ----
+
+  I trigger sono programmi salvati che vengono eseguiti automaticamente quando accade un certo evento.
+  
+  I trigger vengono scritti come risposta ad una  delle seguenti situazioni: 
+      - database manipulation (DML): DELETE, INSERT, or UPDATE.
+      - database definition (DDL): CREATE, ALTER, or DROP.
+      - database operation: SERVERERROR, LOGON, LOGOFF, STARTUP, or SHUTDOWN.
+      
+I trigger possono essere scritti per i seguenti scopi:
+      - Generare alcuni valori di colonne derivate automaticamente.
+      - Applicare integrità referenziale.
+      - Eventi di LOG ed immagazinamento delle informazioni nella tabella d'accesso.
+      - Imporre autorizazzioni per la sicurezza.
+      - Prevenire transaction invalide.
+  
+Sintassi per la creazione di Trigger :
+"  
+CREATE [OR REPLACE ] TRIGGER trigger_name  
+{BEFORE | AFTER | INSTEAD OF }  
+{INSERT [OR] | UPDATE [OR] | DELETE}  
+[OF col_name]  
+ON table_name  
+[REFERENCING OLD AS o NEW AS n]  
+[FOR EACH ROW]  
+WHEN (condition)   
+DECLARE 
+   Declaration-statements 
+BEGIN  
+   Executable-statements 
+EXCEPTION 
+   Exception-handling-statements 
+END; 
+"
+SPECIFICHE:
+
+CREATE [OR REPLACE] TRIGGER trigger_name − Creates or replaces an existing trigger with the trigger_name.
+
+{BEFORE | AFTER | INSTEAD OF} − This specifies when the trigger will be executed. The INSTEAD OF clause is used for creating trigger on a view.
+
+{INSERT [OR] | UPDATE [OR] | DELETE} − This specifies the DML operation.
+
+[OF col_name] − This specifies the column name that will be updated.
+
+[ON table_name] − This specifies the name of the table associated with the trigger.
+
+[REFERENCING OLD AS o NEW AS n] − This allows you to refer new and old values for various DML statements, such as INSERT, UPDATE, and DELETE.
+
+[FOR EACH ROW] − This specifies a row-level trigger, i.e., the trigger will be executed for each row being affected. Otherwise the trigger will execute just once when the SQL statement is executed, which is called a table level trigger.
+
+WHEN (condition) − This provides a condition for rows for which the trigger would fire. This clause is valid only for row-level triggers.
+
