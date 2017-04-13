@@ -1,0 +1,22 @@
+    ---- For Update ----
+Sintassi:
+
+    SELECT ...
+    FROM ...
+    FOR UPDATE [OF column_reference][NOWAIT];
+
+- Applica un lock alle righe selezionate dal cursore in modo che sia possibile modificare o cancellare i valori all’interno del codice.
+- Il lock è applicato al momento dell’apertura del cursore non durante la fase di fetch.
+- Il lock è rilasciato al momento del COMMIT o ROLLBACK da eseguire al termine del ciclo (Attenzione: Il commit o Rollback viene inserito dopo il loop e non  per ogni riga altrimenti questo causa error).
+
+[NOWAIT] --> NOWAIT indica al server di non attendere se sulle tabelle è attivo un lock di un’altra sessione.
+
+  ---- WHERE CURRENT OF ----
+
+Sintassi:
+
+WHERE CURRENT OF cursor;
+
+- Referenzia la riga corrente di un cursore esplicito.
+- Permette di eseguire UPDATE o DELETE della riga corrente utilizzando una clausola WHERE semplificata.
+- E’ necessario utilizzare FOR UPDATE nella definizione del cursore in modo da applicare un lock sulla tabella.
