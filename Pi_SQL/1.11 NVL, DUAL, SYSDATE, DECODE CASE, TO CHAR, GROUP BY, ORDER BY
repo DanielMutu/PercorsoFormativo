@@ -27,4 +27,73 @@ Dual internamente è formato così:
         ----------
         X
  
+ Viene utilizzata come una tabella di lavoro che non ha bisogno di dati provenienti da nessuna tabella, possiamo utilizzarla in diversi modi, per esmpio:
  
+SELECT 'ABCDEF12345' FROM DUAL;  
+
+oppure....
+
+SELECT sysdate FROM DUAL ;  
+
+          --------------------------------------------------- SYSDATE -------------------------------------------
+
+Il comando sysdate mi consente di ricevere la data corrente del sistema:
+La sintassi è: SYSDATE
+Esempio di utilizzo SYSDATE
+
+//**************************
+SELECT SYSDATE
+INTO v_date
+FROM dual;
+****************************
+
+        ------------------------------------------ DECODE CASE ---------------------------------------------------
+E' equivalente ad un  IF - ELSIF - ECC..
+
+Vediamo due codici equivalenti:
+
+//----------------------------------------------------------------
+                SELECT supplier_name,
+                DECODE(supplier_id, 10000, 'IBM',
+                                    10001, 'Microsoft',
+                                    10002, 'Hewlett Packard',
+                                    'Gateway') result
+                FROM suppliers;
+//----------------------------------------------------------------
+
+equivalente a dire....
+
+                IF supplier_id = 10000 THEN
+                   result := 'IBM';
+
+                ELSIF supplier_id = 10001 THEN
+                   result := 'Microsoft';
+
+                ELSIF supplier_id = 10002 THEN
+                   result := 'Hewlett Packard';
+
+                ELSE
+                   result := 'Gateway';
+
+                END IF;
+
+         ------------------------------------------  TO CHAR      ------------------------------------------------
+
+Mi consente di convertire un numero o una data in una stringa.         
+La sintassi è: 
+        TO_CHAR( value [, format_mask] [, nls_language] )
+
+Link riferimento: https://www.techonthenet.com/oracle/functions/to_char.php
+
+           ------------------------------------------   ORDER BY       ------------------------------------
+La clausola order by in pl/SQL viene utilizzata quando vogliamo ordinare un insieme di righe:
+La sintassi può essere la seguente:
+                        SELECT expressions
+                        FROM tables
+                        [WHERE conditions]
+                        ORDER BY expression [ ASC | DESC ];
+               
+        ------------------------------------------   GROUP BY      ----------------------------------------
+        
+Ragruppamento secondo un certo criterio        
+         
