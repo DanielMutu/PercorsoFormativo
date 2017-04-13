@@ -1,0 +1,61 @@
+    ---- Bulk Loader ----
+ 
+ Link Utile: http://www.dba-oracle.com/t_bulk_insert.htm
+ Inserimento di massa di dati nel DB.
+ 
+ Esempio di BULK INSERT:
+ "
+ -- ****************************************
+-- create a test table for the bulk insert
+-- ****************************************
+drop table test_objects;
+
+create table 
+test_objects 
+tablespace users
+as 
+select object_name, object_type from dba_objects;
+
+-- ****************************************************
+-- Populate the table into a array using bulk collect
+-- ****************************************************
+DECLARE
+TYPE t_tab IS TABLE OF test_objects%ROWTYPE;
+objects_tab t_tab := t_tab();
+start_time number; end_time number;
+BEGIN
+-- Populate a collection 
+SELECT * 
+BULK COLLECT 
+INTO 
+objects_tab 
+FROM test_objects;
+
+-- ****************************************************
+-- Time the population of the table with a bulk insert
+-- ****************************************************
+EXECUTE IMMEDIATE 'TRUNCATE TABLE test_objects';
+Start_time := DBMS_UTILITY.get_time;
+FORALL i in objects_tab.first .. objects_tab.last
+INSERT INTO test_objects VALUES objects_tab(i);
+end_time := DBMS_UTILITY.get_time;
+DBMS_OUTPUT.PUT_LINE('Bulk Insert: '||to_char(end_time-start_time));
+
+-- ****************************************************
+-- Populate the table without a bulk insert
+-- ****************************************************
+EXECUTE IMMEDIATE 'TRUNCATE TABLE test_objects';
+Start_time := DBMS_UTILITY.get_time;
+FOR i in objects_tab.first .. objects_tab.last LOOP
+INSERT INTO test_objects (object_name, object_type)
+VALUES (objects_tab(i).object_name, objects_tab(i).object_type);
+END LOOP;
+end_time := DBMS_UTILITY.get_time;
+DBMS_OUTPUT.PUT_LINE('Conventional Insert: '||to_char(end_time-start_time));
+COMMIT;
+END; 
+/
+"
+
+ 
+ 
