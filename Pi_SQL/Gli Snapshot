@@ -1,0 +1,21 @@
+---- Gli snapshot ----
+
+Gli snapshot in Oracle sono "fotografie" di una tabella. Possono essere periodicamente aggiornati e, nella maggior parte degli utilizzi, leggono dati da tabelle remote. La tabella che viene letta e che si vuole replicare viene generalmente definita master table.
+
+La creazione di uno snapshot e' molto semplice:
+
+CREATE SNAPSHOT snap_tabella 
+REFRESH FAST 
+START WITH sysdate 
+NEXT sysdate+1 
+AS SELECT * 
+FROM tabella@remoto;
+
+//_____  Viste Materializzate _____
+
+Una vista materializzata è un oggetto delle basi di dati che contiene i risultati di una interrogazione. Tipicamente una copia locale di dati situati altrove, o un sottoinsieme di righe e/o colonne di una tabella o il risultato di una unione (join), o una sintesi basata su aggregazione di dati di tabelle. Le viste materializzate che memorizzano dati basandosi su tabelle remote sono anche chiamate "snapshot" ovvero "istantanee". Un'istantanea può essere ridefinita come vista materializzata. Una vista materializzata per ottenere una performance migliore salva i dati su disco, a differenza delle viste semplici che sono puramente virtuali (non salvano nessun risultato su disco, tutto è contenuto in memoria).
+
+CREATE MATERIALIZED VIEW MV_MY_VIEW
+REFRESH FAST START WITH SYSDATE
+   NEXT SYSDATE + 1
+     AS SELECT * FROM <table_name>;
