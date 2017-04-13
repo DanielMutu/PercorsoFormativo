@@ -1,0 +1,11 @@
+  ---- DB Link Cos'è -----
+  
+Per utilizzare un DB link si utilizza la clausola:  
+    "CREATE DATABASE LINK"
+  - Un DB Link è un oggetto dello schema in un database che consente di accedere agli oggetti di un altro database.
+  - L'altro database non deve essere neccesariamente un database Oracle. 
+
+Si può anche accedere ad un database non Oracle attraverso Heterangerous Services.
+
+Dopo aver creato un DB Link, è possibile utilizzarlo per fare riferimento a tabelle e viste sull’altro database. In SQL è possibile fare riferimento tabelle o viste sul altri database aggiungendo il DB Link al nome della tabella o vista.
+
