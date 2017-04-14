@@ -12,4 +12,103 @@ Protocollo "stateless" nè client ne server mantengono informazioni relativi ai 
 
 Metodo di comunicazione HTTP:
 
-  Server: rimane in ascolto (server passivo, tipicamente sulla porta 80)
+  1.  Server: rimane in ascolto (server passivo, tipicamente sulla porta 80)
+  2.  Client: apre una connessione TCP sulla porta 80 (cliente attivo)
+  3.  Server: accetta la connessione. 
+  4.  Manda una richiesta.
+  5.  Invia una risposta e chiude la connessione. 
+  
+Differenza fra v1.0 e v1.1 di HTTP:
+La differenza principale è la possibilità di specificare coppie multiple di richieste e risposta nella stessa connessione.
+
+La connessione 1.1 viene anche detta persistente.
+
+Il server dopo aver spedito la prima risposta lascia aperta la connessione TCP quindi a questo punto può ricevere altre risposte.
+
+Il Server a questo punto chiude la connessione quando viene specificato nell'header dl messaggio oppure quando non è usata da un certo tempo.
+
+Pipelining invio di molteplici richieste del client prima di terminare la ricezione delle risposte, importante però, che le risposte  siano date nello stesso ordina delle richieste.
+
+Messaggio HTTP definito in due strutture:
+  
+  Message Header: contiene tutte le informazioni necessarie per identifica un messagio.
+  
+  Message Body: Contiene tutti i dati trasportati dal massaggio.
+  
+  ---- Header HTTP ----
+   Header generali della trasmissione
+          - Data, codifica, versione, tipo di comunicazione, ecc.
+   Header relativi all’entità trasmessa
+          - Content-type, Content-Length, data di scadenza, ecc.
+   Header riguardo la richiesta effettuata
+          - Chi fa la richiesta, a chi viene fatta la richiesta, che tipo di caratteristiche il client è in grado di accettare, quale autorizzazione, ecc.
+   Header della risposta generata
+   Che server dà la risposta, che tipo di autorizzazione è necessaria, ecc.
+  
+  Esempio di HTTP REQUEST:
+  "
+  GET /somedir/page.html HTTP/1.1
+  Host: www.unibo.it
+  Connection: close
+  User-agent: Mozilla/4.0
+  Accept: text/html, image/gif,image/jpeg
+  Accept-language:fr
+  "
+I comandi delle richieste GET:
+  
+  - Serve per richiedere una risorsa ad un server.
+  - Quello che viene attivato quando si fa click su un documento ipertestuale.
+  - La lunghezza massima dell'URL è limitata ed è previsto un passaggio di para.
+
+I comandi delle richieste POST:
+
+  - Non ci sono limiti di lunghezza
+  - Si ha una trasmissione di informazioni fra Cliente -> Servitore
+  
+I comandi delle richieste PUT:
+  
+  - Chiede la memorizzazione sul Server di una risorsa all'URL specificato.
+  - Serve per trasmettere informazioni dal Client al Server.
+  - A differenza  del post si ha la creazione di una risorsa (o la sostituzione se questa esisteva già).
+
+I comandi delle richieste DELETE:
+  Richiede la cancellazione della risorsa che è stata specificata nell'URL.
+  
+  altri comandi sono HEAD, OPTIONS, TRACE
+  
+Codici di stato:  
+- Numero di tre cifre, la prima indica la classe della risposta e le altre due la risposta specificata,
+STATUS CODE DEL SERVER: 
+
+- 100 Continue (se il client non ha ancora mandato il body, deprecated da HTTPv1.0 )
+- 200 Ok (GET con successo)
+- 201 Created (PUT con successo)
+- 301 Moved permanently (URL non valida, il server conosce la nuova posizione)
+- 400 Bad request (errore sintattico nella richiesta)
+- 401 Unauthorized (manca l’autorizzazione)
+- 403 Forbidden (richiesta non autorizzabile)
+- 404 Not found (URL errato)
+- 500 Internal server error (tipicamente un CGI mal fatto)
+- 501 Not implemented (metodo non conosciuto dal server)
+
+
+          ------ AUTENTICAZIONE ---------
+
+L'autenticazione può avvenire in diversi modi:
+
+  - Filtro su set di indirizzi IP
+  - Form per richieste di username e password
+  - HTTP Basic
+  - HTTP Digest
+
+Autenticazione su Riconoscimento dell'indirizzo IP: 
+  SVANTAGGI:
+  - Non funziona se l'indirizzo è pubblico
+  - Non funziona se l'indirizzo IP è asseganto dinamicamente
+  - Esistono tecniche che consentono di presentarsi con IP fasulli(spoofing).
+  
+  Le architetture più articolate per il Web sono:
+    -PROXY: programma applicativo in grado di agire sia come Client che come Server al fine di effetuare richieste per conto di altri Clienti.
+    - GATEWAY: Server che fa da intermediario per altri Server, al contrario dei proxy, viene detto anche "reverse proxy o server-side proxy".
+    -Tunnel: programma applicativo che agisce come "blind relay", non partecipa alla comunicazione HTTP.
+  
