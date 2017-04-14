@@ -1,0 +1,16 @@
+    ---- Cursore dinamico con passaggio di parametri ----
+
+---- Creare il cursore :
+
+CREATE OR REPLACE FUNCTION calcolaQualcosa RETURN NUMBER IS
+  cursor categorie is select categoria from catalogo where;
+  cursor prodotti(p_param varchar2) is select distinct prodotto from prodotti where categoria = p_param;
+BEGIN
+
+---- Utilizzare il cursore :
+
+for i in categorie loop
+  for j in prodotti(i.categoria) loop
+    dbms_output.put_line('Categoria: ' || i.categoria || 'Prodotto: ' || j.prodotto);
+  end loop;
+end loop;
