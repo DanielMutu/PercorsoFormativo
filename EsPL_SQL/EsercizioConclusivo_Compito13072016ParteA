@@ -1,0 +1,110 @@
+/* 1° PRIMA PROCEDURA  */
+DECLARE 
+
+  nomeRicercatore varchar2(20);
+  cognomeRicercatore varchar2(20);
+  HIndex number:=0;
+
+PROCEDURE calcolaHIndex(nomeRicercatore IN varchar2,cognomeRicercatore IN varchar2) IS
+myOut varchar2(20):=NULL;
+numeroArticoli number(20):=NULL;
+
+/* 1° Cursore */
+CURSOR cursoreConta IS 
+
+  /* Controllo il numero di articoli che deve essere maggiore di 0 */
+  SELECT ARTICOLO.IDART
+  INTO numeroArticoli
+  FROM ARTICOLO, AUTORE, RICERCATORE
+  WHERE RICERCATORE.IDRIC=AUTORE.IDRIC AND AUTORE.IDART=ARTICOLO.IDART AND RICERCATORE.NOME='Orso' AND RICERCATORE.COGNOME='Polare';
+  v ARTICOLO.IDART%TYPE;
+
+  /* 2° Cursore */
+  CURSOR numeroCitazioni(idArticolo number) IS
+  SELECT CITA.ARTICOLOCITATO
+  FROM ARTICOLO, AUTORE, RICERCATORE, CITA
+  WHERE RICERCATORE.IDRIC=AUTORE.IDRIC AND AUTORE.IDART=ARTICOLO.IDART AND CITA.IDART=ARTICOLO.IDART AND CITA.IDART=idArticolo;
+  s CITA.ARTICOLOCITATO%TYPE;
+
+BEGIN
+/* Query per calcolare il numero di articoli */
+SELECT COUNT(ARTICOLO.IDART)
+INTO numeroArticoli
+FROM ARTICOLO, AUTORE, RICERCATORE
+WHERE RICERCATORE.IDRIC=AUTORE.IDRIC AND AUTORE.IDART=ARTICOLO.IDART AND RICERCATORE.NOME='Orso' AND RICERCATORE.COGNOME='Polare';
+/*                                            */
+
+DBMS_OUTPUT.PUT_LINE('Il ricercatore  '||nomeRicercatore|| ' ha pubblicato '||numeroArticoli );
+
+OPEN cursoreConta;
+  LOOP
+    FETCH cursoreConta INTO v;    
+      EXIT WHEN cursoreConta%NOTFOUND;    
+     OPEN  numeroCitazioni(v);
+      --DBMS_OUTPUT.PUT_LINE('Sto cercando il umero delle citazioni:  ' );
+     -- LOOP
+      
+         FETCH numeroCitazioni INTO s;
+         EXIT WHEN numeroCitazioni%NOTFOUND;
+          DBMS_OUTPUT.PUT_LINE('articolo   :  ' ||v|| '  è   stato citato:   '||s||'   volte.');
+            
+            IF   s>=numeroArticoli   THEN
+              DBMS_OUTPUT.PUT_LINE('SI'); 
+              HIndex:= HIndex+1;
+            
+            ELSE
+
+              numeroArticoli:=numeroArticoli-1;
+              DBMS_OUTPUT.PUT_LINE('NumeroArticoli  -1 --->'||numeroArticoli);
+            END IF;
+            
+       --  EXIT WHEN numeroCitazioni%NOTFOUND;
+         -- END LOOP;
+      CLOSE numeroCitazioni;
+      
+      
+      
+    END LOOP;
+CLOSE cursoreConta;
+
+
+DBMS_OUTPUT.PUT_LINE('H-Index é:     '||HIndex);
+  
+
+END;
+
+BEGIN
+nomeRicercatore:='Orso';
+cognomeRicercatore:='Polare';
+calcolaHIndex(nomeRicercatore, cognomeRicercatore);
+END;
+/
+
+/*
+Tabelle su cui lavoro:
+-ARTICOLO
+-RICERCATORE
+-AUTORE
+-CITA
+*/
+/*
+IF numeroArticoli>0 THEN
+
+DBMS_OUTPUT.PUT_LINE('La la la');
+
+
+ELSE
+DBMS_OUTPUT.PUT_LINE('Il ricercatore  '||nomeRicercatore|| ' ha pubblicato 0 articoli!!');
+END IF;
+*/  
+
+
+  --DBMS_OUTPUT.PUT_LINE('IDART:  ' ||v);
+            
+      -- LOOP che mi decide quale H-IDEX  !parte fondamentale
+          /*
+          FOR numeroArticoli IN 1..20
+          LOOP
+          DBMS_OUTPUT.PUT_LINE('sss:  ' );          
+          END LOOP;
+          */
