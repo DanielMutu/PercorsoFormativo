@@ -1,0 +1,55 @@
+
+
+----- XML ------
+
+    -Cos'è XML: viene definito come Extensible Markup Language.
+    -E' un linguaggio che consente di rappresentare documenti e dati strutturati su supporti digitali.
+    
+Consente di utilizzarlo per rappresentare dati anche molto complessi    
+
+Esempio di sintassi:
+
+<documento>
+  <corpo>
+    Testo del mio primo documento
+  </corpo >
+</documento>
+
+  Caratteristiche:
+  
+  - XML è uno standard di pubblico dominio  
+  - Ogni software conforme a XML è in grado di gestire dati di tipo XML.
+  - Un applicazione capace di elaborare dati XML viene definita come elaboratore di XML.
+  
+  XML Documento:
+    - Strutturato in modo gerarchico.
+    - Composto da elementi, un elemento rappresenta un componente logico del documento.
+    - Può contenere un frammento di testo oppure altri elementi.
+    - Ad un elemento possono essere associate informazioni descrittive chiamate attributi.
+    
+Un documento XML quindi è semplice file di testo con estensione ".xml"
+
+La struttura del documento viene rappresentata mediante "markup".
+    
+Gli elementi di un XML sono rappresentati mediante TAG.    
+   
+   La struttura Formale di un documento XML è: 
+      -  Prologo:  contiene una dichiarazione XML ed il riferimento (opzionale) ad altri documenti.
+      -  Corpo: corpo XML vero e proprio.
+ 
+ <?xml version=“1.0” encoding=“UTF-8”?>
+ <?xml-stylesheet type=“text/css” href=“gree.css”?>
+  <root>
+    <!-- Questo è un commento -->
+    <child>
+      ...
+    </child>
+  <child> 
+  ...
+  </child>
+</root> 
+  
+  //*****************************
+  
+  
+  
