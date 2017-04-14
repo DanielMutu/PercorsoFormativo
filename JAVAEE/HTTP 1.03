@@ -1,0 +1,15 @@
+------ HTTP -------
+
+  WWW = URL + (HTTP) + HTML
+  
+HTTP sta per HYPER TEXT TRANSFER PROTOCOL
+
+    -  Protocollo a lvello applicativo che serve per trasferire risorse sul WEB.
+
+    -  Gestisce sia le richieste, inviate al server che le risposte al client (pagine).
+
+Protocollo "stateless" nè client ne server mantengono informazioni relativi ai messaggi precedentemente Scambiati.
+
+Metodo di comunicazione HTTP:
+
+  Server: rimane in ascolto (server passivo, tipicamente sulla porta 80)
