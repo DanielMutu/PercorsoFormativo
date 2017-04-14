@@ -1,0 +1,69 @@
+
+                                      ----- Introduzione -----
+
+Il WEB nasce con  Tim Berners-Lee nel 1989.
+
+        ----- URI  ------
+  - L'URI (Uniform Resource Identifier) mettono a disposizione un meccanismo semplice per identificare una risorsa.
+  - Per risorsa si intende qualunque entità che ha un identità, concetto generale che non fa riferimento neccesariamente al protocollo HTTP.
+  - E' il mapping generale ad una risorsa.
+  Gli identificatori hanno:
+  - Caratteristiche comuni:
+      - convenzioni sintattiche comuni.
+      - Semantica comune per l'interpretazione.
+      - Facilità di introdurre nuovi tipi di identificatori.
+      
+      Nel caso URI gli identificatori sono stringhe con una sintassi definita, dipendente dallo schema che può essere espresso in questo modo: 
+      
+     <scheme>://<authority><path>?<query>
+     
+     
+      Uniform Resource Name (URN): deve essere globalmente unico e rimanere valido anche se la risorsa cessa di esistere.
+      
+      Uniform Resource Locator (URL):  Identifica una risorsa per mezzo del suo meccanismo di accesso primario.
+      URL a differenza di URN tiene conto del modo di accedere alla risorsa.
+      
+      La sintassi di dell'URL, nella sua forma più comune è:
+      
+      <protocol>://[<username>:<password>@]<host>[:<port>][/<path>[?<query>][#fragment]]
+      
+      Questo vale per protocolli come HTTP, HTTPS, FTP, WAP, .... Ma non esiste per sempio per la posta elettronica.
+      
+      Vediamo meglio la sintassi dell'URL:
+      
+      <protocol> Descrive il protocollo da utilizzare per accedere al Server.
+      <username>:<password@> credenziali per l'autenticazione.
+      <host> : indirizzo server su cui risiede la risorsa, può essere un indirizzo IP logico o fisico.
+      <port> definisce la porta da utilizzare (TPC come protocollo di trasporto per HTTP), se non viene specificata si usa la porta standard per il protocollo che è la 80.
+      <path> : percorso(pathname), che identifica la risorsa nel file system del server.
+      <query>: stringa di caratteri che consente di passare al server uno o più parametri, di solito con questo formato:
+         parametro1=valore&parametro2=valore2...
+      
+      Un esempio di URL:
+      
+      http://lia.deis.unibo.it:8080/Courses/index.html
+      
+      Altri Esempi di URI possono essere: 
+      
+       Schema per servizi FTP
+              ftp://ftp.FreeBSD.org/pub/FreeBSD/
+      
+       Schema per newsgroup e articoli Usenet
+              news:comp.infosystems.www.servers.unix
+      
+       Schema per servizi Telnet
+              telnet://melvyl.ucop.edu
+      
+       Schema per IRC
+              irc://irc.freenode.net/wikipedia-it
+      
+       Schema per indirizzi di posta elettronica:
+              mailto:paolo.bellavista@unibo.it
+      
+         
+       
+      
+      
+
+
+
