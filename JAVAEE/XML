@@ -51,5 +51,153 @@ Gli elementi di un XML sono rappresentati mediante TAG.
   
   //*****************************
   
+  Document Type Definition (DTD)
   
+  E' uno  strumento per definire le grammatiche di un XML.
   
+
+
+
+                                            Tecnologie Web T
+                                                    DTD
+                                       Document Type Definition
+//-----------------------------------------------------------------------------------------------//                                       
+È un linguaggio per definire la grammatica che descrive la composizione degli elementi costituenti una certa classe di
+documenti XML.
+Ci da uno strumento per la validazione dei documenti XML.
+
+Per applicare un DTD ad un documento XML nel suo prologo dobbiamo inserire una dichiarazione con questa sintassi:
+"<!DOCTYPE root-element SYSTEM "filename">"
+
+1. root-element: è il nome dell'elemento  radice.
+2. System: definisce documenti di utilizzo locale.
+3. filename: file che contiene il DTD.
+
+--- Esempio di utilizzo DTD con XML -----
+
+POssiamo avere un XML del tipo:
+
+<?xml version="1.0"?>
+<!DOCTYPE message SYSTEM “message.dtd”>
+<message>
+<to>Bob</to>
+<from>Janet</from>
+<heading>Reminder</heading>
+<body>Don't forget me this weekend</body>
+</message>
+
+
+Ed un DTD scritto così:  
+
+<!ELEMENT message (to,from,heading,body)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+
+PCDATA (Parsed Character Data) rappresenta l’unico tipo di dato possibile, ovvero di tipo carattere.
+
+Struttura di un DTD costituito da un elenco di chiarazioni che descrivono la struttura del documento.
+
+La struttura di un DTD definiscono: 
+    - Gli elementi di un documento XML.
+    - Gli elementi che contiene e le loro relazioni.
+    - Una lista di attributi associati a ciascun elemento.
+    
+Per dichiarare un elemento si usa la sintassi:
+<!ELEMENT element-name content-model>
+
+Il content model può essere di quattro tipi:
+    EMPTY: Parola che indica l'elemento vuoto.
+    ANY: per l'inserimento di testo.
+Ogni elemento può essere indicato una sola volta.    
+Per esempio:
+
+        DTD:
+        <!ELEMENT ElementoVuoto EMPTY>
+        XML:
+        <ElementoVuoto />
+
+...oppure....
+        DTD:
+        <!ELEMENT Elemento ANY>
+        <!ELEMENT Child EMPTY>
+        <!ELEMENT Child1 EMPTY>
+        XML:
+        <Elemento>
+        <Child/>
+        <Child1/>
+        ...qualcosa...
+        <Child/>
+        </Elemento>
+
+Content Model MIXED:
+( #PCDATA|name|profession|footnote|emphasize|date)*
+    
+    ---     ATTRIBUTI   ----
+Per definire una lista di possibili attributi per un elemento si usa la sintassi:
+        
+        <!ATTLIST ElementName
+        AttrName 1 AttrType 1 Value 1
+        AttrName 2 AttrType 2 Value 2
+        ...>
+
+ElementName: nome dell'elemento.
+AttrName: nome dell'attributo n-esimo.
+AttrType: tipo dell'attributo n-esimo
+Value n : valore di default dell’attributo n-esimo o modificatore di presenza.
+
+DTD:
+        <!ELEMENT payment EMPTY>
+        <!ATTLIST payment mode (check|cash) “cash”>
+XML:
+        <payment mode=“check” />
+        <payment mode=“cash” />
+        <payment mode=“creditcard” />
+
+---- Attributi: tipo ID ----
+ sintassi: 
+        DTD:
+        <!ELEMENT orders (order+)>
+        <!ELEMENT order EMPTY>
+        <!ATTLIST order code ID #REQUIRED>
+        
+        XML:
+        <orders>
+        <order code=“a101”/>
+        <order code=“a102”/>
+        ...
+        </orders>
+
+    ----  Attributi: valore di default ----
+esempio sintassi:
+        DTD:
+        <!ELEMENT square EMPTY>
+        <!ATTLIST square width CDATA "0">
+        XML:
+        <square width="100" />
+        
+In questo caso verrà impostato come valore default 0.
+
+----- #implied -----
+Sintassi:
+            DTD:
+            <!ELEMENT contact EMPTY>
+            <!ATTLIST contact fax CDATA #IMPLIED>
+            XML:
+            <contact fax="555-667788" />
+
+- Implied si utilizza quando non c'è un attributo obbligatorio.
+- Non è possibile stabilire un valore di default.
+
+---- Attributi valore #required ----
+        DTD:
+        <!ELEMENT person EMPTY>
+        <!ATTLIST person number CDATA #REQUIRED>
+        XML:
+        <person number="5677" />
+
+#required si utilizza   quando non è possibile specificare il valore di default oppure si deve forzare la presenza di tale attributo.
+Scrivere solo <person /> genera errore.
+
+
