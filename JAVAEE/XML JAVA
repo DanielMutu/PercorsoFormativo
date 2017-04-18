@@ -1,0 +1,42 @@
+
+I parser XML rendono disponibile alle applicazioni la struttura ed il contenuto dei documenti XML e si
+interfacciano mediante due tipologie di API.
+ Event-based API (es. SAX)
+ Notificano alle applicazioni eventi generati nel parsing dei documenti
+ Usano poche risorse ma non sono sempre comodissime da usare
+ Object-model based API (es. DOM)
+ Forniscono accesso al parse-tree che rappresenta il documento XML; molto comode ed eleganti
+ Richiedono però maggiori risorse in termini di memoria
+ I parser più diffusi supportano sia SAX sia DOM
+ spesso i parser DOM sono sviluppati su parser SAX
+
+Abbiamo due classi fondamentali:
+      SAXParserFactory
+      DocumentBuilderFactory
+      
+      
+LE INTERFACCIE  SAX POSSONO ESSERE DIVISE IN TRE CATEGORIE:
+  -Interfacce Parser-to-Application (callback): consentono di definire funzioni di callback e di associarle agli eventi
+generati dal parser mentre questi processa un documento XML.
+  -Interfacce Application-to-Parser: consentono di gestire il parser.
+  -Interfacce Ausiliarie:facilitano la manipolazione delle informazioni fornite dal parser.
+  
+  
+//Esempio di main  
+public class mane {
+	
+	public static void main(String [] args) throws ParserConfigurationException, SAXException{
+		System.out.println("ciao");
+
+	
+		SAXParserFactory spf =SAXParserFactory.newInstance();
+		DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();
+	
+		SAXParser saxParser = spf.newSAXParser();
+		DocumentBuilder builder = dbf.newDocumentBuilder();
+		
+		//LE INTERFACCE SAX POSSONO ESSERE DIVISE IN TRE CATEGORIE
+		
+		
+	}	
+}
