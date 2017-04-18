@@ -1,0 +1,91 @@
+    --- XML SCHEMA ---
+    
+XML Schema è un alternativa ai DTD.
+
+Gli XSD(= XML schema definition) sono in formato XML e possono essere  analizzati da un parser XML.
+
+Esempio  di sintassi:
+
+          <?xml version="1.0"?>
+          <message
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance“
+          xsi:noNamespaceSchemaLocation="http://mysite.it/msg.xsd">
+          <to>Bob</to>
+          <from>Janet</from>
+          <heading>Reminder</heading>
+          <body>Don't forget me this weekend</body>
+          </message>
+
+Vale anche qui la differenza fra Dichiarazione e Definizione come nei linguaggi di programmazione.
+Definizione: Crea un nuovo tipo di dato semplice o complesso.
+Dichiarazione: fa riferimento ad una definizione per creare un istanza.
+
+Ha la seguente sintassi:
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+//Inizio definizione
+  <xs:complexType name="messageType">
+  <xs:sequence>
+    <xs:element name="to" type="xs:string"/>
+    <xs:element name="from" type="xs:string"/>
+    <xs:element name="heading" type="xs:string"/>
+    <xs:element name="body" type="xs:string"/>
+  </xs:sequence>
+  </xs:complexType>
+  
+  //fine definizione
+  <xs:element name="message" type="messageType"/>  //questa è una dichiarazione
+</xs:schema>
+
+ESEMPIO UTILE:
+
+<!-- anche questo è un documento XML, lo precisiamo -->
+<?xml version="1.0"?>
+<!-- iniziamo lo schema -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.html.it/Guida_ai_Webservice"
+ xmlns="http://www.html.it/Guida_ai_Webservice" elementFormDefault="qualified">
+<!-- definiamo l'elemento libro -->
+  <xs:element name="libro">
+    <xs:complexType> 
+      <xs:all>
+        <!-- definiamo i vari elementi child di libro --> 
+        <xs:element name="titolo" type="xs:string" /> 
+        <xs:element name="autore" type="xs:string" />
+        <xs:element name="numeroDiPagine" type="xs:integer" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+
+xmlns:xs=”…” stabilisce che gli elementi che iniziano con ‘xs’ provengono dal namespace http://www.w3.org/2001/XMLSchema
+targetNamespace=”…” definisce a quale namespace appartengono gli elementi definiti con questo schema
+xmlns=”…” definisce il namespace di default (quello applicato se non ne escplicitiamo uno)
+elementFromDefault=”qualified” indica che ogni elemento usato nel documento XML che utilizzerà questo schema dovrà essere qualificato
+
+Dentro al tag schema possono esserci elementi semplici ed elementi complessi.
+  Gli elementi semplici, al loro interno possono contenere solo testo.
+  Gle elementi complessi possono avere al loro interno testo oppure altri elementi.
+
+Sintassi per dichiarare un elemento semplice:  <xs:element name="xxx" type="yyy" />
+
+xxx: sta al posto del nome dell'elemento semplice.
+yyy: va sostituito con il tipo dell'elemento.
+
+Definire un attributo per un elemento complesso:
+  <xs:attribute name="xxx" type="yyy" />
+  
+ Un elemento complesso può contenere: 
+          può essere un elemento vuoto.
+          può contenere solo elementi.
+          può contenere solo testo.
+          può contenere sia elementi che testo.
+          
+Sintassi base per un elemento complesso: 
+        <xs:element name="nomeElemento">
+         <xs:complexType> 
+         <!-- .... elementi o attributi contenuti ... -->
+         <xs/complexType>
+        <xs:element>
+        
+        
