@@ -1,0 +1,29 @@
+ class SingoloOggetto {
+   //create an object of SingleObject
+   private static SingoloOggetto instance = new SingoloOggetto();
+   //make the constructor private so that this class cannot be
+   //instantiated
+   private SingoloOggetto(){}
+   //Get the only object available
+   public static SingoloOggetto getInstance(){
+      return instance;
+   }
+   public void showMessage(){
+      System.out.println("Hello World!");
+   }
+}
+
+public class singleton{
+	public static void main(String[] args) {
+
+	      //illegal construct
+	      //Compile Time Error: The constructor SingleObject() is not visible
+	      //SingleObject object = new SingleObject();
+
+	      //Get the only object available
+	      SingoloOggetto object = SingoloOggetto.getInstance();
+
+	      //show the message
+	      object.showMessage();
+	   }
+}
