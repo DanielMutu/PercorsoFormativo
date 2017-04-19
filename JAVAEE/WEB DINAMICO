@@ -1,0 +1,34 @@
+----- WEB DINAMICO -----
+
+Il web statico ha grosse limitazioni (basta pensare all'operazione di ricerca), per questo viene introdotto il WEB DINAMICO.
+
+La prima soluzione prende il nome di Common Gateway Interface (CGI), sono programmi che vengono eseguiti dinamicamente in risposta ad una richiesta di output e prendono e possono essere scritti in diversi linguaggi...
+
+Questa soluzioni però ha numerosi svantaggi, una soluzione sarebbe quella di creare un contenitore, che prende il nome di Application Server e si occupa di far vivere le nostre applicazioni
+
+Il contenitore si preoccupa di fornire i servizi di cui le applicazioni hanno bisogno:
+     Interfacciamento con il Web Server
+     Gestione del tempo di vita (attivazione on-demand delle funzioni)
+     Interfacciamento con il database
+     Gestione della sicurezza
+
+Operazioni che possono essere delegate  al Container:
+  Il container può fornire “automaticamente” molte delle funzioni per supportare il servizio applicativo verso l’utente
+
+ Supporto al ciclo di vita
+    Attivazione/deattivazione del servitore
+    Mantenimento dello stato (durata della sessione?)
+    Persistenza trasparente e recupero delle informazioni (interfaccia DB)
+
+ Supporto al sistema dei nomi
+    Discovery del servitore/servizio
+    Federazione con altri container
+
+ Supporto alla qualità del servizio
+    Tolleranza ai guasti, selezione tra possibili deployment
+    Controllo della QoS richiesta e ottenuta
+
+ Sicurezza
+
+
+
