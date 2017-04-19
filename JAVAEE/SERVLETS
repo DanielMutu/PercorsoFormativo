@@ -1,0 +1,21 @@
+----  SERVLET ----
+
+  .Il Servlet fa da tramite fra Client HTTP REquest e database o applicazioni su HTTP Server.
+  .E' un alternativa miglliore ai CGI che offre significativi vantaggi:
+    - Le performance sono migliori.
+  
+  
+  ---- Ciclo di vita di una Servlet ----
+  
+  - Il ciclo di vita di una Servlet descrive la servlet dalla creazione fino alla sua distruzione...
+  
+  ---> La Servlet viene chiamata con il metodo "init()".
+  ---> La Servlet chima il metodo "service()" per processare una richiesta cleinte.
+  ---> La Servlet termina con "destroy()".
+  ---> Infine  la servlet viene raccolta dalla JVM carbage collector che si occupa di ripulire il tutto.
+  
+  -- Init(): creato per essere richiamato solamente una volta, quando la servlet viene creata, quindi è utilizzata solamente una volta quando si crea il Servlet.
+  
+  -- Service(): è il metodo principale per attuare PUT,GET, POST, DELETE, etc.. Il Web server (TomCat) chiama "service()"  
+  
+  
