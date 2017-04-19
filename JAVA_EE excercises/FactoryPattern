@@ -1,0 +1,67 @@
+
+interface esseriViventi{
+	public void respirano();
+}
+class uomini implements esseriViventi {
+	   @Override
+	   public  void respirano() {
+	      System.out.println("Gli uomini respirano");
+	}
+}
+class animali implements esseriViventi {
+	   @Override
+	   public void respirano() {
+	      System.out.println("Gli animali respirano");
+	}
+}
+class piante implements esseriViventi {
+	   @Override
+	   public void respirano() {
+	      System.out.println("Le piante respirano");
+	}
+}
+
+class viventiFactory {
+	
+	   //use getShape method to get object of type shape 
+	   public esseriViventi getShape(String shapeType){
+	      if(shapeType == null){
+	         return null;
+	      }		
+	      if(shapeType.equalsIgnoreCase("uomini")){
+	         return new uomini();
+	         
+	      } else if(shapeType.equalsIgnoreCase("animali")){
+	         return new animali();
+	         
+	      } else if(shapeType.equalsIgnoreCase("piante")){
+	         return new piante();
+	      }
+	      
+	      return null;
+	   }
+	}
+
+public class factory{
+	public static void main(String[] args) {
+	      viventiFactory oggFactory = new viventiFactory();
+
+	      //get an object of Circle and call its draw method.
+	      esseriViventi uomini = oggFactory.getShape("uomini");
+
+	      //call draw method of Circle
+	      uomini.respirano();
+
+	      //get an object of Rectangle and call its draw method.
+	      esseriViventi animali = oggFactory.getShape("animali");
+
+	      //call draw method of Rectangle
+	      animali.respirano();
+
+	      //get an object of Square and call its draw method.
+	      esseriViventi piante = oggFactory.getShape("piante");
+
+	      //call draw method of circle
+	      piante.respirano();
+	   }
+}
