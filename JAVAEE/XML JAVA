@@ -40,3 +40,43 @@ public class mane {
 		
 	}	
 }
+
+*******************************//   API DOM   //*********************************
+
+Basato sui concetti tradizionali della programmazione ad oggetti...
+
+ Metodi: regolano l’accesso e consentono di alterare lo stato degli oggetti.
+ Interfacce: consentono di dichiarare un insieme di metodi.
+ Oggetti: incapsulano dati e metodi.
+
+Quando si usa?
+
+	- Qunado ho bisogno di conoscere la struttura  di un documento.
+	- Quando ho bisogno di spostare parti di un documento.
+	- Quando ho bisogno di utilizzare le informazioni di un documento.
+	
+Le interfacce più comuni del DOM:
+
+		Node.
+
+		Element.
+
+		Attr.
+
+		Text.
+
+		Document: rappresenta l'intero documento XML, è spesso riferito all'albero XML.
+
+I metodi più comuni sono:
+	Document.getDocumentElement() - Mi da l'elemento root del documento.
+	Node.getFirstChild() - 
+	Node.getLastChild() - 
+	Node.getNextSibling() - 
+	Node.getPreviousSibling() - 
+	Node.getAttribute(attrName) - 
+
+
+
+
+
+
