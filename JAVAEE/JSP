@@ -100,5 +100,20 @@ Ci sono tre direttive principali:
   </body>
 </html>
 
---------   <jsp:plugin> Action viene utilizzato per inserire codice Java all'interno della pagina WEB  ------
+---- Implicit Object -----
+Sono oggetti standard disponibili dal web container in particolare:
+
+out-->	JspWriter
+request-->	HttpServletRequest
+response-->	HttpServletResponse
+config-->	ServletConfig
+application-->	ServletContext
+session-->	HttpSession
+pageContext-->	PageContext
+page-->		Object
+exception-->	Throwable
+
+
+----- JSP - Standard Tag Library (JSTL) Tutorial --------
+
 
