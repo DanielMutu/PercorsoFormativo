@@ -1,0 +1,104 @@
+ 
+ 
+ ----- JSP ------
+ 
+  - JAVA SERVER Pages consente di inserire contenuto JAVA in una pagina HTML in modo dinamico.
+  - Il codice  JAVA viene inserito in questi  tag:  <% Codice JAVA %>
+  - Funzionano meglio delle CGI.
+  - Il server ha bisogno di un JSP Container per processare codice JSP.
+  
+  
+ ----- vediamo un po' di sintassi ----
+ //Direttiva <%@ ... %> 
+ <%@ page import="java.util.*" %> 
+<html>
+<head>
+<% Date data_di_oggi = new Date(); %>
+
+//Espressione <%= ... %>
+<%= data_di_oggi %>
+</head>
+	<body>
+	
+	<%! int day = 1; %> 
+	
+	<p>IF...ELSE Example</p> 
+
+	<% if (day == 1 | day == 7) { %>
+	      <p> Today is weekend</p>
+	<% } else { %>
+	      <p> Today is not weekend</p>
+	<% } %>
+
+<% 
+switch(day) {
+case 0:
+   out.println("It\'s Sunday.");
+   break;
+case 1:
+   out.println("It\'s Monday.");
+   break;
+case 2:
+   out.println("It\'s Tuesday.");
+   break;
+case 3:
+   out.println("It\'s Wednesday.");
+   break;
+case 4:
+   out.println("It\'s Thursday.");
+   break;
+case 5:
+   out.println("It\'s Friday.");
+   break;
+default:
+   out.println("It's Saturday.");
+}
+%>
+<br>
+
+//Dichiarazione di variabili <%! ...  %>
+
+<%! int fontSize; %>
+<%for ( fontSize = 1; fontSize <= 3; fontSize++){ %>
+   <font color="green" size="<%= fontSize %>">
+    JSP Tutorial
+   </font><br />
+<%}%>
+	</body>
+</html>
+
+
+
+Oltre a Espressione e Dichiarazioni abbiamo le direttive.
+Le direttive non producono output ma danno informazioni  utili per tutto il documento JSP.
+
+Ci sono tre direttive principali:
+  - Pages: esprime una "definizione di attributi";
+  - Include: include esprime una "notifica" al Servlet Engine riguardo a un punto determinato del file ".jsp" in cui và incluso del codice esterno;
+  - Taglib:  "autorizza" l'uso di costrutti sintattici definiti dallo sviluppatore.
+  
+  
+  <%@ inlude url="ciao.jsp" %>  --> Per includere informazioni di una altra jsp.
+  <jsp:useBean id="name" class="package.class" />  --> 
+  
+  
+  
+  ----- codice per modificare parametri di una pagina java e ricevere una risposta -----
+  
+  <jsp:useBean id="test" class="pack.action" />
+  <jsp:setProperty name="test" property="message" value="Hello JSP Daniel" />
+  <jsp:getProperty name="test" property="message" />
+  
+  ------- forward: termina l'azione della pagina corrente poi richiama il file in questione, per esempio date.jsp------
+ <html>
+  <head>
+    <title>The include Action Example</title>
+  </head>
+  <body>      
+      <h2>The include action Example</h2>
+      <jsp:forward page="date.jsp" />      
+  </body>
+</html>
+
+--------   <jsp:plugin> Action viene utilizzato per inserire codice Java all'interno della pagina WEB  ------
+
