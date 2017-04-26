@@ -1,0 +1,132 @@
+
+---- Spring -----
+
+  - Abbiamo due file nello stesso package
+  
+  -Il primo HelloWorld.java
+  
+package com.tutorialspoint;
+
+public class HelloWorld {
+   private String message;
+
+   public void setMessage(String message){
+      this.message  = message;
+   }
+   public void getMessage(){
+      System.out.println("Your Message : " + message);
+   }
+}
+
+  -Il secondo è  MainApp.java
+  
+package com.tutorialspoint;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+      HelloWorld obj = (HelloWorld) context.getBean("helloWorld");
+      obj.getMessage();
+   }
+}
+
+!ATTENZIONE: 
+      
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml")
+      
+      Carica i file di configurazione e si occupa dell'inizializzazione di tutti gli oggetti.
+      
+      
+      HelloWorld obj = (HelloWorld) context.getBean("helloWorld");
+      
+      getBean () : questo metodo mi fornisce un oggetto generico che può essere ricondotto all'oggetto reale.
+      
+File di configurazione .xml:
+
+      <?xml version = "1.0" encoding = "UTF-8"?>
+    <beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld">
+          <property name = "message" value = "Hello World!"/>
+       </bean>
+    </beans>
+      
+      
+     ---- SIngleton ----
+
+-Crea esattamente una copia di quell'oggetto
+
+
+     ---- Prototipe ----
+ 
+ Spring IoC container crea un nuovo bean dell'oggetto ogni volta che viene richiesto.     
+     
+
+  ---- The life cycle of a Spring bean  ---- (Ciclo di vita di un Bean).
+  
+  E' necessario fare un instanziazzione per farlo nascere con:
+  
+  ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml")
+  
+  Poi viene distrutto quando non viene più utilizzato.
+  
+  ---- Interfaccia BeanPostProcessor ---- 
+      public interface BeanPostProcessor {
+      Object postProcessBeforeInitialization(Object bean, String name)
+      throws BeansException;
+      Objcet postProcessAfterInitialization(Object bean, String name)
+      throws BeansException;
+      }
+    Si occupa del ciclo di vita di un Bean. 
+    L'interfaccia deve essere implementata da una classe.  
+
+      Object postProcessBeforeInitialization(Object bean, String name)
+      throws BeansException;
+
+Con questo metodo posso fare un update del messaggio prima che venga creata la classe  HelloWorld
+
+      Objcet postProcessAfterInitialization(Object bean, String name)
+      throws BeansException;
+      
+Con questo altro metodo invece fa un update dopo che il è stato eseguito il metodo.      
+
+
+Proprietà parent in .xml "parent" si utilizza per utilizzare un metodo in una superclasse facendo un ovverride di quel metodo.
+
+      -----  Java Based Configuration  ------
+      
+    package com.tutorialspoint;
+    import org.springframework.context.annotation.*;
+
+    @Configuration
+    public class HelloWorldConfig {
+       @Bean 
+       public HelloWorld helloWorld(){
+          return new HelloWorld();
+       }
+    }
+
+Con le annotations è possibile fare a meno del file di configurazione .xml
+
+Il codice sopra riportato è equivalente a scrivere: 
+
+
+<beans>
+   <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld" />
+</beans>
+
+Sarà poi possibile utilizzarli con:
+
+    public static void main(String[] args) {
+       ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfig.class);
+
+       HelloWorld helloWorld = ctx.getBean(HelloWorld.class);
+       helloWorld.setMessage("Hello World!");
+       helloWorld.getMessage();
+    }
+    
