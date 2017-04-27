@@ -1,0 +1,19 @@
+---- Maven è un managment tool che si basa sul modello POM (project object model), in particolare, maven si occupa di:
+
+Segue la seguente sintassi: 
+
+ - mvn [plugin-name]:[goal-name]
+ 
+Si può notare come Maven sia composto da plugin, esistono due tipi di plugin:
+
+- Build plugins: They execute during the build and should be configured in the <build/> element of pom.xml
+- Reporting plugins: They execute during the site generation and they should be configured in the <reporting/> element of the pom.xml.
+
+Questa è una lista dei plugin più comuni: 
+clean-->ean up target after the build. Deletes the target directory.
+compiler	Compiles Java source files.
+surefire	Run the JUnit unit tests. Creates test reports.
+jar	Builds a JAR file from the current project.
+war	Builds a WAR file from the current project.
+javadoc	Generates Javadoc for the project.
+antrun	Runs a set of ant tasks from any phase mentioned of the build.
