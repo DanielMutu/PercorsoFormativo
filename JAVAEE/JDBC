@@ -195,5 +195,11 @@ info.put( "user", "username" );
 info.put( "password", "password" );
 Connection conn = DriverManager.getConnection(URL, info);
 
+Le interfacce Statement, CallableStatement e PreparedStatement definiscono i metodi e le proprietà che consentono di mandare comandi SQL o PL/SQL e ricevere dati dal database.
+
+      Statement: Usato in generale per accedere al database. Non può accettare parametri.
+      PreparedStatement: Quando si vuole accedere al database molte volte, accetta parametri input.
+      CallableStatement: Quando voglio utilizzare delle procedure immmagazinate nel database.
+
 
 
