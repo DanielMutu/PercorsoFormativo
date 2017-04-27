@@ -130,6 +130,70 @@ Register the JDBC driver:
 
 
 //***********************************************
+---- JDBC Driver ----
+
+Fornisce JDBC API per interagire con il tuo JDBC server, per esempio:
+- Aprire la connessione al database.
+- Chiedere dati oppure inviare dati.
+- Eliminare dati o modificare dati.
+
+I driver variano a per i diversi sistemi operativi sono 4. Il 4 (Scritto interamente in java è quello preferito).
+
+Dopo aver registrato il driver nel tuo programma, puoi utilizzarlo.
+Il modo più comune per registrare il driver è:
+
+//*******************************************************
+try {
+   Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+}
+catch(ClassNotFoundException ex) {
+   System.out.println("Error: unable to load driver class!");
+   System.exit(1);
+catch(IllegalAccessException ex) {
+   System.out.println("Error: access problem while loading!");
+   System.exit(2);
+catch(InstantiationException ex) {
+   System.out.println("Error: unable to instantiate driver!");
+   System.exit(3);
+}
+
+//*******************************************************
+   
+Una seconda soluzione può essere questa:
+
+//***********************************************************
+try {
+   Driver myDriver = new oracle.jdbc.driver.OracleDriver();
+   DriverManager.registerDriver( myDriver );
+}
+catch(ClassNotFoundException ex) {
+   System.out.println("Error: unable to load driver class!");
+   System.exit(1);
+}
+//***********************************************************
+
+Dopo aver stabilito il driver è possibile impostare la connessione con:
+
+DriverManager.getConnection();
+
+getConnection() accetta i seguenti seguenti parametri: 
+
+      - getConnection(String url)
+
+      - getConnection(String url, Properties prop)
+
+      - getConnection(String url, String user, String password)
+
+
+Codice per la connessione:
+
+import java.util.*;
+
+String URL = "jdbc:oracle:thin:@amrood:1521:EMP";
+Properties info = new Properties( );
+info.put( "user", "username" );
+info.put( "password", "password" );
+Connection conn = DriverManager.getConnection(URL, info);
 
 
 
