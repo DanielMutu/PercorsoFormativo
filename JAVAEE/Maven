@@ -1,5 +1,7 @@
 ---- Maven è un managment tool che si basa sul modello POM (project object model), in particolare, maven si occupa di:
 
+Link in italiano di riferimeno: http://codingjam.it/organizziamoci-con-maven-parte-i/
+
 Segue la seguente sintassi: 
 
  - mvn [plugin-name]:[goal-name]
@@ -10,10 +12,102 @@ Si può notare come Maven sia composto da plugin, esistono due tipi di plugin:
 - Reporting plugins: They execute during the site generation and they should be configured in the <reporting/> element of the pom.xml.
 
 Questa è una lista dei plugin più comuni: 
-clean-->ean up target after the build. Deletes the target directory.
-compiler	Compiles Java source files.
-surefire	Run the JUnit unit tests. Creates test reports.
-jar	Builds a JAR file from the current project.
-war	Builds a WAR file from the current project.
-javadoc	Generates Javadoc for the project.
-antrun	Runs a set of ant tasks from any phase mentioned of the build.
+
+
+--> Pulire l'obiettivo dopo la costruzione. Elimina la directory di destinazione.
+compiler  --> 	Compila Java source files.
+surefire  --> 	Run the JUnit unit tests. Creates test reports.
+jar -->	Builds a JAR file from the current project.
+war  --> 	Builds a WAR file from the current project.
+javadoc --> 	Genera Javadoc for the project.
+antrun  --> 	Runs a set of ant tasks from any phase mentioned of the build.
+
+
+- ! IMPORTANTE: Il file POM xml deve stare nella root del progetto per poter funzionare.
+Esempio di file pom.xml:
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>com.companyname.project-group</groupId>
+   <artifactId>project</artifactId>
+   <version>1.0</version>
+ 
+</project>
+
+La parte più importante è:  <groupId></groupId> che corrisponde a nome package e nome file, poi c'è artifactId, che corrisponde al nome della classe principale.
+
+- Grande vantaggio di Maven è di occuparsi di tutta la parte di dipendenze senza doverlo fare in modo manuale:
+Esempio:
+  <dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.13</version>
+  </dependency>
+
+Inoltre per ogni dipendenza è anche possibile dichiarare uno scope:
+
+compile (default) – le dipendenze sono disponibili in tutti i classpath del progetto
+provided – è simile a compile, ma prevede che a runtime le dipendenze siano rese disponibili dall’ambiente di esecuzione (per esempio le JavaEE APIs per un’applicazione enterprise)
+runtime – le dipendenze sono richieste solo in esecuzione
+test – le dipendenze sono richieste solo per la compilazione e l’esecuzione dei test
+system – la dipendenza non viene recuperata tramite repository, ma ne viene esplicitamente dichiarata la posizione locale
+
+La repository di default è: 
+
+  http://repo1.maven.org/maven2/
+  
+E' possibile specificare una nuova repository con: 
+
+<repositories>
+  <repository>
+    <id>id_nuovo_repository</id>
+    <url>http://nuovo_repository</url>
+  </repository>
+</repositories>  
+
+
+
+---- Cos'è un GOAL ----
+
+Per Goal si intende una singola funzione che può eseguire su un progetto..
+Maven ha una serie di built-in disponibile che sono:
+
+clean: che permette di cancellare i compilati dal progetto;
+compiler: che permette di compilare i file sorgenti;
+deploy: che permette di depositare il pacchetto generato nel repository remoto;
+install: che permette di depositare il pacchetto generato nel repository locale;
+site: che permette di generare la documentazione del progetto;
+archetype: che permette di generare la struttura di un progetto a partire da un template.
+
+Maven mette inoltre a disposizione la possibilità di lanciare dellle fasi...
+Prevede l'esecuzione di determinate coppie: [plugin]:[goal]
+
+scrivere mvn package equivale a 
+
+- resources:resources –> copia tutti i file di resources nella directory di output
+- compiler:compile –> compila il codice sorgente
+- resources:testResources –> copia tutti i file di resources di test nella directory di output di test
+- compiler:testCompile –> compila le classi di test
+- surfire:test –> esegue le classi di test terminando il processo in caso di fallimento
+- jar:jar –> crea il jar di distribuzione nella directory di output
+
+Maven consente di costruire un progetto partendo dal template che viene chiamato "archetype".
+
+Per creare una nuova architettura utilizziamo il seguente comando: 
+
+mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1
+
+Verrà creato automaticamente anche il pom.xml
+
+Spostiamoci nella root del nostro programma e digitiamo:
+
+mvn package
+
+Abbiamo anche la neccesità di lavorare con Maven su un ide, in questo caso eclipse.
+Possiamo dunque digitare il seguente comando 
+
+mvn eclipse:eclipse
