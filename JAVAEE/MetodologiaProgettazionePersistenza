@@ -1,0 +1,76 @@
+---- MetodologiaProgettazionePersistenza  ----
+
+L'interazione con il database è una fase critica,  si può eseguire in diversi modi:
+
+  - Forza bruta
+  - Pattern DAO
+  - Framework Orm
+  
+  
+ ---- Pattern DAO -----
+ 
+ Un pattern è un modo di fare le cose, il pattern DAO separa:
+ 
+ 1 -  la logica di business.
+ 2 -  la logica di persistenza.
+ 
+ I componenti della logica di bussiness non dovrebbero contenere componenti per accedre direttamente ai dsati del database.
+ 
+Solo gli oggetti previsti dal pattern DAO:
+
+     hanno il permesso di “vedere” il DB
+
+     espongono metodi di accesso per tutti gli altri componenti
+    
+Valori scambiati tra DB e il resto dell’applicazione sono racchiusi in oggetti detti Data Transfer Object (DTO):    
+Questi contengono:
+  - campi privati per leggere/scrivere su un database.
+  - mettodi setter/getter per accedere da fuori a tali campi.
+ 
+ - Le operazioni che che si occupano di questi sono racchiusi in interfacce,che definosco i DAO.
+ - Le implementazioni di tale interfacce permettono l'accesso al database, diverse implementazioni permettono l'accesso a diversi vendor, in questo modo, diventa facile migrare l'applicazione su database diversi.  
+   metodi CRUD
+   altri metodi
+  
+  Questi oggetti DAO, possono essere creati da factory.
+  
+  ---- DAO in pratica ------
+
+// +++++++++++ Interfaccia DAO +++++++++++++
+
+public interface ProdottoDAO {
+      public List<Prodotto> doRetrieveAll()
+      throws PersistenceException;
+      public Prodotto doRetriveByKey(String codice)
+      throws PersistenceException;
+      public void saveOrUpdate(Prodotto prodotto)
+      throws PersistenceException;
+      public void delete(Prodotto prodotto)
+      throws PersistenceException;
+      // eventuali altri doRetriveBy...
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+//+++++++++++ Implementazione dell'interfaccia +++++++
+
+public class ProdottoDAOImpl implements ProdottoDAO {
+    public List<Prodotto> doRetrieveAll()
+    throws PersistenceException {
+        Connection connection = null;
+        List<Prodotto> prodotti;
+        ...
+        try {
+            ...
+            } catch (SQLException sqle) {
+            throw new PersistenceException(sqle);
+            } finally {
+            ...
+        }
+        return prodotti;
+    }
+    ...
+}
+//***************************************************
