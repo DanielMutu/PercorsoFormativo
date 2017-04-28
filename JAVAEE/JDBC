@@ -202,4 +202,77 @@ Le interfacce Statement, CallableStatement e PreparedStatement definiscono i met
       CallableStatement: Quando voglio utilizzare delle procedure immmagazinate nel database.
 
 
+Supponiamo di avere la suddetta procedura:
+"
+      DELIMITER $$
+
+      DROP PROCEDURE IF EXISTS `EMP`.`getEmpName` $$
+      CREATE PROCEDURE `EMP`.`getEmpName` 
+         (IN EMP_ID INT, OUT EMP_FIRST VARCHAR(255))
+      BEGIN
+         SELECT first INTO EMP_FIRST
+         FROM Employees
+         WHERE ID = EMP_ID;
+      END $$
+
+      DELIMITER ;
+"
+!Attenzione: PreparedStatement accetta solamente  i parametri in ingresso, invece, CallableStatement accetta tutti e tre i parametri.
+
+La procedura può essere richiamata dal codice Java con la seguente procedura:
+   "
+      CallableStatement cstmt = null;
+      try {
+         String SQL = "{call getEmpName (?, ?)}";
+         cstmt = conn.prepareCall (SQL);
+         . . .
+      }
+      catch (SQLException e) {
+         . . .
+      }
+      finally {
+         . . .
+      }
+   "
+
+L'oggetto ResultSet che raccoglie i risultati di una query, può essere scomposto in tree categorie:
+- Navigational methods: Usato per muovere il cursore che punta ad una query verso il basso.
+- Get methods: Utilizzata per visualizzare i dati della riga corrente a cui il puntatore punta.
+- Update methods: Utilizzato per fare l'update della riga corrente.
+
+Il resultSet inoltre può avere un tipo, ci sono diversi tipi di resultSet:
+
+- ResultSet.TYPE_FORWARD_ONLY -> Il cursore può muoversi solamente in avanti.
+
+- ResultSet.TYPE_SCROLL_INSENSITIVE -> Il cursore può muoversi avanti ed indietro, E il set di risultati NON è sensibile alle modifiche apportate da altri utenti al database che si verificano dopo che è stato creato il set di risultati.
+
+- ResultSet.TYPE_SCROLL_SENSITIVE -> Il cursore può muoversi avanti ed indietro, E il set di risultati è sensibile alle modifiche apportate da altri utenti al database che si verificano dopo che è stato creato il set di risultati.
+
+Esempio di codice:
+
+try {
+   Statement stmt = conn.createStatement(
+                           ResultSet.TYPE_FORWARD_ONLY,
+                           ResultSet.CONCUR_READ_ONLY);
+}
+catch(Exception ex) {
+   ....
+}
+finally {
+   ....
+}
+
+VEDERE LE RIGHE:
+
+- Visualizzazione di un set di risultati l'interfaccia ResultSet contiene decine di metodi per ottenere i dati della riga corrente.
+
+   METODI:
+   
+public int getInt(String columnName) throws SQLException
+
+Restituisce l'int della riga corrente della colonna chimata columnName.
+
+public int getInt(int columnIndex) throws SQLException
+
+REstituisce l'int della riga corrente e passiamo come parametro index della colonna (La prima colonna vale 1).
 
