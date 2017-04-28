@@ -276,3 +276,266 @@ public int getInt(int columnIndex) throws SQLException
 
 REstituisce l'int della riga corrente e passiamo come parametro index della colonna (La prima colonna vale 1).
 
+
+ ---- JDBC  TRANSACTION ---- 
+ 
+ Per aumentare le prestazioni si ricorre alle transaction:
+ Per esempio per disattivare l'auto commit in una transazione si utilizza:
+ 
+      conn.setAutoCommit(false);
+      
+Una volta eseguite le modifiche e si vogliono eseguire le modifiche si può applicare il metodo commit.
+   
+   conn.commit();
+
+Per riavvolgere le modifiche eseguite sul database si può a questo punto utilizzare il metodo 
+
+   conn.rollback();
+   
+Esempio di codice che utilizza il commit() e rollback()
+
+//******************************************
+
+try{
+   //Assume a valid connection object conn
+   conn.setAutoCommit(false);
+   Statement stmt = conn.createStatement();
+   
+   String SQL = "INSERT INTO Employees  " +
+                "VALUES (106, 20, 'Rita', 'Tez')";
+   stmt.executeUpdate(SQL);  
+   //Submit a malformed SQL statement that breaks
+   String SQL = "INSERTED IN Employees  " +
+                "VALUES (107, 22, 'Sita', 'Singh')";
+   stmt.executeUpdate(SQL);
+   // If there is no error.
+   conn.commit();
+}catch(SQLException se){
+   // If there is any error.
+   conn.rollback();
+}
+
+//*****************************************************
+
+--- JDBC SavePOint ----
+
+Il SavePoint è un punto di ripristino  se si dovesse verificare qualche tipo di errore, si ritornerà all'ultimo rollback;
+Esempio:
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+try{
+   //Assume a valid connection object conn
+   conn.setAutoCommit(false);
+   Statement stmt = conn.createStatement();
+   
+   //PARTE IMPORTANTE DOVE SI SETTA UN SAVEPOINT!!
+   Savepoint savepoint1 = conn.setSavepoint("Savepoint1");
+   String SQL = "INSERT INTO Employees " +
+                "VALUES (106, 20, 'Rita', 'Tez')";
+   stmt.executeUpdate(SQL);  
+   //Submit a malformed SQL statement that breaks
+   String SQL = "INSERTED IN Employees " +
+                "VALUES (107, 22, 'Sita', 'Tez')";
+   stmt.executeUpdate(SQL);
+   // If there is no error, commit the changes.
+   conn.commit();
+
+}catch(SQLException se){
+   // If there is any error.
+   conn.rollback(savepoint1);
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++
+
+---- JDBC Exceptions Handling ----
+
+Per gestire le eccezioni in java:
+
+//++++++++++++++++++++++++++++++++++++++++++++++
+
+try {
+   // Your risky code goes between these curly braces!!!
+}
+catch(Exception ex) {
+   // Your exception handling code goes between these 
+   // curly braces, similar to the exception clause 
+   // in a PL/SQL block.
+}
+finally {
+   // Your must-always-be-executed code goes between these 
+   // curly braces. Like closing database connection.
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++
+
+---- JDBC - Batch Processing ----
+
+Batch processing consente di inviare in una sola chiamata molteplici richieste al database.
+In questo modo si riducono i tempi migliorando le prestazioni. Un esempio di branch:
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+         // Create statement object
+         Statement stmt = conn.createStatement();
+
+         // Set auto-commit to false
+         conn.setAutoCommit(false);
+
+         // Create SQL statement
+         String SQL = "INSERT INTO Employees (id, first, last, age) " +
+                      "VALUES(200,'Zia', 'Ali', 30)";
+         // Add above SQL statement in the batch.
+         stmt.addBatch(SQL);
+
+         // Create one more SQL statement
+         String SQL = "INSERT INTO Employees (id, first, last, age) " +
+                      "VALUES(201,'Raj', 'Kumar', 35)";
+         // Add above SQL statement in the batch.
+         stmt.addBatch(SQL);
+
+         // Create one more SQL statement
+         String SQL = "UPDATE Employees SET age = 35 " +
+                      "WHERE id = 100";
+         // Add above SQL statement in the batch.
+         stmt.addBatch(SQL);
+
+         // Create an int[] to hold returned values
+         int[] count = stmt.executeBatch();
+
+         //Explicitly commit statements to apply changes
+         conn.commit();
+
+//*************************************************
+
+---- JDBC Streaming ASCII and Binary Data ----
+
+Vengono utilizzati per il trasferimento di grandi quantità di dati.
+(Come per esmpio i Blob)
+
+
+---- Esempio di caricamneto di un file xml in una tabella. ----
+Abbiamo qui il nostro file .xml
+//++++++++++++++++++++++++++++++++++
+      <?xml version="1.0"?>
+      <Employee>
+      <id>100</id>
+      <first>Zara</first>
+      <last>Ali</last>
+      <Salary>10000</Salary>
+      <Dob>18-08-1978</Dob>
+      <Employee>
+//++++++++++++++++++++++++++++++++++
+
+
+Codice Java:
+
+// Import required packages
+import java.sql.*;
+import java.io.*;
+import java.util.*;
+
+public class JDBCExample {
+   // JDBC driver name and database URL
+   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+   static final String DB_URL = "jdbc:mysql://localhost/EMP";
+
+   //  Database credentials
+   static final String USER = "username";
+   static final String PASS = "password";
+   
+   public static void main(String[] args) {
+   Connection conn = null;
+   PreparedStatement pstmt = null;
+   Statement stmt = null;
+   ResultSet rs = null;
+   try{
+      // Register JDBC driver
+      Class.forName("com.mysql.jdbc.Driver");
+
+      // Open a connection
+      System.out.println("Connecting to database...");
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //Create a Statement object and build table
+      stmt = conn.createStatement();
+      createXMLTable(stmt);
+
+      //Open a FileInputStream
+      File f = new File("XML_Data.xml");
+      long fileLength = f.length();
+      FileInputStream fis = new FileInputStream(f);
+
+      //Create PreparedStatement and stream data
+      String SQL = "INSERT INTO XML_Data VALUES (?,?)";
+      pstmt = conn.prepareStatement(SQL);
+      pstmt.setInt(1,100);
+      pstmt.setAsciiStream(2,fis,(int)fileLength);
+      pstmt.execute();
+
+      //Close input stream
+      fis.close();
+
+      // Do a query to get the row
+      SQL = "SELECT Data FROM XML_Data WHERE id=100";
+      rs = stmt.executeQuery (SQL);
+      // Get the first row
+      if (rs.next ()){
+         //Retrieve data from input stream
+         InputStream xmlInputStream = rs.getAsciiStream (1);
+         int c;
+         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+         while (( c = xmlInputStream.read ()) != -1)
+            bos.write(c);
+         //Print results
+         System.out.println(bos.toString());
+      }
+      // Clean-up environment
+      rs.close();
+      stmt.close();
+      pstmt.close();
+      conn.close();
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(pstmt!=null)
+            pstmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+   System.out.println("Goodbye!");
+}//end main
+
+public static void createXMLTable(Statement stmt) 
+   throws SQLException{
+   System.out.println("Creating XML_Data table..." );
+   //Create SQL Statement
+   String streamingDataSql = "CREATE TABLE XML_Data " +
+                             "(id INTEGER, Data LONG)";
+   //Drop table first if it exists.
+   try{
+      stmt.executeUpdate("DROP TABLE XML_Data");
+   }catch(SQLException se){
+   }// do nothing
+   //Build table.
+   stmt.executeUpdate(streamingDataSql);
+}//end createXMLTable
+}//end JDBCExample
+
