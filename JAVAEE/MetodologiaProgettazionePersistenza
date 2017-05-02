@@ -14,7 +14,7 @@ L'interazione con il database è una fase critica,  si può eseguire in diversi 
  1 -  la logica di business.
  2 -  la logica di persistenza.
  
- I componenti della logica di bussiness non dovrebbero contenere componenti per accedre direttamente ai dsati del database.
+ I componenti della logica di bussiness non dovrebbero contenere componenti per accedre direttamente ai dati del database.
  
 Solo gli oggetti previsti dal pattern DAO:
 
@@ -29,6 +29,7 @@ Questi contengono:
  
  - Le operazioni che che si occupano di questi sono racchiusi in interfacce,che definosco i DAO.
  - Le implementazioni di tale interfacce permettono l'accesso al database, diverse implementazioni permettono l'accesso a diversi vendor, in questo modo, diventa facile migrare l'applicazione su database diversi.  
+  
    metodi CRUD
    altri metodi
   
@@ -74,3 +75,199 @@ public class ProdottoDAOImpl implements ProdottoDAO {
     ...
 }
 //***************************************************
+
+------------     Pattern DAO con classi Factory      -----------------
+
+- Una factory astratta fornisce specifiche per factory concreta.
+  
+ -> Poi una factory concreta consente di avere oggetti DAO appropriati al corrispondente tipo di DB.
+ -> Gestisce aspetti quali connessione, autenticazione.
+ 
+ Serve un oggetto DTO per ogni tipo di entità che si vuole rappresentare.
+ Un'interfaccia DAO per ogni oggetto DTO.
+ 
+ 
+ ---- Principlai oggetti dell'API Hibernate ----
+ 
+ - SessionFactory
+ - Sessione
+ - Persistent Object
+ - Transient and Detached Object
+ - Transaction
+ - Connection Provider
+ - Transaction Factory
+ 
+ Classe org.hibernate.SessionFactory
+ 
+ - Factory per oggetti di tipo session e cliente di ConnectionProvider
+ 
+ 
+ Classe Classeorg.hibernate.Session 
+ 
+ La sua vita inizia con una transazione e finisce con la fine della della transazione logica.
+ LA Classe org.hibernate.Session fa da factory per oggetti di tipo TRansaction.
+ 
+ Classe org.hibernate.Session
+ 
+ - Rappresenta un contesto di persistenza, la sua vita è delimitata dall'inizio e dalla fine di una transazione logica.
+ - Gestisce il ciclo di vita degli oggetti persistenti.
+ - Fa da factory per oggetti Transaction. 
+ 
+ 
+ Classe org.hibernate.Transaction
+ 
+ E' un oggetto di tipo single-threaded  ed è usato per specificare unità atomiche di lavoro.
+ UN oggetto transaction può essere coinvolto in diverse transaction.
+ 
+ Classe org.hibernate.connection.ConnectionProvider
+ 
+ Factory pool per connessioni JDBC. 
+ Può essere implementata dallo sviluppatore.
+ 
+ Classe org.hibernate.TransactionFactory
+ 
+ - E' una factory per oggetti Transaction.
+ - Può essere estesa ed implementata dallo sviluppatore.
+ 
+ UN OGGETTO PERSISTENTE PUO' AVERE  TRE FASI :
+  - Transient: non appartenenti ad un contesto di persistenza
+      (Un istanza mai associata ad una sessione).
+      (Non ha identità di persistenza).
+      (Non ha righe corrispondenti nel database).
+      
+  - Persistent: appartenente a un contesto di persistenza.
+      (E' un istanza associata con una sessione).
+      (Ha un identità di persistenza)
+  
+  - Detached: Usualmente appartenenti a persistenza ma non in questo momento.
+      (Associata ad una persistenza in passato ma ora la sessione è stata chiusa).
+      
+      
+---- Cicli di vita degli oggetti persistenti -----
+      
+Gli oggetti  Transient possono divntare persistenti tramite metodi save(), persist () o saveOrUpdate()  dell'oggetto 
+Session.
+  - Ogni oggetto persistente restituita da get() o load() rimane Persistent
+  - Gli oggetti di tipo Persistent possono diventare transienti tramite invocazione di delete()
+  - Oggetti Persistent possono diventare "staccati" con evict(), clear() e close().
+  - Oggetti staccati possono ritornare persistenti tramite update(), saveOrUpdate() e merge().
+  
+  ----- Hibernate Query Lenguage -----
+  
+  Esempio:
+  
+  Update a stock name to “DIALOG1′′ where stock code is “7277′′
+
+Query query = session.createQuery("update Stock set stockName = :stockName" + " where stockCode = :stockCode");
+query.setParameter("stockName", "DIALOG1");
+query.setParameter("stockCode", "7277");
+int result = query.executeUpdate();
+  
+  Hibernate: --> Strategie di fetching
+  
+  Una strategia di fetching determina come e quando i dati vengono effetivamente caricati dal DB.
+  Tipi di Fetching:
+  - FetchMode.DEFAULT (configurazione del mapping file)
+  - FetchMode.JOIN (Per recuperare dati associati (cioè presenti su tabelle diverse) si utilizza un JOIN )
+  - FetchMode.SELECT (Hibernate effettua una seconda select separata per recuperare le entity o collection associate)
+  
+  Hibernate: --> Strategie di caching
+  
+  Si utilizza per motivi di performance.
+  Rendere necessario l'accesso al DB solo se i dati non sono presenti in chace.
+  
+  -------- Una cache può essere di primo e di secondo livello.  ---------
+  
+  La chace di primo livello si utilizza all'interno di una singola transazione, per ridurre il numero di query.
+  Per esempio se un oggetto è modificato diverse volte all'interno della medesima transazione, Hibernate genera un unico
+  statement SQL UPDATE al fine di ridurre le query.
+  
+  La chace di secondo livello mantiene i dati in SessionFactory in questo modo, questi dati sono utilizzabili 
+  da diverse transazioni.
+  
+  Elementi che costituiscono Hibernate durante la fase di persistenza:
+  - Classi di dominio realizzate in java.
+  - Base  di dati.
+  - file xml per il mapping delle classi persistenti.
+  - Uno o più file di configurazione di Hibernate.
+  - Interfacce Hibernate per l'accesso alla base dati.
+  
+  Il file xml deve soddisfare un apposita grammatica specificata all'interno di un apposito DTD chiamato 
+  "hibernate-mapping-3.0.dtd"
+
+Hibernate controlla la validità del file xml attraverso il dtd.
+Esempio di .xml
+
+<?xml version="1.0"?>
+    <!DOCTYPE hibernate-mapping PUBLIC"-//Hibernate/Hibernate Mapping DTD 3.0//EN""http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    <class name="User" table="UTENTE">
+    <id name="username" column="username"></id>
+    <property name="nome" column=“nome"></property>
+    <property name="cognome" column=“cognome"></property>
+    <property name="email"></property>
+    <property name="password"></property>
+    </class>
+</hibernate-mapping>
+
+
+  - Elemento class indica la classe persistente e dice ad hibernate come caricare oggetti della classe User sfruttando la tabella UTENTE.
+  
+  - L'elemento id dichiara il nome dell'elemento della classe che funge da identificatore.
+  - Elemento property dichiara il nome delle proprietà persistenti della classe e a quali attributi della tabella corrispondono, di default nessuna proprietà è persistente.
+  
+  
+  ---- FIle di configurazione Hibernate ----
+  
+  Hibernate gestisce la persistenza, ovvero si connette al DB.
+  La proprietà diatect specifica la variante SQL che deve generare Hibernate.
+  
+  ---- INterfacce Hibernate ---
+   Le interfacce principali di Hibernate sono tre:
+   Session: Comprende i metodi per caricare / salvare oggetti nella base dati.
+   Transaction: Ogni istanza rappresenta una transazione.
+   Query: interfaccia che consente di eseguire le query sia in HQL(Hibernate query language), sia SQL.
+   Le query utilizzano al loro interno varibili scritte :nomeVariabile
+  Per la connessione ovviamente ho bisogno di tutti i driver necessari quali DBMS, JDBC, base di dati, utente, password, etc...
+  Il file xml fornisce tutte queste informazioni
+  Esempio di file di configurazione Hibernate:
+  
+  
+ <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+<!-- Database connection settings -->
+<property name="hibernate.connection.driver_class">
+com.ibm.db2.jcc.DB2Driver</property>
+<property name="hibernate.connection.url">
+jdbc:db2://diva:deis.unibo.it:50000/tw_stud</property>
+<property name="connection.username">*****</property>
+<property name="connection.password">*****</property>
+<!-- SQL dialect -->
+<property name="dialect">
+org.hibernate.dialect.DB2Dialect</property>
+<!-- JDBC connection pool (use C3P0) -->
+<property name="c3p0.min_size">5</property>
+<property name="c3p0.max_size">20</property>
+<property name="c3p0.timeout">300</property>
+<property name="c3p0.max_statement">50</property>
+<!-- Show and print nice SQL on stdout -->
+<property name="show_sql">true</property>
+<property name="format_sql">true</property>
+<!-- List of XML mapping files -->
+<mapping resource="User.hbm.xml" />
+</session-factory>
+</hibernate-configuration> 
+  
+  
+  ---- File di configurazione Hibernate ----
+  
+  Elemento "session-factory" definisce l'accesso ad un particolare DB.
+  
+COSA VUOL DIRE MAPPARE UNA CLASSE JAVA?
+  - Stabilire una corrispondenza fra istanze e le tuple della tabella.
+  - Mappare le sue proprietà persistenti.
+  
