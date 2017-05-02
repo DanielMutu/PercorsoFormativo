@@ -1,0 +1,81 @@
+----- Gestione delle transazioni -----
+
+INTRODUZIONE:
+
+La caratteristica Base di un applicazione WEB è garantire un accesso multiplo in maniera concorrente, il DBMS invece, deve garantire affidabilità e prestazioni.
+
+TRANSAZIONI:
+
+Sequenza di operazioni che può concludersi con successo oppure insuccesso.
+  In caso di successo, il risultato della transizione deve essere persistente
+  Insuccesso: si ritorna allo stato precedente all'inizio della transazione.
+  
+  DEFINIZIONE DI UNA TRANSAZIONE:
+  Parte di programma caratterizzato da un inizio (begin-transaction o start transaction in SQL) ed una fine (end-transaction)
+  All'interno di una transazione deve essere eseguito il comando "commit work" oppure "rollback work". 
+  
+  Esempio di transaction SQL:
+ 
+ “ trasferimento di 10 unità dal conto 42177 al conto 12202”ù
+  
+start transaction;
+    update ContoCorrente
+    set Saldo = Saldo + 10
+    where NumConto = 12202;
+    update ContoCorrente
+    set Saldo = Saldo - 10
+    where NumConto = 42177;
+commit work;
+  
+  Definizione precisa di transazione: gode delle proprietà ACIDE
+  -ATOMICITA'
+  -CONSISTENZA
+  -ISOLAMENTO: non espone i suoi dati intermedi.
+  -DURABILITA': effetti di una transazione andata in commit non andranno perduti.
+  
+  - CONTROLLO DI CONCORRENZA :
+  Se si eseguono due operazioni sullo stesso dato (ed almeno una prevede una modifica) può portare il database in uno stato incostente.
+  Può accadere di leggere un dato "sporco" se per esempio T2 tenta di leggere un dato che è stato modificato da T1 ma la modifica non è stata completata.
+  
+  
+  GESTIONE DELLE TRANSAZIONI MEDIANTE LOCK:
+  
+  Lock: è una tecnica per evitare anomalie durante le transazioni.
+  Si blocca l'accesso alla risorsa mentre si effettua una transazione su di essa e le altre transazioni vengono messe in una coda.
+  Questo è un meccanisco efficace ma influisce sulle prestazioni.
+  
+  LIVELLO DI ISOLAMENTO:
+    Maggiore restrizione su una risorsa minore prestazione.
+    
+    I DIVERSI LIVELLI DI ISOLAMENTO SONO:
+    
+    SERIALIZABLE:
+   assicura che la transazione T legge solo cambiamenti fatti da transazioni concluse nessun valore letto o scritto da T verrà cambiato da altre transazione finché T non è conclusa.
+   se T legge un insieme di valori acceduti secondo qualche condizione di ricerca, l'insieme non viene modificato da altre transazione finché T non è conclusa.
+ REPEATABLE READ 
+assicura che la transazione T legge solo cambiamenti fatti da transazioni concluse nessun valore letto o scritto da T verrà cambiato da altre transazione finché T non è conclusa.
+ READ COMMITTED 
+assicura che la transazione T legge solo cambiamenti fatti da transazioni concluse T non vede nessun cambiamento eventualmente effettuato da transazioni concorrenti non concluse tra i valori letti all'inizio di T.
+ READ UNCOMMITTED
+a questo livello di isolamento una transazione T può leggere modifiche fatte ad un oggetto da un transazione in esecuzione; ovviamente l'oggetto può essere cambiato mentre T è in esecuzione. Quindi T è soggetta a effetti fantasma.
+  
+  pUÒ essere anche scelto un livello di isolamnto della transazione: 
+  - read uncommitted: permette letture sporche.
+  - read committed: evita letture sporche ma permette letture inconsistenti
+  - repeatable read: evita tutte le anomalie esclusi gli inserimenti fantasma.
+  - serializable: evita tutte le anomalie.
+  
+  
+  Esempio di codice:
+  
+  START TRANSACTION
+  SET TRANSACTION ISOLATION LEVEL livello
+  istruzioni SQL
+  COMMIT
+
+  
+  
+  
+
+  
+  
