@@ -1,5 +1,6 @@
-               Caratteristiche Della Programmazione Ad Oggetti
-Composta da:
+CARATTERISTICHE DELLA PROGRAMMAZIONE ORIENTATA AGLI OGGETTI:
+
+La programmazione orientata agli oggetti consiste nel raggruppare in un unica entità (definita classe) sia la struttura dati che le procedure che operano su di esse.
 
 - Classe: una classe è un'astrazione che rappresenta un insieme di oggetti che condividono le stesse caratteristiche e le stesse funzionalità. Un programma Java risiede interamente in classi (e in interfacce, come vedremo più avanti). Generalmente, una classe è usata per definire un tipo di oggetti.
 
