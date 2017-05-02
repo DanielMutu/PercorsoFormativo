@@ -1,20 +1,20 @@
-    --- Variabili e costanti 
+VARIABILI
 
-- Deve essere dichiarata anteponendo il nome del tipo al nome della variabile. 
-- Esempio assegnamento: valoreInt = 1000;
-- Devono essere dichiarati con la lettera minuscola.
+In Java una variabile si dichiara in questo modo:
+[modificatore] tipo.di.dato nome.variabile [inizializzazione];
 
-    --- Variabili locali
+modificatori: parole chiavi, che modificano le proprietà e le caratteristiche della variabile.
+tipo.di.dato: tipo di dato (Es. int, String, ecc);
+nome.variabile: un nome  che diamo noi per riconoscere la nostra variabile.
+inizializzazione: valore di default che diamo alla variabile.
 
-- Una variabile locale è una variabile dichiarata all'interno del corpo di un metodo e che quindi non è visibile all'esterno di esso.
-- Non è automaticamente inizializzata e se si tenta di usarla prima di assegnargli un valore, si produce un errore.
+Variabile d'istanza: una variabile è detta d'istanza se è dichiarata in una classe, ma al di fuori di un metodo.
+Variabile locale: una variabile è detta locale se è dichiarata all'interno di un metodo. Smetterà di esistere quando terminerà un metodo
 
-	--- Esempio assegnamento
+COSTANTI:
 
-String a=5;
+Una variabile locale può essere preceduta solamente dal modificatore final. Se marcata final, significa che il valore della variabile può essere assegnato una sola volta, cioè non può più essere modificato. 
 
-Una variabile locale può essere marcata solamente col modificatore final. Se marcata final, significa che il valore della variabile può essere assegnato una sola volta, cioè non può più essere modificato. 
-
-Esempio: final double CM_PER_INCH = 2.54;
+Esempio: final int x = 2.54;
 
 I principali modificatori che possono marcare un campo sono public, private, static e final5. Il modificatore FINAL ha lo stesso significato delle variabili locali. STATIC marca un campo come statico, cioè campo della classe, se non ha tale modificatore è un campo dell'oggetto. I modificatori PUBLIC, e PRIVATE riguardano il livello di accessibilità di un campo. Ad esempio, PUBLIC significa che il campo è accessibile da ovunque sia visibile la classe in cui è dichiarato. Ritorneremo su questi e gli altri modificatori in seguito.
