@@ -1,0 +1,29 @@
+----- Hibernate -------
+
+ORM: è un processo per convertire dati del database con codice java.
+Ci sono diversi framework che consentono di ottenere lo stesso risultato, tra i più comuni abbiamo:
+
+    Enterprise JavaBeans Entity Beans
+    Java Data Objects
+    Castor
+    TopLink
+    Spring DAO
+    Hibernate
+    And many more
+    
+
+Configuration Object:
+Il primo oggetto che viene creato in Hibernate è Configuration Object.
+
+SessionFactory Object:
+L'oggetto Configuration viene utilizzato per creare una session factory.
+
+Session Object:
+Utilizzato per avere una connessione con il database. E' molto leggera ed è stata costruita per essere instanzializzata
+ogni volta che abbiamo un  interazione con il database .
+
+Transaction Object:
+Rappresenta un unità di lavoro su un DBMS, è un oggetto opzionale, si può scegliere  di non utilizzare questo oggetto.
+
+Query Object:
+Servono ad accedere ai dati da un database 
