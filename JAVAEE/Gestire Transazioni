@@ -75,6 +75,26 @@ a questo livello di isolamento una transazione T può leggere modifiche fatte ad
 
   
   
+  Non tutti i database però supportano le transazioni. L'interfaccia Connection mette a disposizione il metodo 
+  gtMetaData() che restituisce un oggetto DatabaseData.
+  DatabaseData: offre metodi per reperire informazioni sul DBMS, per verificare il supporto alle transazioni abbiamo:
+  -supportsTransactions(): restiruisce true se le transazioni sono supportate dal database, false se non lo sono.
+  supportsTransactionIsolationLevel(int): permette di sapere se il DBMS supporta il livello di isolamento passato come 
+  parametro.
+  JDBC risulta una buona soluzione quando si tratta di gestire un unica transaction, se il sistema prevede di gestire 
+  due o più transaction allora non è possibile gestire l'atomicità con JDBC.
+  
+  Java TRansaction API (JTA): fornisce un servizio per le transazioni in ambienti JEE.
+  JTA fornisce l'interfaccia javax.transaction.UserTransaction e i metodi begin(), commit(), rollback().
+  
+  Hibernate astrae dalle API JDBC/JTA sottostanti.
+  Hibernate espone interfaccia     "org.hibernate.Transaction"
+  Hibernate rispetto a JDBC e JTA permette una stretta integrazione con il contesto di persistenza.
+  
+  L'interfaccia principale di Hibernate e Session.
+  metodo openSession() della classe SessionFactory.
+  Con open Session viene creata una nuova connesione JDBC con la base di dati.
+  La Session non consuma alcuna risorsa fino a qaundo questa non è effettivamento neccessaria.
   
 
   
