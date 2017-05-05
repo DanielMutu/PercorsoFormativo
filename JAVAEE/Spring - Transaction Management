@@ -1,0 +1,66 @@
+                                                --- Spring TRANSAZIONI ---
+
+
+Una transazione è una sequenza di operazioni che vengono eseguite sul database, queste dovrebbero terminare correttamente oppure non avvenire affatto.
+Il concetto di transazioni può essere espresso attraverso la parola ACID.
+
+- Atomicità: Tutte le operazioni vengono eseguite in un blocco solo come se fosse un unica istruzione.
+- Consistenza: rappresenta l'integrità referenziale (chiavi primarie uniche ecc )
+- Isolazione: Potrebbero esserci più transazioni con la stessa modifica di dati contemporaneamente. Una transazione dovrebbe essere isolata da altre transazioni.
+- Durabilità: Una volta completata una transazioni i dati devono diventare permanenti.
+
+FASI:
+
+1. Avviare una nuova transazione 
+2. Eseguire tutte le operazioni CRUD 
+3. Se l'operazione è andata a buon fine avremmo un commit() altrimenti un rollback().
+
+TRANSAZIONI LOCALI E TRANSAZIONI GLOBALI:
+
+Locali: utilizza un unica risorsa transizionale.
+Globali: includono più risorse transizionali distribuite.
+
+Programmatiche vs. Dichiarative
+Programmatiche: significa che si deve gestire la transazione attraverso la programazione, estremamente flessibile, difficile da gestire. 
+Dichiarative: Si separano le transazioni dalla logica di bussiness, le transazioni vengono gestite interamente attraverso annotazioni oppure xml.
+
+
+
+                                        Spring Transaction Abstractions
+Il cuore delle transazioni spring è:
+
+org.springframework.transaction.PlatformTransactionManager                                        
+
+IN particolare abbiamno la classe: 
+
+public interface PlatformTransactionManager {
+   TransactionStatus getTransaction(TransactionDefinition definition);
+   throws TransactionException;
+   
+   void commit(TransactionStatus status) throws TransactionException;
+   void rollback(TransactionStatus status) throws TransactionException;
+}
+
+SPEIGAZIONE CODICE: 
+
+- TransactionStatus getTransaction(TransactionDefinition definition) : RITORNA L'ULTIMA TRANSAZIONE ESEGUITA OPPURE NE CREA UNA NUOVA.
+
+L'interfaccia "TransactionDefinition" è una fra le principali, è costruita in questo modo:
+
+public interface TransactionDefinition {
+   int getPropagationBehavior();
+   int getIsolationLevel();
+   String getName();
+   int getTimeout();
+   boolean isReadOnly();
+}
+
+Un' altra interfaccia importante è:
+
+public interface TransactionStatus extends SavepointManager {
+   boolean isNewTransaction();
+   boolean hasSavepoint();
+   void setRollbackOnly();
+   boolean isRollbackOnly();
+   boolean isCompleted();
+}
