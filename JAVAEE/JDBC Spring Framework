@@ -1,1 +1,12 @@
 
+JDBC è un API che fornisce enromi vantaggi in termini di performance, lo sviluppatore però dovrà prendersi carico dello sviluppo dell'intero processo di gestione come:
+
+- Gestione della connessione
+- Creazione del PreparmentStatment e valorizzazione dei parametri
+- Esecuzione del PreparmentStatment
+- Estrazione risultati
+- Gestione eccezioni
+- Chiusura della connessione
+
+ JDBCTemplate è una classe che offre diversi vantaggi per quanto riguarda la persistenza dei dati.
+ 
