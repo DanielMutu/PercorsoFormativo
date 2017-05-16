@@ -1,0 +1,368 @@
+Dichiarazione di una variabile in typescript:
+
+I tipi principali sono: 
+
+
+var myBoolean: boolean = true; 
+var myNumber: number = 123; 
+var myString: string = "Una stringa";
+
+Ci sono anche due modi per dichiarare un array che sono:
+  
+  var numeri: number[] = [10, 15, 45];  
+  var numeri: Array<number> = [10, 15, 45];
+  
+Possiamo anche dire che il valore può essere di qualsiasi tipo:
+
+  var myVar: any = 123; 
+  
+In una funziona invece possiamo indicare che una funzione non ritorna nessun valore 
+con il void:
+
+function myFunc():void { 
+    console.log("Messaggio"); 
+}
+
+Si può inoltre utilizzare il costructo `interface` per dichiarare la struttura del nostro 
+parametro:
+
+interface Messaggio { 
+    email: string; 
+    messaggio: string; 
+} 
+ 
+function inviaMessaggio(msg: Messaggio) { 
+    mailSender.sendTo(msg.email, msg.messaggio); 
+}
+
+
+!Attenzione a questa chiamata:
+
+var mioMessaggio = {
+    email: "mario.rossi@html.it", 
+    messaggio: "Buongiorno!", 
+    data: new Date()
+};
+ 
+inviaMessaggio(mioMessaggio);
+
+Questa chiamata sarà considerata sempre valida anche se abbiamo un nuovo dato di tipo 
+new Date().
+
+Si possono anche descrivere strutture con elementi opzionali:
+
+interface Messaggio { 
+    email: string; 
+    nomeDestinatario?: string; 
+    oggetto?: string; 
+    messaggio: string; 
+}
+
+Queste indicano che sono opzionali: se le accetta se sono presenti ma non le richiede se non ci sono.
+ 
+ Le interfacce in Typescript non descrivono solamente valori ma possono anche descrivere 
+ una generica funzione su valori numerici:
+ 
+ interface FunzioneSuNumeri { 
+    (x: number, y: number):number 
+} 
+
+ecco un esempio di funzione appena dichiarata:
+
+var somma: FunzioneSuNumeri; 
+somma = function(a:number, b:number) { 
+    return a + b; 
+};
+ 
+ 
+In quest`altro caso abbiamo specificato index dell`array number ed il tipo degli elementi 
+che lo compongono...
+
+interface ArrayDiStringhe { 
+    [index:number]: string 
+}
+ 
+var x: ArrayDiStringhe = ["uno", "due", "tre"];
+
+l`indice dell`array oltre ad essere un `number` potrebbe essere di tipo `string` in questo caso 
+di fatto possiamo creare un dizionario.
+
+interface Dizionario { 
+    [index:string]: string 
+} 
+ 
+var x: Dizionario; 
+ 
+x["chiave1"] = "valore1"; 
+x["chiave2"] = "valore2";
+
+Non è possibile specificare dati di tipo diverso.
+
+Per le variabili di un array invece è possibile specificare qualsiasi tipo di dato.
+
+
+TypeScript si avvicina alla programmazione OOP grazie alla possibilità di definire una classe
+
+/********** definizione di classe TypeScript  ******/
+ 
+class Persona { 
+    nome: string; 
+    cognome: string; 
+     
+    constructor(nome: string, cognome: string) { 
+        this.nome = nome; 
+        this.cognome = cognome; 
+    }
+ 
+    visualizzaNomeCognome() {
+        return this.nome + ' ' + this.cognome; 
+    } 
+} 
+
+la creazione di un istanza della classe avviene attraverso l`operatore new nomeClass().
+
+var marioRossi = new Persona("Mario", "Rossi");
+
+È inoltre possibile dichiarare i metodi come `private` per renderli visibili solamente all`interno 
+della classe. 
+
+class Persona { 
+    nome: string; 
+    cognome: string; 
+      
+    private visualizzaNomeCognome() { 
+        return this.nome + ' ' + this.cognome; 
+    } 
+} 
+
+Per ottenere un attributo da una classe utilizzeremo dunque un metodo `get`.
+
+class Persona { 
+    nome: string; 
+    cognome: string; 
+     
+    constructor(nome, cognome) {
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+     
+    get nomeCompleto(): string { 
+        return this.nome + ' ' + this.cognome; 
+    } 
+} 
+
+
+Poi possiamo vederlo con:
+
+var marioRossi = new Persona("Mario", "Rossi"); 
+console.log(marioRossi.nomeCompleto);       //Mario Rossi 
+ 
+marioRossi.nomeCompleto = "Giuseppe Verdi"; 
+console.log(marioRossi.nomeCompleto);       //Mario Rossi 
+
+È anche possibile definire i membri statici, che non avranno bisogno di avere oggetti per essere 
+utilizzati. 
+
+class Persona { 
+    nome: string; 
+    cognome: string; 
+ 
+    constructor(nome, cognome) {
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+     
+    static concatena(a:string, b:string) {
+        return a + " " + b; 
+    }
+}
+
+console.log(Persona.concatena("Mario", "Rossi"));  //Mario Rossi 
+
+In questo caso per esempio non abbiamo dovuto creare un oggetto di Persona. 
+
+In TypeScript è possibile utilizzare l`ereditarietà, per esempio:
+"
+enum Materie {Storia, Informatica, Matematica, Scienze}; 
+ 
+class Studente extends Persona { 
+    materie: Materie[]; 
+ 
+    constructor(nome, cognome) { 
+        super(nome, cognome); 
+    } 
+}
+"
+
+Da notare che abbiamo utilizzato la parola super() per accedere al costruttore della superclasse
+
+È inoltre possibile utilizzare super accedere anche ad un metodo della superclasse:
+
+getNomeCompletoConTitolo() { 
+    return "Studente " + super.getNomeCompleto(); 
+}
+
+Una nuova clausalo `mixin` è stata introdotta per supportare l`ereditarietà multipla.
+
+Per esempio, avendo queste due classi:  
+
+class Studente { 
+    nome: string; 
+    cognome: string; 
+    materie: Materie[]; 
+ 
+    constructor(nome: string, cognome: string) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.materie = [];
+    }
+}
+ 
+class Impiegato {
+    nome: string; 
+    cognome: string; 
+    mansione: string;
+     
+    constructor(nome: string, cognome: string, mansione: string) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.mansione = mansione;
+    } 
+}
+
+è possibile creare una classe Studente lavoratore che implementa entrambe le classi sopra dichiarate:
+
+class StudenteLavoratore implements Studente, Impiegato { 
+    nome: string;
+    cognome: string;
+    materie: Materie[];
+    mansione: string;
+      
+    constructor(nome: string, cognome: string, mansione: string, materie: Materie[]) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.materie = [];
+        this.mansione = mansione;
+    } 
+} 
+
+Una funzione specifica poi si occupa di questa implementazione:
+
+applyMixins(StudenteLavoratore, [Studente, Impiegato]);
+
+Una possibile implementazione di questa funzione è proposta in seguito:
+
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+     
+    baseCtors.forEach(baseCtor => {
+         
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            derivedCtor.prototype[name] = baseCtor.prototype[name];
+        })
+    });
+} 
+
+ baseCtors => si analizzano le classi da implementare
+ e aggiunge ogni elemento nella classe di destinazione con:   derivedCtor
+ 
+
+interface FunzioneSuNumeri { 
+    (x: number, y: number):number 
+} 
+
+grazie a questa interfaccia possiamo scrivere una funzione somma in questo modo:
+
+var somma: FunzioneSuNumeri; 
+somma = function(x:number, y:number) { 
+    return x + y; 
+};
+
+Possiamo tuttavia fare a meno di dichiarare l`interfaccia di un oggetto per determinare la firma 
+(Il tipo di valore in ritorno di una funzione) 
+
+var somma: (x:number, y:number) => number; 
+
+è obbligatorio scrivere il tipo di dato restituito dalla funzione, anche quando la funzione non 
+restituisce nulla, in questo modo:  
+
+var funzioneSenzaRisultato: (x:number, y:string) => void; 
+
+
+
+
+--- Overloading ---
+
+Per overloading di intende metodo con lo stesso nome ma con firma diversa...
+
+function somma(x:number | number[], y:number | number[]):number|number[]; 
+
+In questo esempio diciamo che la funziona somma può accettare due elementi ciascuno può essere 
+di tipo snumber o arrayNumber[]...
+ 
+Un`implementazione di questa classe può essere realizzata nel seguente modo:
+
+function somma(x, y) { 
+ 
+    var risultato; 
+ 
+    if (typeof x === "number" && typeof y === "number") { 
+        risultato = x + y; 
+    } 
+ 
+    if (typeof x === "object" && typeof y === "object") { 
+        var i = 0; 
+        risultato = []; 
+        for (i = 0; i < x.length; i++) { 
+            risultato.push(x[i] + y[i]); 
+        } 
+    } 
+ 
+    if (typeof x === "object" && typeof y === "undefined") { 
+        var i = 0; 
+        risultato = 0; 
+        for (i = 0; i < x.length; i++) { 
+            risultato = risultato + x[i]; 
+        } 
+    }
+     
+    return risultato; 
+}
+
+
+
+
+namespace: risolve il problema di variabili globali quando abbiamo a che fare con programmi 
+molto lunghi e complessi.
+Scopo di namespace è evitare collissioni di nomi fornendo un modo per ragruppare i nomi per categoria.
+
+namespace Geometria {
+     
+    var pigreco = 3.14;
+     
+    export function circonferenza(raggio:number) {
+        return 2 * pigreco * raggio;
+    }
+}
+
+Per esempio tutte le parole rinchiuse in geometria hanno qualche collegamento con la geometria. 
+Da notare la parola chiave `export` che sta a significare che la funzione circonferenza può essere 
+vista fuori dal namespace Geometria. 
+Per accedere dunque a circonferenza usiamo dunque:
+
+Geometria.circonferenza(4);
+
+
+Oltre al namespace per migliorare l`organizzazione del cpodice possiamo  utilizzare i moduli.
+Vogliamo definire un modulo che esporta una funzione per il calcolo dell`area di un triangolo 
+
+export function areaTriangolo(base:number, altezza:number) {
+    return base * altezza / 2;
+}
+
+In caso che la funzione sia memorizzata in un file esterno sarà necessario fare un import.
+
+import {areaTriangolo as calcolaAreaTriangolo} from "./geometria"
+
+
+
